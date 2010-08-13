@@ -1,0 +1,16 @@
+These tools were written by me to complete certain tasks. They are not very
+pretty, and you usually have to edit the code to get them to work with
+different files.
+
+Tools are here to:
+  - create bitmapped data (compressed and uncompressed)
+  - create diffmaps
+  - create fonts
+
+They are written in Python and designed for Python 2.6. They *will not* run
+on Python 3.0.
+
+As the files are source code, they fall under the same GPLv2 license for
+the whole project.
+
+- Tom
