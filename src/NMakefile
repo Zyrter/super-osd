@@ -1,0 +1,23 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: osd2.mcp
+# Date: Sat Aug 07 01:29:16 2010
+
+AS = pic30-as.exe
+CC = pic30-gcc.exe
+LD = pic30-ld.exe
+AR = pic30-ar.exe
+HX = pic30-bin2hex.exe
+RM = del
+
+"osd2.hex" : "osd2.cof"
+	$(HX) "osd2.cof"
+
+"osd2.cof" : "osd_core.o"
+	$(CC) -mcpu=33FJ128GP802 "osd_core.o" -o"osd2.cof" -Wl,-Tp33FJ128GP802.gld,--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,-Map="osd2.map",--report-mem
+
+"osd_core.o" : "..\..\..\..\..\..\program files\microchip\mplab c30\support\dsPIC33F\inc\p33FJ128GP802.inc" "osd_core.s"
+	$(CC) -mcpu=33FJ128GP802 -c -D__DEBUG "osd_core.s" -o"osd_core.o" -Wa,--defsym=__DEBUG=1,-g
+
+"clean" : 
+	$(RM) "osd_core.o" "osd2.cof" "osd2.hex"
+
