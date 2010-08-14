@@ -11,12 +11,115 @@
 #include <stdio.h>
 
 extern long int TIME;		// time, from osd_core.s
+char strbuff[64];			// TODO: refactor code to use buff[50]
 
-char strbuff[64];
+/**
+ * Draw a rectangle with outline. Fast; uses dhline and dvline.
+ *
+ * \param		x
+ * \param		y
+ * \param		width
+ * \param		height
+ * \param		mode
+ */
+void draw_rect_outline(int x, int y, int width, int height, int mode)
+{
+	dhline(x, x + width, y, mode);
+	dvline(x + width, y, y + height, mode);
+	dhline(x + width, x, y + height, mode);
+	dvline(x, y + height, y, mode);
+}
 
-int fps = 0;
-int framecounter = 0;
-long int last_sec = 0;
+/**
+ * Bresenham's line drawing algorithm.
+ *
+ * \param		x0
+ * \param		y0
+ * \param		x1
+ * \param		y1
+ * \param		mode
+ */
+void draw_line(int x0, int y0, int x1, int y1, int mode)
+{
+	// If the line is steep, we need to swap some vars.
+	char steep = abs(y1 - y0) > abs(x1 - x0);
+	if(steep)
+	{
+		SWAP_TEMP_INT(x0, y0);
+		SWAP_TEMP_INT(x1, y1);
+	}
+	// If the line is the wrong way round we need to swap some vars.
+	if(x0 > x1)
+	{
+		SWAP_TEMP_INT(x0, x1);
+		SWAP_TEMP_INT(y0, y1);
+	}
+	// Is the line horizontal or vertical? If so, it 
+	// makes more sense to draw it with an optimised 
+	// line drawing routine.
+	if(x0 == x1) 		// vertical
+		dvline(x0, y0, y1, mode);
+	else if(y0 == y1)	// horizontal
+		dhline(x0, x1, y0, mode);
+	// Calculate important state variables.
+	unsigned int deltax = x1 - x0;
+	unsigned int deltay = abs(y1 - y0);
+	int error = deltax / 2;
+	int ystep;
+	if(y0 < y1) ystep = +1;
+	else		ystep = -1;
+	int x = x0, y = y0;
+	int minx = +32767, maxx = -32768;
+	for(; x < x1; x++)
+	{
+		/** FIXME **
+		if((deltax - deltay) > 10) // longer in x by 10 more
+		{
+			// Optimised, hline mode.
+			// In this mode, we write long lines of pixels
+			// at a time, so nearly horizontal lines are faster.
+			if(steep)
+			{
+				if(y < minx) minx = y;
+				if(y > maxx) maxx = y;
+			}
+			else
+			{
+				if(y < minx) minx = x;
+				if(y > maxx) maxx = x;
+			}
+		}
+		else
+		*/
+		{
+			// Unoptimised.
+			if(steep)
+			{
+				if(mode)
+					setpix(y, x);
+				else
+					clrpix(y, x);
+			}
+			else
+			{
+				if(mode)
+					setpix(x, y);
+				else
+					clrpix(x, y);
+			}
+		}
+		error -= deltay;
+		if(error < 0)
+		{
+			//if(minx < +32767 && maxx > -32768)
+            //	dhline(minx, maxx, y, mode);
+			y += ystep;
+			error += deltax;
+		}
+	}
+	if(minx < +32767 && maxx > -32768)
+		dhline(minx, maxx, y, mode);
+}
 
 /**
  * Calculate the bounding box for a string of text.
@@ -47,42 +150,25 @@ void calc_text_bbox(int x, int y, char *str, int fontnum, int xs, struct TextBBo
 }
 
 /**
- * Calculate the current FPS of the video and update it
- * if necesary. This should be called at least once per
- * second in the draw loop. When called, it examines the
- * video time stamp and its internal counter to determine
- * the frame rate. The frame rate is the number of times
- * per second this function is called. Note that because
- * frame rate is derived from the video input signal,
- * it depends on the accuracy of that signal.
- */ 
-void update_fps()
+ * Draw text, given a bbox. (The bbox provides x and y only;
+ * width and height are ignored.)
+ *
+ * \param		string pointer
+ * \param		bbox struct
+ * \param		horizontal spacing
+ * \param		font number
+ * \param		mode (0 = clear, 1 = set or 2 = toggle)
+ */
+inline void draw_text_bbox(char *str, struct TextBBox bbox, int xs, int fontnum, int mode)
 {
-	if(last_sec != TIME)
-	{
-		// TODO: should some averaging be implemented here?
-		fps = framecounter;
-		framecounter = 0;
-		last_sec = TIME;
-	}
-	framecounter++;
+	drawstr(str, bbox.x, bbox.y, mode, fontnum, xs);
 }
 
 /**
- * Draw the current fps to the screen. This should be 
- * called in turn with update_fps. FPS is drawn in top
- * left (5,5) corner of screen.
- */ 
-void draw_fps()
-{
-	sprintf(strbuff, "%d FPS", fps);
-	drawstr(strbuff, 5, 5, 0, 0, 1);
-}
-
-/**
- * Draw text with a specified horizontal and vertical 
- * alignment. The alignment determines where the text's
- * (x,y) coordinates fit on the text.
+ * Draw text with a specified horizontal and vertical alignment. 
+ * The alignment determines where the text's (x,y) coordinates 
+ * fit on the text; it is not relative to the screen. Invalid
+ * alignments assume HALIGN_LEFT and VALIGN_TOP.
  *
  * \param		string pointer
  * \param		x position
@@ -95,13 +181,36 @@ void draw_fps()
  */
 void draw_text_aligned(char *str, int x, int y, int ha, int va, int xs, int fontnum, int mode)
 {
+	struct TextBBox bbox;
+	bbox_text_aligned(str, x, y, ha, va, xs, fontnum, &bbox);
+	drawstr(str, bbox.x, bbox.y, mode, fontnum, xs);
+}
+
+/**
+ * Calculate the bounding box for some text with alignment.
+ * The alignment determines where the text's (x,y) coordinates 
+ * fit on the text; it is not relative to the screen. Invalid
+ * alignments assume HALIGN_LEFT and VALIGN_TOP.
+ *
+ * \param		string pointer
+ * \param		x position
+ * \param		y position
+ * \param		h alignment (HALIGN_LEFT, HALIGN_CENTER, HALIGN_RIGHT)
+ * \param		v alignment (VALIGN_TOP, VALIGN_MIDDLE, VALIGN_BOTTOM)
+ * \param		horizontal spacing
+ * \param		font number
+ * \param		bbox pointer; data will be saved here
+ */
+void bbox_text_aligned(char *str, int x, int y, int ha, int va, int xs, int fontnum, struct TextBBox *newbbox)
+{
 	// Calculate the bbox for the string.
 	struct TextBBox bbox;
 	calc_text_bbox(0, 0, str, fontnum, xs, &bbox);
-	// Calculate the x and y topleft coords to blit at.
+	// Calculate the x and y topleft coords.
 	int xcalc, ycalc;
 	switch(ha)
 	{
+		default:
 		case HALIGN_LEFT:
 			xcalc = x;
 			break;
@@ -114,6 +223,7 @@ void draw_text_aligned(char *str, int x, int y, int ha, int va, int xs, int font
 	}
 	switch(va)
 	{
+		default:
 		case VALIGN_TOP:
 			ycalc = y;
 			break;
@@ -124,9 +234,10 @@ void draw_text_aligned(char *str, int x, int y, int ha, int va, int xs, int font
 			ycalc = y - bbox.height;
 			break;
 	}
-	// Draw the string.
-	drawstr(str, xcalc, ycalc, mode, fontnum, xs);
-	return;
+	newbbox->x = xcalc;
+	newbbox->y = ycalc;
+	newbbox->width = bbox.width;
+	newbbox->height = bbox.height;
 }
 
 /**
@@ -150,7 +261,8 @@ void draw_text_aligned(char *str, int x, int y, int ha, int va, int xs, int font
  * \param		x spacing
  * \param		y spacing
  */
-void draw_text_bbox(char *str, int x0, int y0, int w, int h, int ha, int fontnum, int xs, int ys)
+void draw_text_paragraph(char *str, int x0, int y0, int w, int h, int ha, int fontnum, int xs, int ys)
 {
 	// TODO
 }
+

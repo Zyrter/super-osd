@@ -15,6 +15,11 @@ _FWDT(FWDTEN_OFF);
 // JTAG off, ICD using PGD1/PGC1.
 _FICD(JTAGEN_OFF & ICS_PGD1);
 
+// Buffer; some other files use this.
+char buff[50];
+// Temporary store. Some files use this.
+int tmp_swap;
+
 int main()
 {
 	BDISP = 0;
@@ -23,11 +28,11 @@ int main()
 	fill_mem(0xffff);
 	BDISP = 0;
 	BDRAW = 1;
-	// demo();
+	hud_init();
 	while(1)
 	{
-	//	hud_rc_plane_single_frame();
-		demo();
+		hud_rc_plane_single_frame();
+	//	demo();
 	}
 	return 0;
 }

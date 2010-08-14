@@ -13,8 +13,7 @@
 ;    including optimisations for certain lines. Investigate repeated
 ;    pixel optimisations and how to implement them.
 ;  - Add a circle drawing algorithm.
-;  - Consider I2C interface.
-;  - Consider adding toggle function to _drawpix.
+;  - Consider I2C interface.;  - Consider adding toggle function to _drawpix.
 
 .include "p33FJ128GP802.inc"
 
@@ -311,9 +310,20 @@ lineproc:	; Handle a line.
 			; If VSYNC low, call new frame processor.
 			btss	PORTB, #7
 			rcall	newframe
+			; If line = 5, tick the RTC. (5 is arbitrary.)
+			mov		TV_LINE, W0
+			cp		W0, #5
+			bra		nz, continueln
+			; If we get here, we need to tick the RTC.
+			mov		_TIME, W2
+			mov		_TIME+2, W3
+			add		W2, #1, W2
+			addc	W3, #0, W3
+			mov		W2, _TIME
+			mov		W3, _TIME+2
 			; Increment the line counter. 
 			; Why does "INC" not work?
-			mov		TV_LINE, W0
+continueln:	mov		TV_LINE, W0
 			add		W0, #1, W0
 			; Deinterlacer.
 			mov		INTLCOMP, W1	; move interlace compensation into W3
@@ -324,15 +334,8 @@ lineproc:	; Handle a line.
 			mov		VBI, W1
 			cpsgt	W0, W1			; W0 contains TV_LINE as above
 			bra		exit
-			; If line counter left VBI tick the RTC. The function remembers
-			; to tick only once per field.
-			;add		W1, #1, W1
-			mov		TV_LINE, W0
-			cpsne	W0, W1
-			call	tick_rtc
-			nop						; sync
 			; If line is odd, and we are set to skip odd lines, don't draw anything.
-			; FIXME
+			; FIXME/TODO
 			;btss	SKIP_ODD, #0
 			;bra		calcy
 			;btss	TV_LINE, #0
@@ -366,7 +369,7 @@ waitcs:		btss	PORTB, #6
 			; Code below to help line up video and OSD.
 			;mov		#LINE, W0
 			;mov		#0xcccc, W1		; 'error' pattern
-			;mov		#192, W2
+			;mov		#HEIGHT, W2
 			;mov		TV_GFX_Y, W3
 			;cpsgt	W3, W2			; W3 > W2? If so, copy W3 to W1
 			;mov		W3, W1
@@ -386,13 +389,14 @@ waitcs:		btss	PORTB, #6
 			mul.uu	W2, W3, W2
 			add		W1, W2, W1
 			; Check address not out of bounds (due to VOFF being out of range for example.)
-			;mov		#VIDEO, W2
-			;cpsgt	W1, W2
-			;return
-			;mov		#(VIDEO+(FSIZE*2)), W2
-			;cpslt	W1, W2
-			;return
-			;mov		#0xff18, W1
+			; This code is preliminary; before it was causing some problems, but now it
+			; seems to work. Have to keep an eye on it.
+			mov		#VIDEO, W2
+			cpsgt	W1, W2
+			return
+			mov		#(VIDEO+(FSIZE*2)), W2
+			cpslt	W1, W2
+			return
 			; Copy the data. I love how this is fast! 16 cycles for the copy.
 			repeat	#(WIDTH / 16)
 			mov.w	[W1++], [W0++]
@@ -452,34 +456,6 @@ newframe:	; TV_LINE = 0
 			bclr	TICKED, #0
 			return
 
-tick_rtc:	; FIXME, this doesn't tick properly.
-			; Handle the RTC. Call on every line outside of VBI.
-			; If we've already ticked in this field exit.
-			btsc	TICKED, #0
-			return
-			; Increment sequence counter.
-			mov		TV_SEQ, W0
-			add		W0, #1, W0
-			mov		W0, TV_SEQ
-			; If sequence counter equal to the number of fields per second,
-			; tick once and reset sequence counter; otherwise, return. 
-			mov		FIELDSSEC, W1
-			cpseq	W0, W1
-			return
-			mov		_TIME, W0
-			mov		_TIME+2, W1
-			; 32-bit increment in TWO cycles. Awesome.
-			add		W0, #1, W0
-			addc 	W1, #0, W1
-			mov		W0, _TIME
-			mov		W1, _TIME+2
-			; Clear sequence counter.
-			mov		#0, W0
-			mov		W0, TV_SEQ
-			; Set TICKED bit.
-			bset	TICKED, #0
-			return
-
 .global		_delay
 
 			; Arbitrary delay function.
@@ -492,62 +468,62 @@ _delay:		; W0 = delay count.
 delayend:	nop
 			return
 
-			; Generate a random LFSR number. 
-			; Clobbers W0..W2.
-lfsr_rand:	; Result in W0.			
-			; Compute LSB (0 or 1.)
-			mov		LFSR, W0
-			and		W0, #1, W1		; LSB = W1 = W0 & 1
-			; Shift right once LFSR in W0.
-			lsr		W0, #1, W0
-			; If LSB = 1, then XOR with 0xB400.
-			mov		#0xA1A1, W2
-			btsc	W0, #1
-			xor		W0, W2, W0
-			; Move LFSR back.
-			mov		W0, LFSR
-			; Return. LFSR/W0 is our number.
-			return
-
-			; Get a random number W0..W1.
-			; Clobbers W0..W4.
-getrand:	; Result in W0.
-			; Calculate the random span and determine if we can use AND 
-			; instead of the slower modulo.
-			sub		W1, W0, W2
-			add		W2, #1, W2
-			; If x(W2) == 0 then span is zero so return W0 (first arg.)
-			cp0		W2
-			bra		nz, rand
-			return
-			; Get random number. W4 holds value.
-rand:		push.d	W0
-			push	W2
-			call	lfsr_rand
-			mov		W0, W4
-			pop		W2
-			pop.d	W0
-			; Decide which method to use.
-			; Power of two if x & (x - 1) == 0 for nonzero unsigned x.
-			sub		W2, #1, W3
-			and		W0, W3, W3
-			cp0		W3
-			bra		nz, modrand
-			; Use AND range limiter
-andrand:	sub		W2, #1, W2
-			and		W4, W2, W1
-			add		W0, W1, W0
-			return
-			; Or, use the hardware divider, which is slower.
-modrand:	push	W0
-			repeat	#17
-			div.u	W4, W2
-			; W0 holds quotient, which we don't need, W1 holds remainder, which we want.
-			; Pop W0 from stack (overwriting quotient.)
-			pop		W0
-			; Add W1 to W0 and done.
-			add		W0, W1, W0
-			return
+;			; Generate a random LFSR number. 
+;			; Clobbers W0..W2.
+;lfsr_rand:	; Result in W0.			
+;			; Compute LSB (0 or 1.)
+;			mov		LFSR, W0
+;			and		W0, #1, W1		; LSB = W1 = W0 & 1
+;			; Shift right once LFSR in W0.
+;			lsr		W0, #1, W0
+;			; If LSB = 1, then XOR with 0xB400.
+;			mov		#0xA1A1, W2
+;			btsc	W0, #1
+;			xor		W0, W2, W0
+;			; Move LFSR back.
+;			mov		W0, LFSR
+;			; Return. LFSR/W0 is our number.
+;			return
+;
+;			; Get a random number W0..W1.
+;			; Clobbers W0..W4.
+;getrand:	; Result in W0.
+;			; Calculate the random span and determine if we can use AND 
+;			; instead of the slower modulo.
+;			sub		W1, W0, W2
+;			add		W2, #1, W2
+;			; If x(W2) == 0 then span is zero so return W0 (first arg.)
+;			cp0		W2
+;			bra		nz, rand
+;			return
+;			; Get random number. W4 holds value.
+;rand:		push.d	W0
+;			push	W2
+;			call	lfsr_rand
+;			mov		W0, W4
+;			pop		W2
+;			pop.d	W0
+;			; Decide which method to use.
+;			; Power of two if x & (x - 1) == 0 for nonzero unsigned x.
+;			sub		W2, #1, W3
+;			and		W0, W3, W3
+;			cp0		W3
+;			bra		nz, modrand
+;			; Use AND range limiter
+;andrand:	sub		W2, #1, W2
+;			and		W4, W2, W1
+;			add		W0, W1, W0
+;			return
+;			; Or, use the hardware divider, which is slower.
+;modrand:	push	W0
+;			repeat	#17
+;			div.u	W4, W2
+;			; W0 holds quotient, which we don't need, W1 holds remainder, which we want.
+;			; Pop W0 from stack (overwriting quotient.)
+;			pop		W0
+;			; Add W1 to W0 and done.
+;			add		W0, W1, W0
+;			return
 
 .global		_clear_mem
 
@@ -868,7 +844,7 @@ togneigh:	; Clobbers W0..W6.
 			; done!
 			pop.d	W0
 			return
-			
+
 			; Draw a vertical line.
 			; x    (W0) from 0..WIDTH-1
 			; y0   (W1) from 0..HEIGHT-1
@@ -919,7 +895,9 @@ dvline:		; If X out of bounds, return.
 			; Write in a DO loop; we need to loop W2 - W1 = W0 times.
 			sub		W2, W1, W0
 			do		W0, writeline
-			call	dhvwrite
+			push	W8			; NAND clobbers W8, so push it
+			call	dhvwrite	; call it
+			pop		W8			; then pop it
 			add		#(WIDTH / 8), W5
 writeline:	nop
 			return
@@ -1015,7 +993,7 @@ _1stcase:	; First case. Use the word addresses in W4 and W5 (W5 == W4) to
 			; To do this, we observe that one less than a power of two is always
 			; a string of '1's. We compute two powers of two and XOR them together.
 			; 
-			; This is a very fast operation (12 cycles, not including the time to 
+			; This is a very fast operation (11 cycles, not including the time to 
 			; write the data) and is constant in time.
 			;
 			; The dsPIC's barrel shifter is what makes this possible.
@@ -1046,6 +1024,8 @@ _2ndcase:	; The second case is more of an extension of the first case. We
 			; 
 			; It is an O(n) algorithm; time varies depending on the number of 
 			; words written.
+			;
+			; FIXMEs: the DO count sometimes may be wrong.
 
 			; Compute bits to be set.
 			and		W0, #15, W6
@@ -1057,7 +1037,7 @@ _2ndcase:	; The second case is more of an extension of the first case. We
 			subr	W6, #15, W6
 			sl		W8, W6, W8
 			sub		W8, #1, W8
-			push	W5
+			push	W5				; hmm... consider an EXCH Ws,Wd instruction instead
 			mov		W4, W5
 			call	dhvwrite
 			pop		W5
@@ -1070,10 +1050,10 @@ _2ndcase:	; The second case is more of an extension of the first case. We
 			com		W8, W8
 			call	dhvwrite
 			; Write blocks from W5+1 to W6-1.
-			; Use a DO loop. The DO count (W9) is simply ((W5-W4) / 2) - 2.
+			; Use a DO loop. The DO count (W9) is simply ((W5-W4) / 2) - 1.
 			sub		W5, W4, W9		; W9 = W5 - W4
 			asr		W9, #1, W9		; W9 = W9 asr 1		(W9 = W5 - W4); divide by two (asr = arithmetic shift right)
-			sub		W9, #2, W9		; subtract 1 from W9 as do iterates +1 more than necessary
+			sub		W9, #1, W9		; subtract 1 from W9 as do iterates +1 more than necessary
 			; If current DO count <= 0, return. It could be less than
 			; zero if the above SUB rolls over past zero (signed numbers.)
 			mov		#0, W8
@@ -1084,6 +1064,7 @@ _2ndcase:	; The second case is more of an extension of the first case. We
 			; toggles pixels appropriately.
 			mov		#0xffff, W8
 			add		W4, #2, W5		; word aligned, add 2
+			sub		W9, #1, W9		; subtract 1 from W9 as do iterates +1 more than necessary
 			do		W9, __wword
 			rcall	dhvwrite
 			add		W5, #2, W5		; word aligned, add 2
@@ -1437,30 +1418,6 @@ _dfrect:	; C30 interface for dfrect.
 			pop.d	W8			; pop W9, W8
 			return
 
-			; Draw a rectangle with an outline.
-			; W0 = x
-			; W1 = y
-			; W2 = width
-			; W3 = height
-			; W4 = mode (0, 1 or 2 for clear, set or toggle)
-drect:		; Clobbers W0..W12.
-			; dhline args: x0, x1, y
-			; dvline args: x, y0, y1
-			; Draw a horizontal line from x,y to x+width,y
-			push.d	W0
-			push.d	W2
-			push	W4
-			add		W0, W2, W1
-			mov		W1, W2
-			mov		W4, W3
-			call	dhline
-			pop		W4
-			pop.d	W2
-			pop.d	W0
-			; Draw a vertical line from x+width,y to x+width,y+height
-			; WORK IN PROGRESS - FIXME
-			return
-
 .global		_textsize
 		
 			; Calculate the character size for a fixed font.
@@ -1476,7 +1433,7 @@ _textsize:	; Clobbers W0..W4.
 			mov		[W3], W3
 			add		W2, #4, W4
 			mov		[W4], W4
-			; Move W3 to W1, W4 to W1+2.
+			; Move W3 to [W1], W4 to [W1+2].
 			mov		W3, [W1]
 			mov		W4, [++W1]
 			return
@@ -1510,4 +1467,3 @@ yend:		nop
 xend:		nop
 
 .end
-

@@ -4,6 +4,8 @@
  * It is written in C because that makes many parts easier.
  */
 
+#if 0		// no longer used
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -53,8 +55,6 @@ void demo_intro_text1()
 			drawstr(" - Fast software OSD in assembly language", 5, 71, 1, 0, k);
 			k = triangle((i + 10) % 21, 10) + 5;
 			drawstr(" - Interrupt driven", 5, 77, 1, 0, k);
-			//draw_fps();
-			update_fps();
 			BDISP = 1 - BDISP;
 			BDRAW = 1 - BDRAW;
 			delay(20);
@@ -169,3 +169,4 @@ int demo()
 	return 1;
 }
 
+#endif

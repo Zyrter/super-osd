@@ -19,6 +19,8 @@
 #define	CTSPIN			14
 #define	FPSPIN			13
 
+extern long int TIME;
+
 extern int BDRAW;		// Draw buffer no.
 extern int BDISP;		// Display buffer no.
 
@@ -26,6 +28,13 @@ struct TextSize
 {
 	int width, height;
 };
+
+extern char buff[50];
+extern int tmp_swap;
+
+#define	SWAP_TEMP_INT(x,y)	tmp_swap = (x); \
+							(x) = (y); \
+							(y) = tmp_swap;
 
 /**
  * Arbiturary delay. As a guide, i = 40 is about 10 fps (100 ms.)
