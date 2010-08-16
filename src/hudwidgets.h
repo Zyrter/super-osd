@@ -28,3 +28,13 @@ void hud_draw_lin_compass(int cx, int cy, int tick_maj, int tick_min, int range,
  * of values which will be displayed.
  */
 void hud_draw_airspeed_indicator(int cx, int cy, int tick_maj, int tick_min, int range, int airspeed);
+
+/** 
+ * Draw an RSSI indicator.
+ */
+void hud_draw_rssi(int x, int y, int ha, int va, int rssi, int flash_beat);
+
+/**
+ * Draw a battery meter.
+ */
+void hud_draw_battery_meter(int x, int y, int width, int voltage, long int current, int mah, int max_mah);

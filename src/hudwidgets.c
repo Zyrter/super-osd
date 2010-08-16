@@ -224,3 +224,49 @@ void hud_draw_altitude_indicator(int cx, int cy, int tick_maj, int tick_min, int
 	dfrect(cx - 15, cy + (range / 2), bbox.width + 35, tsize.height, 0); // NOTE: constants 35 & 15 work well
 	dfrect(cx - 15, cy - (range / 2), bbox.width + 35, tsize.height, 0);
 }
+
+void hud_draw_rssi(int x, int y, int ha, int va, int rssi, int flash_beat)
+{
+	memset(buff, 0x00, 50);
+	my_itoa(rssi, buff);
+	// Handle each of the cases and add bars for the percentage.
+	if		(rssi >= 80)	strcat(buff, "% στυώÿ");	
+	else if	(rssi >= 60)	strcat(buff, "% στυώ ");	
+	else if	(rssi >= 40)	strcat(buff, "% στυ  ");	
+	else if	(rssi >= 20)	strcat(buff, "% στ   ");	
+	else					strcat(buff, "% σ    ");
+	// Make RSSI flash.
+	if((rssi < 50 && flash_beat) || rssi >= 50)	
+		draw_text_aligned(buff, x, y, ha, va, 1, 0, 0);
+}
+
+void hud_draw_battery_meter(int x, int y, int width, int voltage, long int current, int mah, int max_mah)
+{
+	// Clamp mAh.
+	int mah_disp = MIN(mah, max_mah);
+	// Clear buffer.
+	memset(buff, 0x00, 50);
+	// Get font size; we'll need this.
+	textsize(0, &tsize);
+	// Draw current consumption centred at x+(width/2),y.
+	my_itoa(current / 1000, buff);
+	strcat(buff, ".");
+	my_itoa((current % 1000) / 10, buff + strlen(buff));	// TODO: make number of decimal points configurable; currently set to 2.
+	strcat(buff, "A");
+	draw_text_aligned(buff, x + (width / 2), y, HALIGN_CENTER, VALIGN_TOP, 1, 0, 0);
+	// Draw the body of the battery. TODO: flashing modes.
+	draw_rect_outline(x, tsize.height + y + 1, width - 1, tsize.height + 3, 1);
+	dvline(x + width, tsize.height + y + 2, (tsize.height * 2) + y + 3, 1);
+	// Calculate the voltage string and draw text in the rectangle.
+	my_itoa(voltage / 1000, buff);
+	strcat(buff, ".");
+	my_itoa((voltage % 1000) / 10, buff + strlen(buff));	// TODO: make number of decimal points configurable; currently set to 2.
+	strcat(buff, "V");
+	draw_text_aligned(buff, x + (width / 2), tsize.height + y + 3, HALIGN_CENTER, VALIGN_TOP, 1, 0, 0);
+	// Fill the battery with the toggle fill.
+	dfrect(x + 1, tsize.height + y + 2, ((max_mah - mah_disp) * (width - 3)) / max_mah, tsize.height + 1, 2);
+	// Draw mAh. TODO: flashing modes.
+	my_itoa(mah, buff);
+	strcat(buff, " mAh"); 
+	draw_text_aligned(buff, x + (width / 2), (tsize.height * 3) + y + 1, HALIGN_CENTER, VALIGN_TOP, 1, 0, 0);
+}

@@ -28,22 +28,6 @@
 ; CONST SECTION.
 .section rdonly,psv
 
-; Text/strings.
-HWORLD:		.asciz	"Hello, world!"
-LIPSUM1:	.ascii	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id "
-        	.ascii	"odio in risus pulvinar vehicula non at tortor. Nullam at urna "
-        	.ascii	"velit, a adipiscing neque. Pellentesque tellus mauris, rhoncus " 
-        	.ascii	"in volutpat in, iaculis quis arcu. Suspendisse at turpis lacus. "
-        	.ascii	"Integer scelerisque, ipsum sit amet feugiat molestie, metus " 
-        	.ascii	"tellus scelerisque dolor, blandit pharetra magna nunc sit amet "
-        	.ascii	"turpis. Nunc vitae sem nulla. Sed sed enim non risus rhoncus "
-        	.ascii	"molestie at a magna. Aliquam iaculis suscipit suscipit. Nunc "
-        	.ascii	"iaculis ipsum et nisi tincidunt nec ullamcorper elit varius. "
-        	.ascii	"Praesent pharetra cursus enim vitae tempus. Curabitur tincidunt "
-        	.ascii	"tempus diam, vitae vehicula tortor rutrum vitae. Ut vitae urna "
-        	.asciz	"lorem. Suspendisse pulvinar sagittis magna vel tempus."
-STARTUP:	.asciz	"SuperOSD v2.0"
-
 ; DMA DATA SECTION
 .section	dma
 
@@ -51,7 +35,7 @@ STARTUP:	.asciz	"SuperOSD v2.0"
 ; It is no mistake that the number of samples in this is equal
 ; to the number of lines in PAL. Less, more compacted samples
 ; are used in NTSC.
-; TODO
+; WORK IN PROGRESS
 SNDBUFF:	.space	626
 
 ; DATA SECTION
@@ -59,6 +43,7 @@ SNDBUFF:	.space	626
 .align(0x800)	; start address of dsPIC memory
 
 ; Stack pointer
+; DO NOT MOVE THIS; IT MUST BE THE FIRST ITEM
 STACK:		.space 	256
 ; Line memory.
 LINE:		.space	(WIDTH / 8)
@@ -74,8 +59,8 @@ _BDISP:		.space	2
 ; Horizontal offset
 VID_HOFF:	.space	2
 ; Current vertical scale factor. 
-; If PAL = 0.4444f * 64 = 29.
-; If NTSC = 0.3f * 64 = 20.
+; If PAL = 44.
+; If NTSC = ?? (more research needs to be done on this.)
 ; Rounded up.
 VSF:		.space	2
 ; Definition of VBI. That is, the first visible line on a field.
@@ -90,11 +75,12 @@ VOFF:		.space	2
 ; or 312 for PAL.
 INTLCOMP:	.space	2
 ; Runtime. 32 bit counter.
+; Counts up to 88 million seconds on PAL or 71 million on NTSC.
 .global		_TIME
 .align		
 _TIME:		.space	4
 TICKED:		.space	2		; whether or not we have ticked in current field
-; Number of fields per second.
+; Number of fields per second (50 or 60.)
 FIELDSSEC:	.space	2
 ; Skip odd lines (0 = no, 1 = yes.) Improves speed at expense of readability.
 ; NOT YET IMPLEMENTED
@@ -774,14 +760,15 @@ _testpix:	; Ignore out of range pixels, or we could have a memory access violati
 			; Draw a pixel (set or clear) at x,y, according to W2.
 			; x (W0) from 0..WIDTH-1
 			; y (W1) from 0..HEIGHT-1
-			; W2 whether or not to draw (0 = don't draw, 1 = draw)
+			; W2 whether or not to draw (0 = clear, 1 = set)
 _drawpix:	; Clobbers W0..W5.
 			cp		W2, #1
 			bra		z, doset
-			call	_clrpix
+			rcall	_clrpix
 			return
-doset:		call	_setpix
+doset:		rcall	_setpix
 			return
+			; TODO: conside the possibly of a TOGPIX command.
 
 .global		_swapbuffs
 
@@ -1419,7 +1406,7 @@ _dfrect:	; C30 interface for dfrect.
 			return
 
 .global		_textsize
-		
+
 			; Calculate the character size for a fixed font.
 			; W0 = font number
 			; W1 = ptr to store info in
@@ -1438,32 +1425,4 @@ _textsize:	; Clobbers W0..W4.
 			mov		W4, [++W1]
 			return
 
-			; Sharp Pixel Demo.
-spdemo:		; Run it to find out what it does...
-			; Iterate over each pixel.
-			mov		#0, W8				; X ptr
-			mov		#0, W9				; Y ptr
-			do		#255, xend
-			add		W8, #1, W8			; increment x	
-			mov		#0, W9				; zero y
-			do		#191, yend			; loop y
-			add		W9, #1, W9			; increment y
-			; Test the pixel. _BDRAW is used. Result in W0.
-			mov		W8, W0
-			mov		W9, W1
-			call	_testpix
-			; If pixel is off, then handle the next pixel.
-			cp		W0, #1
-			bra		nz, yend
-			; Set neighbours.
-			mov		W8, W0
-			mov		W9, W1
-			call	togneigh
-			mov		W8, W0
-			mov		W9, W1
-			call	_clrpix
-			nop
-yend:		nop
-xend:		nop
-
-.end
+.end		; Phew, now we're at the end, we can breathe.

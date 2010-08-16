@@ -13,6 +13,8 @@
 #define	VALIGN_MIDDLE	2
 #define	VALIGN_BOTTOM	3
 
+#define MIN(x, y) ((y) + (((x) - (y)) & -((x) < (y))));
+
 struct TextBBox
 {
 	int x, y;
