@@ -197,3 +197,5 @@ net=3.3V:1
 }
 N 42900 47000 42900 46800 4
 C 42800 44300 1 0 0 gnd-1.sym
+T 47200 44100 9 10 1 0 0 0 1
+use *exact* specified parts where possible

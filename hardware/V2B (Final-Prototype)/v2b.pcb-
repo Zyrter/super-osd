@@ -1,5 +1,5 @@
 # release: pcb 20091103
-# date:    Sun Aug 29 14:54:05 2010
+# date:    Mon Aug 30 14:21:52 2010
 # user:    thomas (Thomas Oldbury,,,)
 # host:    jupiter
 
@@ -1966,6 +1966,19 @@ Layer(8 "signal4")
 )
 Layer(9 "silk")
 (
+	Line[74000 63000 70000 59000 1000 2000 "clearline"]
+	Line[70000 59000 70000 58000 1000 2000 "clearline"]
+	Line[70000 58000 72000 56000 1000 2000 "clearline"]
+	Line[72000 56000 78000 56000 1000 2000 "clearline"]
+	Line[78000 56000 80000 54000 1000 2000 "clearline"]
+	Line[80000 54000 80000 52000 1000 2000 "clearline"]
+	Line[80000 52000 75000 47000 1000 2000 "clearline"]
+	Line[78000 60000 100000 60000 1000 2000 "clearline"]
+	Line[81000 57000 100000 57000 1000 2000 "clearline"]
+	Line[83000 54000 100000 54000 1000 2000 "clearline"]
+	Line[86000 51000 92000 51000 1000 2000 "clearline"]
+	Text[79000 52000 0 100 "uper OSD" "auto"]
+	Text[58000 44000 0 100 "by T. Oldbury, 28Aug10" "auto"]
 )
 Layer(10 "silk")
 (
@@ -1993,7 +2006,7 @@ Layer(10 "silk")
 	Line[208000 59000 209000 59000 1000 2000 "clearline"]
 	Text[7000 9000 3 100 "50mm" ""]
 	Text[9000 1000 0 100 "70mm" ""]
-	Text[22000 122000 1 100 "SD/MMC" "selected"]
+	Text[22000 122000 1 100 "SD/MMC" ""]
 	Text[142000 73000 0 100 "PIC18 ICSP" ""]
 	Text[239000 131000 1 100 "dsPIC ICSP" ""]
 	Text[114000 74000 0 100 "1" ""]

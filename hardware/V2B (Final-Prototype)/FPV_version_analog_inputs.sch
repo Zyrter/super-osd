@@ -26,9 +26,9 @@ device=none
 N 54500 64100 51500 64100 4
 N 54500 63300 51500 63300 4
 T 50000 67700 9 10 1 0 0 0 3
-Unscaled ADC inputs 0-3.3V (rated to handle ±15V)
+Unscaled ADC inputs 0-3V (rated to handle ±50V)
 Input impedence non-overloaded: about 1 Mohm
-Input impedence overloaded: about 10 kohm
+Input impedence overloaded: about 100 kohm
 T 50800 60400 9 10 1 0 0 0 1
 Scaled ADC inputs 0-30V (rated to handle ±50V)
 N 54500 62500 51500 62500 4
@@ -132,7 +132,7 @@ device=RESISTOR
 T 54700 67700 5 10 1 1 0 0 1
 refdes=R1
 T 54700 67500 5 10 1 1 0 0 1
-value=10k
+value=100k
 T 54500 67200 5 10 0 0 0 0 1
 footprint=0603
 }
@@ -143,7 +143,7 @@ device=RESISTOR
 T 54700 66900 5 10 1 1 0 0 1
 refdes=R2
 T 54700 66700 5 10 1 1 0 0 1
-value=10k
+value=100k
 T 54500 66400 5 10 0 0 0 0 1
 footprint=0603
 }
@@ -154,7 +154,7 @@ device=RESISTOR
 T 54700 66100 5 10 1 1 0 0 1
 refdes=R3
 T 54700 65900 5 10 1 1 0 0 1
-value=10k
+value=100k
 T 54500 65600 5 10 0 0 0 0 1
 footprint=0603
 }
@@ -165,7 +165,7 @@ device=RESISTOR
 T 54700 65300 5 10 1 1 0 0 1
 refdes=R4
 T 54700 65100 5 10 1 1 0 0 1
-value=10k
+value=100k
 T 54500 64800 5 10 0 0 0 0 1
 footprint=0603
 }
@@ -235,3 +235,5 @@ value=10k
 T 51800 62200 5 10 0 0 270 0 1
 footprint=0603
 }
+T 49100 66000 9 10 1 0 0 0 1
+ANALOG2 is an internal ADC input
