@@ -57,7 +57,7 @@ void init_osd()
 {
 	int i;
 	vid_hoffset = 0;
-	vid_voffset = 0;
+	vid_voffset = 1;
 	tv_time = 0;
 	tv_line = 0;
 	tv_field = 0;
@@ -212,6 +212,8 @@ void _MY_ISR _CNInterrupt()
 	timer2_osd = 550 + vid_hoffset;
 	T2CONbits.TON = 1;
 	TMR2 = 0;
+	// Handle I2C.
+	interface_handle_i2c();
 	// Output a debugging pulse.
 	//PORTBbits.RB15 = 1;
 	//PORTBbits.RB15 = 0;
@@ -239,7 +241,8 @@ void _MY_ISR _CNInterrupt()
 }
 
 /**
- * VSYNC handler. This fires on each field 50 or 60 times per second.
+ * tv_vsync: VSYNC handler. This fires on each field 50 
+ * or 60 times per second.
  */
 void tv_vsync()
 {
@@ -271,7 +274,7 @@ void tv_vsync()
  * tv_csync: CSYNC handler. This fires on each line at ~30 kHz.
  * 
  * Please note a lot of the numbers in this are from trial and 
- * error, these should be replaced with constants.
+ * error. These should be replaced with constants in future.
  */
 void tv_csync()
 {
@@ -293,10 +296,10 @@ void tv_csync()
 	// from the graphics memory to the scanline pointers.
 	prep_scanline(disp_buffer_mask + addr, scanline_mask_out, 1, DISP_WIDTH / 16);
 	prep_scanline(disp_buffer_level + addr, scanline_level_out, 0, DISP_WIDTH / 16);
-	// Wait for OSD time.
+	// Wait for OSD time. (TODO: execute other code in this time.)
 	while(TMR2 <= timer2_osd);
 	// Output screen data.
-	TRISBbits.TRISB5 = 1;
+	TRISBbits.TRISB5 = 1; // tristate before sending
 	osd_out(scanline_mask_out, scanline_level_out, DISP_WIDTH / 16);
 	// Tristate output so as not to cause problems.
 	TRISBbits.TRISB5 = 1;

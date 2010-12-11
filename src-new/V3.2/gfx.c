@@ -713,7 +713,7 @@ int fetch_font_info(char ch, int font, struct FontEntry *font_info, char *lookup
 	if(lookup != NULL)
 	{
 		*lookup = font_info->lookup[ch];
-		if(lookup == 0xff)
+		if(*lookup == 0xff)
 			return 0; // character doesn't exist, don't bother writing it.
 	}
 	return 1;
@@ -746,6 +746,7 @@ void write_char(char ch, unsigned int x, unsigned int y, int flags, int font)
 		ch = tolower(ch);
 	if(font_info.flags & FONT_UPPERCASE_ONLY)
 		ch = toupper(ch);
+	fetch_font_info(ch, font, &font_info, &lookup);
 	// How big is the character? We handle characters up to 8 pixels
 	// wide for now. Support for large characters may be added in future.
 	if(font_info.width <= 8)

@@ -31,7 +31,17 @@ char temp_buff[100];
  */
 void panic(char *msg)
 {
-	// Not yet implemented.
+	long int d = 5000000;
+	// Initialize console, print message.
+	con_init();
+	con_puts("PANIC ON OSD DSP !!");
+	con_puts("Super OSD's on screen display processor encountered a fatal error condition.");
+	con_puts("");
+	con_puts(msg);
+	con_puts("");
+	con_puts("Resetting soon.");
+	// Reset after timer expires.
+	while(d--);
 	asm("reset");
 }
 

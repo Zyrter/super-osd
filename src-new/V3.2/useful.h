@@ -22,6 +22,9 @@
 
 #include <stdlib.h>
 
+// Assert routine.
+#define MY_ASSERT(x) { if(!(x)) panic("assert failed: " #x); }
+
 /*
  * Useful extra features, like size of array, convert degrees to radians...
  */

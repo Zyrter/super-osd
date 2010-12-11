@@ -67,11 +67,11 @@ extern long int delaytmp;
 	DEBUG_DELAY;
 
 // Horizontal line calculations. 
-// This computes an island mask.
-#define	COMPUTE_HLINE_ISLAND_MASK(b0, b1) (((1 << (b0)) - 1) ^ ((1 << ((b1) + 1)) - 1));
-// Edge cases are simpler.
+// Edge cases.
 #define	COMPUTE_HLINE_EDGE_L_MASK(b) ((1 << (16 - (b))) - 1)
 #define	COMPUTE_HLINE_EDGE_R_MASK(b) (~((1 << (15 - (b))) - 1))
+// This computes an island mask.
+#define	COMPUTE_HLINE_ISLAND_MASK(b0, b1) (COMPUTE_HLINE_EDGE_L_MASK(b0) ^ COMPUTE_HLINE_EDGE_L_MASK(b1));
 
 // Line endcaps (for horizontal and vertical lines.)
 #define ENDCAP_NONE		0

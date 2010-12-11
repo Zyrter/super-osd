@@ -36,6 +36,10 @@ int current_wp = 0;
  * slow at times. However, where possible, results are cached and
  * optimal routes to calculations are taken.
  *
+ * Some may critique me for premature optimisation. This is because
+ * I do actually do this, because on a processor with not much
+ * processing power, it is necessary.
+ *
  * This code may be moved to the PIC24F later.
  */
 
@@ -89,7 +93,12 @@ float angle_dist_rad(float a1, float a2)
  */
 float angle_dist_deg(float a1, float a2)
 {
-	return fmod(a1 + (180.0f - a2), 360.0f) - 180.0f;
+	float tent_dist = a1 + 180.0f - a2;
+	// only call fmod if necessary
+	if(tent_dist > 720.0f) tent_dist = fmod(tent_dist, 360.0f);
+	else if(tent_dist > 360.0f) tent_dist -= 360.0f;
+	return tent_dist - 180.0f;
+	//return fmod(a1 + (180.0f - a2), 360.0f) - 180.0f;
 }
 
 /**
@@ -115,6 +124,7 @@ float lerp2(float a, float b, float f)
  */
 float hypot2(float a, float b)
 {
+	// sqrt -> sqrtf(?)
 	return sqrt((a * a) + (b * b));
 }
 
@@ -127,7 +137,7 @@ float hypot2(float a, float b)
  *
  * This algorithm comes from http://en.wikipedia.org/wiki/Talk:Euclidean_distance.
  * It's good for long distances and is a reasonable approximation using only
- * floating point add, absolute, multiply and compare.
+ * floating point add, absolute sign, multiply and compare.
  *
  * @param	dx	distance in x
  * @param	dy	distance in y
@@ -159,7 +169,7 @@ float esthypot2(float dx, float dy)
  */
 float hypot3(float a, float b, float c)
 {
-	return sqrt((a * a) + (b * b) + (c * c));
+	return sqrtf((a * a) + (b * b) + (c * c));
 }
 
 // There is no esthypot3 function because hypot3 is faster.
@@ -174,10 +184,12 @@ float hypot3(float a, float b, float c)
  * @param	rx		pointer for result x
  * @param	ry		pointer for result y
  * @param	theta	angle to rotate by (radians)
+ *
+ * FIXME: appears to cause memory corruption(?)
  */
 void rotate2(float px, float py, float ox, float oy, float *rx, float *ry, float theta)
 {
-	float costheta = cos(theta), sintheta = sin(theta);
+	float costheta = cosf(theta), sintheta = sinf(theta);
 	*rx = (costheta * (px - ox)) - (sintheta * (py - oy)) + ox;
 	*ry = (sintheta * (px - ox)) + (costheta * (py - oy)) + oy;
 }
@@ -218,11 +230,11 @@ void compute_3d_transform(struct WorldCamera *p_viewer, struct Point3D_LLA *p_su
 		goto quick_exit;
 	// Compute the horizontal angle to the point. 
 	// atan2(y,x) so atan2(lon,lat) and not atan2(lat,lon)!
-	res->h_angle = angle_dist_deg(RAD2DEG(atan2(p_viewer->p.lon - p_subj->lon, p_viewer->p.lat - p_subj->lat)), p_viewer->yaw);
+	res->h_angle = angle_dist_deg(RAD2DEG(atan2f(p_viewer->p.lon - p_subj->lon, p_viewer->p.lat - p_subj->lat)), p_viewer->yaw);
 	//res->small_dist = res->est_dist * 0.0025f; // by trial and error this works well.
 	// Using the estimated distance and altitude delta we can calculate
 	// the vertical angle.
-	res->v_angle = RAD2DEG(atan2(p_viewer->p.alt - p_subj->alt, res->est_dist));
+	res->v_angle = RAD2DEG(atan2f(p_viewer->p.alt - p_subj->alt, res->est_dist));
 	// Normalize the results to fit in the field of view of the camera if
 	// the point is visible. If they are outside of (0,hfov] or (0,vfov]
 	// then the point is not visible.
@@ -238,9 +250,10 @@ void compute_3d_transform(struct WorldCamera *p_viewer, struct Point3D_LLA *p_su
 		res->pos.x = (res->h_angle / p_viewer->hfov) * p_viewer->width;
 		res->pos.y = (res->v_angle / p_viewer->vfov) * p_viewer->height;
 		// If roll is nonzero rotate about the display surface's center.
-		if(p_viewer->roll <= 0.5f)
+		if(p_viewer->roll >= 0.5f)
 		{
 			float x = res->pos.x, y = res->pos.y;
+			// TODO: cache sin(theta) and cos(theta).
 			rotate2(res->pos.x, res->pos.y, p_viewer->width / 2, p_viewer->height / 2, &x, &y, DEG2RAD(p_viewer->roll));
 			// Convert and write back.
 			res->pos.x = x;
@@ -260,7 +273,7 @@ int demo_game()
 {
 	char buff[100];
 	long int d, last_time;
-	int i, r, ctr = 0, fps = 0;
+	int i, r, ctr = 0, fps = 0, vis_wps = 0;
 	struct WorldCamera p_viewer;
 	struct Point2D_CalcRes p_res;
 	struct Point3D_LLA point;
@@ -289,8 +302,12 @@ int demo_game()
 	p_viewer.p.alt = 100.0f;
 	while(1)
 	{
+		//fill_buffer(draw_buffer_mask, 0xffff);
+		//fill_buffer(draw_buffer_level, 0xffff);
 		fill_buffer(draw_buffer_mask, 0x0000);
 		fill_buffer(draw_buffer_level, 0xffff);
+		//fill_buffer_rand(draw_buffer_mask);
+		//fill_buffer_rand(draw_buffer_level);
 		ctr++;
 		if(tv_time != last_time)
 		{
@@ -298,14 +315,16 @@ int demo_game()
 			ctr = 0;
 			last_time = tv_time;
 		}
-		//sprintf(buff, "FPS: %d\n%.4f N %.4f E\nAl: %.1fm Rl: %.1f\n", fps, p_viewer.p.lat, p_viewer.p.lon, p_viewer.p.alt, p_viewer.roll);
-		//sprintf(buff, "% 3dFPS  WP%d %c%d", fps, 5, 128, 220);
-		my_itoa(fps, buff);
-		strcat(buff, " FPS");
-		write_string(buff, 0, 0, 0, 1, TEXT_VA_TOP, TEXT_HA_LEFT, 0, 1);
 		memset(buff, 0, 20);
-		strcat(buff, "ROLL: ");
-		my_itoa(p_viewer.roll, buff + strlen(buff));
+		strcat(buff, "FPS:");
+		my_itoa(fps, buff + strlen(buff));
+		//strcat(buff, "\nWP :");
+		//my_itoa(vis_wps, buff + strlen(buff));
+		vis_wps = 0;
+		write_string(buff, 0, 0, 0, 0, TEXT_VA_TOP, TEXT_HA_LEFT, 0, 1);
+		memset(buff, 0, 20);
+		//strcat(buff, "ROL:");
+		//my_itoa(p_viewer.roll, buff + strlen(buff));
 		write_string(buff, DISP_WIDTH, 0, 0, 1, TEXT_VA_TOP, TEXT_HA_RIGHT, 0, 1);
 		memset(buff, 0, 20);
 		/*
@@ -340,9 +359,11 @@ int demo_game()
 					//write_rectangle_outlined(p_res.pos.x - r, p_res.pos.y - r, r * 2, r * 2, 0, 1);
 					write_circle_outlined(p_res.pos.x, p_res.pos.y, r, 0, 0, 0, 1);		
 				}
-				sprintf(buff, " %d ", i);
+				memset(buff, 0, 5);
+				my_itoa(i, buff);
 				write_string(buff, p_res.pos.x, p_res.pos.y, 0, 1, TEXT_VA_MIDDLE, TEXT_HA_CENTER, 0, 1);
-			}	
+				vis_wps++;
+			}
 		}
 		swap_buffers();
 		// adjust viewpoint.
