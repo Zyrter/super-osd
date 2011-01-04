@@ -1,0 +1,333 @@
+v 20100214 2
+T 67700 71400 9 20 1 0 0 0 1
+Super OSD Lite - Power Supply
+T 67100 71000 9 10 1 0 0 0 1
+power.sch
+T 67400 70700 9 10 1 0 0 0 1
+2
+T 69100 70700 9 10 1 0 0 0 1
+4
+T 71000 71000 9 10 1 0 0 0 1
+3.2
+T 71000 70700 9 10 1 0 0 0 1
+Tom Oldbury
+T 57700 70800 9 15 1 0 0 0 7
+Unless otherwise noted:
+  - All resistors SMD metal film, 1/16W, 5%, 0603
+  - All capacitors SMD ceramic, >10V, 10%, 0603, X5R/C0G
+
+Unit of capacitance is FARAD
+Unit of resistance is OHM
+Unit of inductance is HENRY
+C 62400 79000 1 0 0 generic-power.sym
+{
+T 62600 79250 5 10 1 1 0 3 1
+netname=+3.3V
+T 62400 79000 5 10 0 1 0 0 1
+net=3V3_1:1
+}
+C 60700 78000 1 0 1 connector3-2.sym
+{
+T 60000 79700 5 10 1 1 0 0 1
+refdes=CONN4
+T 60400 79650 5 10 0 0 0 6 1
+device=CONNECTOR_3
+T 60400 79850 5 10 0 0 0 6 1
+footprint=JUMPER3
+}
+C 61400 78700 1 0 0 fuse-2.sym
+{
+T 61600 79250 5 10 0 0 0 0 1
+device=FUSE
+T 61300 79400 5 10 1 1 0 0 1
+refdes=RF1
+T 61600 79450 5 10 0 0 0 0 1
+symversion=0.1
+T 61300 79200 5 10 1 1 0 0 1
+value=350mA 6V
+T 61400 78700 5 10 0 0 0 0 1
+footprint=0603
+T 61300 79000 5 10 1 1 0 0 1
+specific_model=0603L035YR
+}
+N 61400 78800 60700 78800 4
+N 62600 79000 62600 78800 4
+N 62600 78800 62300 78800 4
+C 61200 79100 1 90 0 gnd-1.sym
+N 60900 79200 60700 79200 4
+C 63100 76800 1 0 0 LT1933-1.sym
+{
+T 63395 78795 5 10 1 1 0 0 1
+refdes=U5
+T 63095 76795 5 10 0 1 0 0 1
+device=BUCK_REG
+T 63100 76800 5 10 0 0 0 0 1
+footprint=SOT26
+}
+N 63100 78400 62000 78400 4
+N 62900 78400 62900 77800 4
+N 62900 77800 63100 77800 4
+C 62000 78100 1 0 1 diode-4.sym
+{
+T 61600 78700 5 10 0 0 0 6 1
+device=DIODE
+T 61100 78100 5 10 1 1 0 0 1
+refdes=D1
+T 61100 77900 5 10 1 1 0 0 1
+value=RB160M
+T 62000 78100 5 10 0 0 0 0 1
+footprint=SOD323
+}
+N 61100 78400 60700 78400 4
+T 59100 80300 9 10 1 0 0 0 2
+IN: 4.8V - 32V
+OUT: 3.3V @ 400mA
+C 62700 78200 1 90 1 capacitor-1.sym
+{
+T 62000 78000 5 10 0 0 270 2 1
+device=CAPACITOR
+T 62200 77800 5 10 1 1 0 6 1
+refdes=C14
+T 61800 78000 5 10 0 0 270 2 1
+symversion=0.1
+T 62900 78200 5 10 0 1 270 2 1
+specific_model=C1206X225K5RACTU
+T 62200 77600 5 10 1 1 0 6 1
+value=2.2u 50V
+T 62700 78200 5 10 0 0 0 0 1
+footprint=1206
+}
+C 62400 76800 1 0 0 gnd-1.sym
+N 62500 77100 62500 77300 4
+N 62500 78200 62500 78400 4
+C 67000 79200 1 0 1 diode-1.sym
+{
+T 66600 79800 5 10 0 0 0 6 1
+device=DIODE
+T 66300 79900 5 10 1 1 0 0 1
+refdes=D2
+T 67000 79200 5 10 0 0 0 0 1
+footprint=603
+T 66300 79700 5 10 1 1 0 0 1
+value=1N4148
+}
+C 66300 78200 1 0 1 capacitor-1.sym
+{
+T 66100 78900 5 10 0 0 180 2 1
+device=CAPACITOR
+T 65500 78900 5 10 1 1 0 0 1
+refdes=C15
+T 66100 79100 5 10 0 0 180 2 1
+symversion=0.1
+T 65500 78700 5 10 1 1 0 0 1
+value=100n
+T 66300 78200 5 10 0 0 0 0 1
+footprint=0603
+}
+N 65400 78400 65000 78400 4
+N 66100 79400 65200 79400 4
+N 65200 79400 65200 78400 4
+N 65000 77800 66500 77800 4
+N 66500 77600 66500 78400 4
+N 66300 78400 66700 78400 4
+N 67000 79400 68200 79400 4
+C 66700 78300 1 0 0 inductor-1.sym
+{
+T 66900 78800 5 10 0 0 0 0 1
+device=INDUCTOR
+T 66800 78800 5 10 1 1 0 0 1
+refdes=L1
+T 66900 79000 5 10 0 0 0 0 1
+symversion=0.1
+T 66700 78300 5 10 0 0 0 0 1
+footprint=IND__Bourns_SDR0604_Series
+T 66800 78600 5 10 1 1 0 0 1
+value=22u 1A
+}
+C 63600 76300 1 0 0 gnd-1.sym
+N 63700 76600 63700 76800 4
+N 68200 78200 68200 79600 4
+N 67600 78400 68200 78400 4
+C 68000 78200 1 270 0 capacitor-1.sym
+{
+T 68700 78000 5 10 0 0 270 0 1
+device=CAPACITOR
+T 68500 77800 5 10 1 1 0 0 1
+refdes=C16
+T 68900 78000 5 10 0 0 270 0 1
+symversion=0.1
+T 67800 78200 5 10 0 1 270 0 1
+specific_model=GRM21BR60J226ME39L
+T 68500 77600 5 10 1 1 0 0 1
+value=22u 6.3V
+T 68000 78200 5 10 0 0 0 6 1
+footprint=0805
+}
+C 68100 76800 1 0 0 gnd-1.sym
+N 68200 77100 68200 77300 4
+C 66800 77600 1 90 1 diode-4.sym
+{
+T 66200 77200 5 10 0 0 90 6 1
+device=DIODE
+T 66800 77200 5 10 1 1 0 0 1
+refdes=D3
+T 66800 77000 5 10 1 1 0 0 1
+value=RB160M
+T 66800 77600 5 10 0 0 90 0 1
+footprint=SOD323
+}
+C 66400 76200 1 0 0 gnd-1.sym
+N 66500 76500 66500 76700 4
+C 64600 75900 1 0 0 resistor-2.sym
+{
+T 65000 76250 5 10 0 0 0 0 1
+device=RESISTOR
+T 64700 76400 5 10 1 1 0 0 1
+refdes=R13
+T 64700 76200 5 10 1 1 0 0 1
+value=16.5k 1%
+T 64600 75900 5 10 0 0 0 0 1
+footprint=0603
+}
+C 64500 74900 1 90 0 resistor-2.sym
+{
+T 64150 75300 5 10 0 0 90 0 1
+device=RESISTOR
+T 64600 75400 5 10 1 1 0 0 1
+refdes=R14
+T 64600 75200 5 10 1 1 0 0 1
+value=10k 1%
+T 64500 74900 5 10 0 0 0 0 1
+footprint=0603
+}
+N 64400 75800 64400 76800 4
+N 65500 76000 67800 76000 4
+N 67800 76000 67800 78400 4
+N 64600 76000 64400 76000 4
+C 64300 74400 1 0 0 gnd-1.sym
+N 64400 74700 64400 74900 4
+C 68000 79600 1 0 0 generic-power.sym
+{
+T 68200 79850 5 10 1 1 0 3 1
+netname=+3.3V
+T 68000 79600 5 10 0 1 0 0 1
+net=3V3_1:1
+}
+C 57200 70400 0 0 0 title-bordered-B.sym
+T 59700 75600 9 10 1 0 0 0 5
+20V input maximum version uses
+LM2734Y (pin & freq compatible), 
+lower WV higher capacitance filter 
+cap (4.7u 25V) and different feedback 
+resistors.
+C 71400 79200 1 0 0 generic-power.sym
+{
+T 71600 79450 5 10 1 1 0 3 1
+netname=+3.3V
+T 71400 79200 5 10 0 1 0 0 1
+net=3V3_1:1
+}
+C 71400 79000 1 270 0 led-1.sym
+{
+T 72000 78200 5 10 0 0 270 0 1
+device=LED
+T 72100 78600 5 10 1 1 0 0 1
+refdes=LED1
+T 72200 78200 5 10 0 0 270 0 1
+symversion=0.1
+T 72100 78400 5 10 1 1 0 0 1
+value=BLU 3.2V
+T 71400 79000 5 10 0 0 0 0 1
+footprint=603
+}
+N 71600 79000 71600 79200 4
+C 71700 77000 1 90 0 resistor-2.sym
+{
+T 71350 77400 5 10 0 0 90 0 1
+device=RESISTOR
+T 71800 77500 5 10 1 1 0 0 1
+refdes=R15
+T 71800 77300 5 10 1 1 0 0 1
+value=10R
+T 71700 77000 5 10 0 0 0 0 1
+footprint=0603
+}
+N 71600 77900 71600 78100 4
+C 71500 76500 1 0 0 gnd-1.sym
+N 71600 76800 71600 77000 4
+T 71800 77100 9 10 1 0 0 0 1
+(0R production?)
+T 59900 78400 9 10 1 0 0 6 1
+BATT
+T 59900 79200 9 10 1 0 0 6 1
+COM/GND
+T 59900 78800 9 10 1 0 0 6 1
+3V3
+C 60700 77700 1 180 0 output-2.sym
+{
+T 59800 77500 5 10 0 0 180 0 1
+net=BATT:1
+T 60500 77000 5 10 0 0 180 0 1
+device=none
+T 59800 77600 5 10 1 1 180 1 1
+value=BATT
+}
+N 60700 77600 60900 77600 4
+N 60900 77600 60900 78400 4
+C 69400 78200 1 270 0 capacitor-1.sym
+{
+T 70100 78000 5 10 0 0 270 0 1
+device=CAPACITOR
+T 69900 77800 5 10 1 1 0 0 1
+refdes=C17
+T 70300 78000 5 10 0 0 270 0 1
+symversion=0.1
+T 69200 78200 5 10 0 1 270 0 1
+specific_model=JMK316BJ476ML-T
+T 69900 77600 5 10 1 1 0 0 1
+value=47u 6.3V DNP
+T 69400 78200 5 10 0 0 0 6 1
+footprint=1206
+}
+C 69500 76800 1 0 0 gnd-1.sym
+N 69600 77100 69600 77300 4
+N 68200 78400 69600 78400 4
+N 69600 78400 69600 78200 4
+T 72100 78200 9 10 1 0 0 0 1
+POWER
+T 61900 79700 9 10 1 0 0 0 4
+max chip temperature (calculated): 
+38°C above ambient
+
+chip must be -40°C to +125°C extended temp range
+T 66800 76800 9 10 1 0 0 0 1
+D3 can be hot!
+T 57700 73500 9 10 1 0 0 0 6
+The connector is designed such that only two input/output possibilities
+are available:
+
+The correct way - 3V3 is output, and COM/GND and BATT are in the right places
+The incorrect way - 3V3 floats (no output), and input is negative, with
+no damage due to diode
+T 66400 72700 9 10 1 0 0 0 7
+R1: 16.335K <= 16.5K <= 16.665K
+R2: 9.9K <= 10.0K <= 10.1K
+Vref: 1.23V <= 1.25V <= 1.27V
+Vout: 3.22326V <= 3.30807V <= 3.39288V
+Range: +/-2.564%
+Nom. voltage: 3.3V
+Deviation from nom.: -2.33% +2.81%
+T 70000 72700 9 10 1 0 0 0 7
+R1: 31.284K <= 31.6K <= 31.916K
+R2: 9.9K <= 10.0K <= 10.1K
+Vref: 784.0mV <= 800.0mV <= 816.0mV
+Vout: 3.2172V <= 3.32257V <= 3.42795V
+Range: +/-3.171%
+Nom. voltage: 3.3V
+Deviation from nom.: -2.51% +3.88%
+T 66400 74200 9 15 1 0 0 0 1
+LT1933
+T 70000 74200 9 15 1 0 0 0 1
+LM2734Y
+T 59100 80100 9 10 1 0 0 0 1
+all outputs 280mA max total
