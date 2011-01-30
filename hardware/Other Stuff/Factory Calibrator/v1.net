@@ -1,0 +1,26 @@
+unnamed_net18	U2-14 U2-12 
+unnamed_net17	R10-1 LED2-2 
+unnamed_net16	R9-1 LED1-2 
+unnamed_net15	LED1-1 U2-7 
+unnamed_net14	C17-1 R8-1 R6-2 U2-6 
+unnamed_net13	CONN2-2 CONN4-1 CONN4-2 CONN4-3 CONN2-4 CONN3-3 
+unnamed_net12	CONN1-2 D1-2 
+unnamed_net11	C13-1 R4-1 R5-1 U2-9 
+unnamed_net10	R2-1 R1-1 C6-1 U2-2 
+plus12_37V	CONN2-3 Q2-2 R4-2 C14-1 
+unnamed_net9	U2-8 R7-1 
+unnamed_net8	Q2-1 R7-2 
+plus6_1645V	CONN2-1 Q1-3 R1-2 C12-1 
+unnamed_net7	U2-1 R3-1 
+unnamed_net6	Q1-1 R3-2 
+plus16V	Q2-3 U2-4 C5-1 C11-1 C10-1 D4-1 
+unnamed_net5	C8-1 D3-1 D4-2 
+minus9V	CONN2-5 C9-2 U3-5 
+unnamed_net4	C7-1 C8-2 U3-2 
+unnamed_net3	C7-2 U3-4 
+plus2_048V	U2-5 CONN5-3 CONN5-2 CONN5-1 U2-10 U2-3 C4-1 U1-6 
+plus5V	C1-1 U1-4 
+plus9V	Q1-2 LED2-1 R6-1 C16-1 C15-1 D3-2 U3-8 C3-1 C2-1 J1-1 
+unnamed_net2	D1-1 J1-2 D2-1 
+GND	C13-2 C6-2 R2-2 R5-2 C17-2 U2-13 C16-2 C15-2 C2-2 R10-2 R9-2 R8-2 CONN3-1 C11-2 CONN1-1 U2-11 C5-2 C14-2 C12-2 C9-1 C10-2 U3-3 C4-2 C1-2 U1-2 U1-1 C3-2 B1-2 
+unnamed_net1	D2-2 B1-1 
