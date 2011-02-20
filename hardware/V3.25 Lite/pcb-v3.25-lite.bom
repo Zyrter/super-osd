@@ -1,0 +1,48 @@
+# $Id$
+# PcbBOM Version 1.0
+# Date: Sun 20 Feb 2011 16:36:55 GMT UTC
+# Author: Thomas Oldbury
+# Title: (unknown) - PCB BOM
+# Quantity, Description, Value, RefDes
+# --------------------------------------------
+3,"0805","22u 6.3V",C19 C28 C42 
+9,"0603","1k",R43 R25 R49 R34 R33 R41 R26 R53 R50 
+3,"SOT23","unknown",U9 U8 D3 
+1,"0603","330R",R42 
+4,"0603","150k 1%",R32 R16 R19 R18 
+13,"0603","100n",C24 C18 C31 C39 C22 C25 C32 C38 C30 C35 C27 C34 C33 
+2,"603","GREEN_2.2V",LED2 LED3 
+3,"TL1240-2","unknown",S1 S2 S3 
+1,"SOT23","MMBT2222A",Q1 
+1,"0603","22k",R37 
+10,"0603","10k",R39 R23 R28 R24 R22 R36 R27 R56 R54 R55 
+2,"0603","18p",C21 C20 
+4,"JUMPER4","unknown",CN9 CN8 CN3 CN2 
+2,"JUMPER2","unknown",CN7 CN11 
+1,"1206","1R 0.33W",R47 
+3,"JUMPER3","unknown",CN6 CN5 CN10 
+1,"0603","220R",R52 
+6,"0603","10k 1%",R17 R20 R21 R31 R51 R45 
+1,"SO8M","unknown",U7 
+1,"XTAL_HC-49U","7.3728_MHz",X1 
+2,"TQFP44_10","unknown",U1 U6 
+2,"JUMPER5","unknown",CN4 CN1 
+1,"0603","1M",R35 
+1,"0805","100mA",PTC2 
+3,"0603","10u 6.3V",C37 C36 C40 
+2,"0603","120R",R57 R29 
+2,"0603","100n DNP",C23 C41 
+1,"0603","39k",R38 
+1,"SOT25","unknown",U4 
+1,"SOD323","BAS70JFILM",D1 
+1,"1206","47u 6.3V DNP",C29 
+1,"0805","500mA 6V",PTC1 
+1,"603","BLU_3.2V",LED1 
+1,"SOT26","unknown",U5 
+1,"0603","16.5k 1%",R44 
+1,"MSOP10","unknown",U2 
+1,"IND__Bourns_SDR0604_Series","22u_1A",L1 
+1,"SOD123","unknown",D2 
+2,"0603","10R",R48 R46 
+1,"1206","2.2u 50V",C26 
+1,"TSSOP16","unknown",U3 

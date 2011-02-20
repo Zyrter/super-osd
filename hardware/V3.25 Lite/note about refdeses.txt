@@ -1,0 +1,3 @@
+Due to a bit of screwup while designing this version, I numbered all resistors from R16 and all capacitors from C18. There are no missing components, it was just a mistake on my part. I'm not too bothered by this but I will fix it in future versions.
+
+Tom
