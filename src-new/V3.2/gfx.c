@@ -23,7 +23,9 @@ long int delaytmp;
 #include "gfx.h"
 #include "useful.h"
 #include "fonts.h"
+
 #include <stdlib.h>
+#include <ctype.h>
 
 /**
  * The GFX files handle the management of the display surfaces. 
@@ -32,12 +34,28 @@ long int delaytmp;
  * timing; that is managed by the OSD files.
  */
 
-// We define four buffers: two level buffers and two mask buffers.
-// All buffers are identical in size and type.
-uint16_t buffer0_level[BUFF_WORDS] FAR;
-uint16_t buffer0_mask[BUFF_WORDS] FAR;
-uint16_t buffer1_level[BUFF_WORDS] FAR;
-uint16_t buffer1_mask[BUFF_WORDS] FAR;
+// Define the buffers.
+// For 256x192 pixel mode:
+//   buffer0_level/buffer0_mask becomes buffer_level; and 
+//   buffer1_level/buffer1_mask becomes buffer_mask;
+// For 192x128 pixel mode, allocations are as the names are written.
+// divide by 8 because two bytes to a word.
+// Must be allocated in one block, so it is in a struct.
+struct _buffers
+{
+	uint16_t buffer0_level[BUFF_TOTAL_SIZE / 8] FAR;
+	uint16_t buffer0_mask[BUFF_TOTAL_SIZE / 8] FAR;
+	uint16_t buffer1_level[BUFF_TOTAL_SIZE / 8] FAR;
+	uint16_t buffer1_mask[BUFF_TOTAL_SIZE / 8] FAR;
+} buffers FAR;
+// Remove the struct definition (makes it easier to write for.)
+#define		buffer0_level	(buffers.buffer0_level)
+#define		buffer0_mask	(buffers.buffer0_mask)
+#define		buffer1_level	(buffers.buffer1_level)
+#define		buffer1_mask	(buffers.buffer1_mask)
+
+int disp_width, disp_height;
+int buff_words;
 
 // We define pointers to each of these buffers.
 uint16_t *draw_buffer_level;
@@ -45,21 +63,137 @@ uint16_t *draw_buffer_mask;
 uint16_t *disp_buffer_level;
 uint16_t *disp_buffer_mask;
 
+// Memory test.
+int memseed;
+
+// Do we have VSYNC, and are we looking for it? (osd.c sets have_vsync_refresh, gfx.c clears it.)
+// Some graphics work better locked to the frame rate, so we have functions to wait for vsync.
+int use_vsync, have_vsync_refresh;
+
 /**
  * init_osd: Initialize the OSD buffers and internal 
  * state variables.
  */
-void init_gfx()
+void init_gfx(int mode)
 {
-	draw_buffer_level = buffer0_level;
-	draw_buffer_mask = buffer0_mask;
-	disp_buffer_level = buffer1_level;
-	disp_buffer_mask = buffer1_mask;
-	// Fill the buffers.
+	// mode 0: 256x192 pixel single buffered mode
+	if(mode == 0)
+	{
+		draw_buffer_level = buffer0_level;
+		draw_buffer_mask = buffer1_level; // see above
+		disp_buffer_level = draw_buffer_level;
+		disp_buffer_mask = draw_buffer_mask;
+		buff_words = BUFF_TOTAL_SIZE / 4;
+		disp_width = 256;
+		disp_height = 192;
+	}
+	// mode 1: 192x128 pixel double buffered mode
+	else if(mode == 1)
+	{
+		draw_buffer_level = buffer0_level;
+		draw_buffer_mask = buffer0_mask;
+		disp_buffer_level = buffer1_level;
+		disp_buffer_mask = buffer1_mask;
+		buff_words = BUFF_TOTAL_SIZE / 8;
+		disp_width = 192;
+		disp_height = 128;
+	}
+	// Fill the buffers with empty data, in case the RAM doesn't
+	// initialize empty.
 	fill_buffer(draw_buffer_level, 0x0000);
 	fill_buffer(draw_buffer_mask, 0x0000);
 	fill_buffer(disp_buffer_level, 0x0000);
 	fill_buffer(disp_buffer_mask, 0x0000);
+	// Memory test seed - initialize it to zero.
+	memseed = 0;
+	// Don't use vsync for now.
+	use_vsync = 0;
+	have_vsync_refresh = 1;
+}
+
+/**
+ * mem_test: Test memory (level and mask) by writing a word 
+ * and reading it back. Uses draw buffer only.
+ *
+ * @return	Number of errors (0 = none)
+ */
+volatile int mem_test(uint16_t word)
+{
+	int i = buff_words, err = 0;
+	uint16_t *buff = draw_buffer_level;
+	while(i--)
+	{
+		*buff = word;
+		if(*buff != word)
+			err++;
+		*buff++;
+	}
+	buff = draw_buffer_mask;
+	i = buff_words;
+	while(i--)
+	{
+		*buff = word;
+		if(*buff != word)
+			err++;
+		*buff++;
+	}
+	return err;
+}
+
+/**
+ * mem_test_full: Fully test memory.
+ *
+ * @return	0 = failure, 1 = success
+ */
+int mem_test_full()
+{
+	#define DO_MEM_TEST_WORD(x) \
+		if(mem_test((x))) { goto memtest_error; } \
+		if(mem_test((x))) { goto memtest_error; } \
+		swap_buffers(); \
+		if(mem_test((x))) { goto memtest_error; } \
+		if(mem_test((x))) { goto memtest_error; } \
+		swap_buffers();
+	
+	// Simple on/off bit tests
+	DO_MEM_TEST_WORD(0b1111111111111111);
+	DO_MEM_TEST_WORD(0b0000000000000000);
+	DO_MEM_TEST_WORD(0b1010101010101010);
+	DO_MEM_TEST_WORD(0b0101010101010101);
+	DO_MEM_TEST_WORD(0b1100110011001100);
+	DO_MEM_TEST_WORD(0b0011001100110011);
+	DO_MEM_TEST_WORD(0b1111000011110000);
+	DO_MEM_TEST_WORD(0b0000111100001111);
+	DO_MEM_TEST_WORD(0b1111111100000000);
+	DO_MEM_TEST_WORD(0b0000000011111111);
+	DO_MEM_TEST_WORD(0b1111111111111111);
+	DO_MEM_TEST_WORD(0b0000000000000000);
+	// Roaming bit tests
+	DO_MEM_TEST_WORD(0b1000000000000000);
+	DO_MEM_TEST_WORD(0b0100000000000000);
+	DO_MEM_TEST_WORD(0b0010000000000000);
+	DO_MEM_TEST_WORD(0b0001000000000000);
+	DO_MEM_TEST_WORD(0b0000100000000000);
+	DO_MEM_TEST_WORD(0b0000010000000000);
+	DO_MEM_TEST_WORD(0b0000001000000000);
+	DO_MEM_TEST_WORD(0b0000000100000000);
+	DO_MEM_TEST_WORD(0b0000000010000000);
+	DO_MEM_TEST_WORD(0b0000000001000000);
+	DO_MEM_TEST_WORD(0b0000000000100000);
+	DO_MEM_TEST_WORD(0b0000000000010000);
+	DO_MEM_TEST_WORD(0b0000000000001000);
+	DO_MEM_TEST_WORD(0b0000000000000100);
+	DO_MEM_TEST_WORD(0b0000000000000001);
+	// Random word tests.
+	DO_MEM_TEST_WORD(rand() & 0xffff);
+	DO_MEM_TEST_WORD(rand() & 0xffff);
+	DO_MEM_TEST_WORD(rand() & 0xffff);
+	DO_MEM_TEST_WORD(rand() & 0xffff);
+	return 1;
+	
+	#undef DO_MEM_TEST_WORD
+memtest_error:
+	return 0;
 }
 
 /**
@@ -68,7 +202,7 @@ void init_gfx()
  */
 void fill_buffer(uint16_t *buff, uint16_t word)
 {
-	int i = BUFF_WORDS, j;
+	int i = buff_words;
 	while(i--)
 	{
 		*buff++ = word;
@@ -81,11 +215,29 @@ void fill_buffer(uint16_t *buff, uint16_t word)
  */
 void fill_buffer_rand(uint16_t *buff)
 {
-	int i = BUFF_WORDS, j;
+	int i = buff_words;
 	while(i--)
 	{
 		*buff++ = rand() + rand();
 	}
+}
+
+/**
+ * clear_draw: Erase the draw buffers.
+ */
+void clear_draw()
+{
+	fill_buffer(draw_buffer_level, 0x0000);
+	fill_buffer(draw_buffer_mask, 0x0000);
+}
+
+/**
+ * clear_disp: Erase the display buffers.
+ */
+void clear_disp()
+{
+	fill_buffer(disp_buffer_level, 0x0000);
+	fill_buffer(disp_buffer_mask, 0x0000);
 }
 
 /**
@@ -210,6 +362,10 @@ void write_hline_outlined(unsigned int x0, unsigned int x1, unsigned int y, int 
 {
 	int stroke, fill;
 	SETUP_STROKE_FILL(stroke, fill, mode)
+	if(x0 > x1) 
+	{
+		SWAP(x0, x1);
+	}
 	// Draw the main body of the line.
 	write_hline_lm(x0 + 1, x1 - 1, y - 1, stroke, mmode); 
 	write_hline_lm(x0 + 1, x1 - 1, y + 1, stroke, mmode);
@@ -232,6 +388,29 @@ void swap_buffers()
 	uint16_t *tmp;
 	SWAP_BUFFS(tmp, disp_buffer_mask, draw_buffer_mask);
 	SWAP_BUFFS(tmp, disp_buffer_level, draw_buffer_level);
+}
+
+/**
+ * buffer_mode: Switch between single and double buffering.
+ *
+ * @param	mode	0 = single, 1 = double
+ */
+void buffer_mode(int mode)
+{
+	if(mode == 0)
+	{
+		draw_buffer_level = buffer0_level;
+		draw_buffer_mask = buffer0_mask;
+		disp_buffer_level = buffer0_level;
+		disp_buffer_mask = buffer0_mask;
+	}
+	else if(mode == 1)
+	{
+		draw_buffer_level = buffer0_level;
+		draw_buffer_mask = buffer0_mask;
+		disp_buffer_level = buffer1_level;
+		disp_buffer_mask = buffer1_mask;
+	}
 }
 
 /**
@@ -286,7 +465,7 @@ void write_vline_lm(unsigned int x, unsigned int y0, unsigned int y1, int lmode,
 }
 
 /**
- * write_hline_outlined: outlined horizontal line with varying endcaps
+ * write_vline_outlined: outlined vertical line with varying endcaps
  * Always uses draw buffer.
  *
  * @param	x			x coordinate
@@ -300,6 +479,10 @@ void write_vline_lm(unsigned int x, unsigned int y0, unsigned int y1, int lmode,
 void write_vline_outlined(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
 {
 	int stroke, fill;
+	if(y0 > y1)
+	{
+		SWAP(y0, y1);
+	}
 	SETUP_STROKE_FILL(stroke, fill, mode);
 	// Draw the main body of the line.
 	write_vline_lm(x - 1, y0 + 1, y1 - 1, stroke, mmode); 
@@ -629,6 +812,8 @@ void write_line(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x
  */
 void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int mode)
 {
+	// TODO
+	/*
 	int stroke, fill;
 	SETUP_STROKE_FILL(stroke, fill, mode);
 	// To draw an outlined line, we first process the outside of the line, then
@@ -652,7 +837,7 @@ void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsi
 		ystep = 1;
 	else
 		ystep = -1;
-	// TODO
+	*/
 }
 
 /**
@@ -732,7 +917,7 @@ int fetch_font_info(char ch, int font, struct FontEntry *font_info, char *lookup
  */
 void write_char(char ch, unsigned int x, unsigned int y, int flags, int font)
 {
-	int i, yy, addr_temp, row, row_temp, xshift;
+	int yy, addr_temp, row, row_temp, xshift;
 	uint16_t and_mask, or_mask, level_bits;
 	struct FontEntry font_info;
 	char lookup;
@@ -837,10 +1022,9 @@ void calc_text_dimensions(char *str, struct FontEntry font, int xs, int ys, stru
  */
 void write_string(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font)
 {
-	int xx, yy, xx_original;
+	int xx = 0, yy = 0, xx_original = 0;
 	struct FontEntry font_info;
 	struct FontDimensions dim;
-	char lookup;
 	// Determine font info and dimensions/position of the string.
 	fetch_font_info(0, font, &font_info, NULL);
 	calc_text_dimensions(str, font_info, xs, ys, &dim);
@@ -872,5 +1056,46 @@ void write_string(char *str, unsigned int x, unsigned int y, unsigned int xs, un
 			xx += font_info.width + xs;
 		}
 		str++;
+	}
+}
+
+/**
+ * gfx_align_test: Draw alignment markers, for making sure the
+ * display is properly aligned. A test routine.
+ */
+void gfx_align_test()
+{
+	int y;
+	clear_draw();
+    write_hline_outlined(0, DISP_WIDTH, 0, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, 16, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, (DISP_HEIGHT / 2) - 10, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, DISP_HEIGHT / 2, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, (DISP_HEIGHT / 2) + 10, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, DISP_HEIGHT - 16, 2, 2, 0, 1);
+	write_hline_outlined(0, DISP_WIDTH, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined(0, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined(20, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined(DISP_WIDTH - 20, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined(DISP_WIDTH, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined((DISP_WIDTH / 2) - 10, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined((DISP_WIDTH / 2), 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_vline_outlined((DISP_WIDTH / 2) + 10, 0, DISP_HEIGHT, 2, 2, 0, 1);
+	write_circle_outlined(DISP_WIDTH / 2, DISP_HEIGHT / 2, (DISP_HEIGHT / 2) - 16, 10, 1, 0, 1); 
+	write_circle_outlined(DISP_WIDTH / 2, DISP_HEIGHT / 2, 10, 0, 1, 0, 1); 
+	write_string("DISPLAY ALIGN ", DISP_WIDTH / 2, 30, 1, 1, TEXT_VA_TOP, TEXT_HA_CENTER, 0, 0);
+	//write_string("TEST MODE", DISP_WIDTH / 2, DISP_HEIGHT - 30, 1, 1, TEXT_VA_BOTTOM, TEXT_HA_CENTER, 0, 1);
+}
+
+/**
+ * wait_vsync: If we are set to sync the display to the vsync signal, 
+ * then this code will pause the main thread until vsync occurs.
+ */
+void wait_vsync()
+{
+	if(use_vsync == 1)
+	{
+		while(have_vsync_refresh != 1);
+		have_vsync_refresh = 0;
 	}
 }

@@ -27,12 +27,15 @@
 #define FORMAT_NTSC 1
 
 // These values are from trial and error.
-#define PAL_GFX_SCALE	29
-#define NTSC_GFX_SCALE	24
+#define PAL_GFX_SCALE_192	116
+#define NTSC_GFX_SCALE_192	96
+#define PAL_GFX_SCALE_256	180
+#define NTSC_GFX_SCALE_256	148
 
 #include "gfx.h"
 #include "osd.h"
 
+extern unsigned int tv_field;
 extern long int tv_time;
 
 /**

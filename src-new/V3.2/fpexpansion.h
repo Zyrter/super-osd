@@ -17,14 +17,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef HUD_H
-#define HUD_H
+#include <libq.h>
 
-#define HUD_VSCALE_FLAG_CLR_BG			1
-#define HUD_VSCALE_FLAG_NO_NEGATIVE		2
+/**
+ * Adds functions to the Microchip fixed point library.
+ */
 
-// Function prototypes.
-void hud_draw_vertical_scale(int v, int range, int halign, int x, int y, int height, int mintick_step, int majtick_step, int majtick_len, int mintick_len, int max_val, int flags);
-void hud_demo();
-
-#endif // HUD_H
+_Q16 multiplyQ16xQ16(_Q16 a, _Q16 b);
+_Q16 multiplyQ16xQ15(_Q16 a, _Q15 b);
+#define multiplyQ15xQ16(a, b)	multiplyQ16xQ15(b, a) // other permutation
+_Q16 multiplyQ15xQ15(_Q15 a, _Q15 b);
+_Q16 squareQ16(_Q16 x);
+_Q16 squareQ15(_Q15 x);
+_Q16 divideQ16byQ16(_Q16 a, _Q16 bs);

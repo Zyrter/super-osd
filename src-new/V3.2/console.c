@@ -17,6 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include "osd.h"
 #include "console.h"
 
@@ -25,11 +28,17 @@
  * debugging and on startup. The functions are similar to old DOS 
  * APIs.
  */
-// TODO/FIXME: assumes 8x8 characters
-struct ConChar cons[DISP_WIDTH / 8][DISP_HEIGHT / 8];
-const int con_width = DISP_WIDTH / 8;
-const int con_height = DISP_HEIGHT / 8;
+// Console is up to 32x24 chars.
+struct ConChar cons[32][24];
+int con_width, con_height;
 struct ConCurs curs;
+// What to do when we reach the end of the window.
+// 0 = scrolling window (scrolls down)
+// 1 = rolling window (resets at top) 
+int con_rolling; 
+
+// Private buffer.
+char printf_buffer[CON_TMPSIZE];
 
 /**
  * con_init: Initialize the console.
@@ -41,6 +50,9 @@ void con_init()
 	// Initialize cursor.
 	curs.x = 0;
 	curs.y = 0;
+	// Initialize console size 
+	con_width = DISP_WIDTH / 8;
+	con_height = DISP_HEIGHT / 8;
 	// Demo/test console on startup.
 	con_fillscr(0, 0);
 	con_puts("Console init", 0);
@@ -76,9 +88,6 @@ void con_setchr(int x, int y, char ch, char attr)
 void con_scrollup()
 {
 	int x, y;
-	// Delete the topmost row.
-	for(x = 0; x < con_width; x++)
-		con_setchr(x, 0, ' ', 0);
 	// Copy each row.
 	for(y = 1; y < con_height; y++)
 	{
@@ -124,8 +133,9 @@ void con_clrscr()
  *
  * @param	ch		character to be written
  * @param	attr	attributes for character
+ * @param	flush	whether or not to flush on newline or special character (0 = no, 1 = yes)
  */
-void con_putchr(char ch, char attr)
+void con_putchr(char ch, char attr, char flush)
 {
 	if(ch == '\n' || ch == '\r')
 	{
@@ -153,26 +163,76 @@ void con_putchr(char ch, char attr)
 		curs.x++;
 	}
 	// If y exceeds bounds, scroll up the window.
-	if(curs.y > con_width - 1)
+	if(curs.y > con_height - 1)
 	{
-		con_scrollup();
-		con_flush();
-		curs.y--;
+		if(flush)
+			con_flush();
+		if(con_rolling)
+			curs.y = 0;
+		else
+		{
+			con_scrollup();
+			curs.y = con_height - 1;
+		}
 	}
 }
 
 /**
  * con_puts: Write a string to the console. Newline is
  * automatically added.
+ *
+ * @param	string	string to be written, newline automatically added
+ * @param	attr	attributes for each character
  */
 void con_puts(char *s, char attr)
 {
 	while(*s != '\0')
 	{
-		con_putchr(*s, attr);
+		con_putchr(*s, attr, 0);
 		s++;
 	}
-	con_putchr('\n', 0);
+	con_putchr('\n', 0, 1);
+	con_flush();
+}
+
+/**
+ * con_puts: Write a string to the console. 
+ * Does not flush console.
+ *
+ * @param	string	string to be written, newline automatically added
+ * @param	attr	attributes for each character
+ */
+void con_puts_noflush(char *s, char attr)
+{
+	while(*s != '\0')
+	{
+		con_putchr(*s, attr, 0);
+		s++;
+	}
+	con_putchr('\n', 0, 0);
+}
+
+/**
+ * con_printf: Write a formatted string to the console.
+ * Up to CON_TMPSIZE characters may be written. Newline is
+ * **not** automatically added.
+ *
+ * @param	fmt		format string (as in printf, sprintf...)
+ * @param	attr	attributes for each character
+ */
+void con_printf(char *fmt, char attr, ...)
+{
+	// FIXME: something is not right with this.
+	char *s = printf_buffer;
+	va_list args;
+	va_start(args, attr);
+	vsnprintf(s, CON_TMPSIZE, fmt, args);
+	va_end(args);
+	while(*s != '\0')
+	{
+		con_putchr(*s, attr, 0);
+		s++;
+	}
 	con_flush();
 }
 

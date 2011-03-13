@@ -27,13 +27,17 @@ typedef	unsigned short uint16_t;
 #define FAR	__attribute__((far))
 
 // We have a 192x128 pixel display.
-#define	DISP_WIDTH	192
-#define	DISP_HEIGHT	128
+// todo: make these integers not consts.
+extern int disp_width, disp_height;
+#define	DISP_WIDTH			disp_width
+#define	DISP_HEIGHT			disp_height
 
-// We define four buffers: two level buffers and two mask buffers.
-// All buffers are identical in size and type.
-#define	BUFF_SIZE	((192 / 8) * 128)
-#define BUFF_WORDS	(BUFF_SIZE / 2)
+#define	BUFF_SIZE_192		3072
+#define	BUFF_SIZE_256		6144
+
+// Video buffer is always 12KB for now.
+#define	BUFF_TOTAL_SIZE		12288
+//#define	BUFF_WORDS		(DISP_WIDTH * DISP_HEIGHT) / 16
 
 // Macros for computing addresses and bit positions.
 // NOTE: /16 in y is because we are addressing by word not byte.
@@ -105,7 +109,7 @@ extern long int delaytmp;
 // Text dimension structures.
 struct FontDimensions
 {
-	int width, height
+	int width, height;
 };
 
 // Macro to swap buffers given a temporary pointer.
@@ -135,6 +139,9 @@ struct FontDimensions
 #define CLIP_COORD_Y(y) { y = MAX(0, MIN(y, DISP_HEIGHT)); }
 #define CLIP_COORDS(x, y) { CLIP_COORD_X(x); CLIP_COORD_Y(y); }
 
+// VSYNC stuff.
+extern int use_vsync, have_vsync_refresh;
+
 // Externs for graphics buffers pointers. (Direct access to buffers typically
 // not allowed.)
 extern uint16_t *draw_buffer_level;
@@ -144,10 +151,16 @@ extern uint16_t *disp_buffer_mask;
 
 // ** Function prototypes. **
 // Buffer management.
-void init_gfx();
+void init_gfx(int mode);
 void swap_buffers();
+void buffer_mode(int mode);
 void fill_buffer(uint16_t *buff, uint16_t word);
 void fill_buffer_rand(uint16_t *buff);
+void clear_disp();
+void clear_draw();
+// Memory test routines.
+volatile int mem_test(uint16_t word);
+int mem_test_full();
 // Basic primitives.
 void write_pixel(uint16_t *buff, unsigned int x, unsigned int y, int mode);
 void write_pixel_lm(unsigned int x, unsigned int y, int mmode, int lmode);
@@ -175,5 +188,9 @@ int fetch_font_info(char ch, int font, struct FontEntry *font_info, char *lookup
 void write_char(char ch, unsigned int x, unsigned int y, int flags, int font);
 void calc_text_dimensions(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim);
 void write_string(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font);
+// Test and/or demo functions.
+void gfx_align_test();
+// VSYNC stuff.
+void wait_vsync();
 
 #endif	// GFX_H

@@ -17,8 +17,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <stdio.h>
 #include "useful.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 char temp_buff[100];
 
@@ -89,7 +93,7 @@ void *safe_realloc(void *ptr, size_t size)
 	void *newptr = realloc(ptr, size);
 	if(newptr == NULL)
 	{
-		sprintf(temp_buff, "realloc of %u (0x%x) bytes failed (oldptr=%x)", (unsigned int)size, (unsigned int)size, &ptr);
+		sprintf(temp_buff, "realloc of %u (0x%x) bytes failed (oldptr=%x)", (unsigned int)size, (unsigned int)size, (unsigned int)(&ptr));
 		panic(temp_buff);
 	}
 	return newptr;

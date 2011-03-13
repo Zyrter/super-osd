@@ -18,118 +18,159 @@
  */
 
 #include <p33fj128gp802.h>
+#include <uart.h>
+#include <pps.h>
+
 #include "useful.h"
 #include "interface.h"
 
+// Private DMA structures.
+char uart_buffA[UART_BUFFSZ] __attribute__((space(dma)));
+char uart_buffB[UART_BUFFSZ] __attribute__((space(dma)));
+char uart_buff_done[UART_BUFFSZ];
+
+// for UART/DMA
+int UART_RX_DMA_last;
+
 /*
- * This code handles the external interface, including I2C, and
- * parsing commands and sending the commands off to the various
- * drawing functions. The code is mixed with the OSD code, which
- * captures some of the I2C data.
+ * This code handles the external interface over a very high
+ * speed UART connection. It manages the UART receive and 
+ * transmit buffer, DMA, the hardware API as well as parsing
+ * the received commands. 
  */
-
-char cmd_buffer[CMD_BUFFER_SIZE];
-int cmd_buffer_ptr;
-int cmd_buffer_full;
 
 /**
- * interface_init: Initialize the I2C interface and command 
- * buffers. This should be called before the first TV line
- * interrupt, or line interrupts should be disabled while it
- * is processing, otherwise commands may be lost.
+ * interface_init_uart: Initialize UART module including
+ * PPS. Does not set baud rate and module must be enabled
+ * after this function is run.
  */
-void interface_init_i2c()
+void interface_init_uart()
 {
-	int i = 0;
-	while(i < CMD_BUFFER_SIZE)
-	{
-		cmd_buffer[i] = 0x00;
-		i++;
-	}
-	cmd_buffer_full = 0;
-	cmd_buffer_ptr = 0;
-	// Setup I2C as a slave device.
-	I2C1CONbits.I2CEN = 0; 		// initially disable it
-	I2C1CONbits.I2CSIDL = 0;	// don't stop in idle mode
-	I2C1CONbits.SCLREL = 1;		// turn off clock stretching
-	I2C1CONbits.IPMIEN = 0;		// IPMIEM support off
-	I2C1CONbits.A10M = 0;		// use 7-bit addresses
-	I2C1CONbits.DISSLW = 1;		// disable slew rate control
-	I2C1CONbits.SMEN = 0;		// SMBus compatibility off
-	I2C1CONbits.GCEN = 0;		// ignore general call
-	I2C1CONbits.STREN = 1;		// allow for clock stretching to be used
-	I2C1ADD = I2C_MY_ADDR;		// set address
-	I2C1MSK = 0x00;				// no masking
-	I2C1RCV = 0x00;				// clear receive buffer
-	I2C1TRN = 0x00;				// clear transmit buffer
-	I2C1BRG = 0xffff;			// BRG not important as we are a slave and not a master
-	I2C1CONbits.I2CEN = 0; 		// now enable I2C1.
+	// Setup PPS (use pps.h macros.)
+	PPSUnLock;
+	iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP9);
+	iPPSInput(IN_FN_PPS_U1CTS, 31); // always clear to send to PIC24F (tie internally to Vss)
+	iPPSOutput(OUT_PIN_PPS_RP11, OUT_FN_PPS_U1RTS);
+	iPPSOutput(OUT_PIN_PPS_RP8, OUT_FN_PPS_U1TX);
+	// Setup UART1.
+	U1MODEbits.UARTEN = 0;							// Disable UART1 for now
+	U1MODEbits.USIDL = 0;							// Don't stop in idle mode(?)
+	U1MODEbits.IREN = 0;							// Disable IrDA mode
+	U1MODEbits.RTSMD = 0;							// Flow control mode - automatically control U1RTS
+	U1MODEbits.UEN = 0b10;							// UxTX, UxRX and UxRTS pins are enabled and used; UxCTS pin is controlled by port latches
+	U1MODEbits.WAKE = 0;							// Disable wake-up
+	U1MODEbits.LPBACK = 0;						    // Disable loop-back
+	//U1MODEbits.LPBACK = 1;						    // Enable loop-back (testing)
+	U1MODEbits.ABAUD = 0;							// Disable auto-baud for now
+	U1MODEbits.URXINV = 0;							// Disable receive invert
+	U1MODEbits.BRGH = 1;							// High-speed mode
+	U1MODEbits.PDSEL = 0b00;						// 8-bit, no parity (consider odd/even parity?)
+	U1MODEbits.STSEL = 0;							// 1 stop bit
+	U1STAbits.UTXEN = 0;							// Disable transmit (for now)
+	// Setup interrupts (required for DMA)
+	U1STAbits.URXISEL = 0b00;						// "Interrupt" on each byte
+	// Disable interrupts on the CPU side, so the processor doesn't get interfered with.
+	IEC0bits.U1RXIE = 0; 
+	IPC2bits.U1RXIP = 0; 
+	// Setup DMA for RX side.
+	DMA5CONbits.CHEN = 0;							// Disable channel for now
+	DMA5CONbits.SIZE = 1;							// Byte transfers
+	DMA5CONbits.DIR = 0;							// Read from peripheral to DPSRAM
+	DMA5CONbits.HALF = 0;							// Don't interrupt on half written
+	DMA5CONbits.NULLW = 0;							// Don't do a null write
+	DMA5CONbits.AMODE = 0b00;						// Peripheral indirect addressing mode, post-increment
+	DMA5CONbits.MODE = 0b10;						// Continuous, ping pong buffer
+	DMA5REQbits.FORCE = 0;							// Don't force transfer yet (peripheral control only)
+	DMA5REQbits.IRQSEL = 0b0001011;					// UART1RX IRQ
+	DMA5STA = __builtin_dmaoffset(uart_buffA);		// Buffer A
+	DMA5STB = __builtin_dmaoffset(uart_buffB);		// Buffer B
+	DMA5CNT = UART_BUFFSZ - 1;						// Maximum UART_BUFFSZ bytes per transaction
+	DMA5PAD = (volatile unsigned int) &U1RXREG;		// DMA peripheral address
+	U1MODEbits.UARTEN = 1;							// Enable UART
+	DMA5CONbits.CHEN = 1;							// Turn channel on
+	// Set channel tracker up.
+	UART_RX_DMA_last = DMACS1bits.PPST5;
+	// Kick-start the first transfer.
+	DMA5REQbits.FORCE = 1;
+	// Lock PPS & OSCCON.
+	PPSLock;
 }
 
 /**
- * interface_handle_i2c: Handle the I2C buffer. Called on each
- * TV CSYNC line and occasionally in the main loop.
+ * interface_test_uart: Loop n times (a long int), repeating the
+ * character 'U' on the UART tx pin.
  */
-void interface_handle_i2c()
+void interface_test_uart(long int n)
 {
-	// I2C buffer is full. Is receive buffer full?
-	// If so, put byte into the command buffer.
-	if(I2C1STATbits.RBF && !cmd_buffer_full)
-		cmd_buffer[cmd_buffer_ptr++] = I2C1RCV;
-	// If STOP (bit P) has been asserted, or, if the command buffer 
-	// has overflowed. then it is the end of any given command, so 
-	// end the buffer. This signals to the main application code that 
-	// the buffer must be handled.
-	if(I2C1STATbits.P || cmd_buffer_ptr >= CMD_BUFFER_SIZE - 1)
+	// Enable transmit.
+	U1STAbits.UTXEN = 1;
+	while(n--)
 	{
-		// The following should be atomic. How do we ensure this?
-		cmd_buffer_full = 1;
-		I2C1CONbits.SCLREL = 0; // clock stretching on
+		while(BusyUART1());
+		WriteUART1('U');
 	}
-	// Are we okay now to accept another byte?
-	if(cmd_buffer_full == 0)
-		I2C1CONbits.SCLREL = 1; // clock stretching off
 }
 
 /**
- * interface_handle_command: Handle the command buffer. After
- * this, the buffer is marked as empty and the pointer is reset.
- * It is important for that operation to be atomic, so a single
- * bit is set to indicate the buffer is to be reset and this
- * is handled on each CSYNC line. Otherwise, an interrupt between
- * the write to the full bit and the pointer could cause the
- * command buffer to be clobbered.
+ * interface_check_uart: Check UART (this is run in a loop) for 
+ * new data. We need to investigate making this faster in future.
  */
-void interface_handle_command()
+void interface_check_uart()
 {
-	// Argument temporaries.
-	int x0 = 0, y0 = 0, x1 = 0, y1 = 0;
-	int ec0 = 0, ec1 = 0;
+	char *ptr, nullread;
 	int i = 0;
-	char cksum = 0x00;
-	// Check the command arrived correctly using the checksum.
-	// The checksum is very basic, but handles simple bit errors, which is
-	// pretty much the only thing that can happen with I2C.
-	while(i < cmd_buffer_ptr) // up to the last byte
-		cksum ^= cmd_buffer[i++];
-	// In future, handle errors more gracefully.
-	MY_ASSERT(cksum == cmd_buffer[cmd_buffer_ptr]);
-	// First byte indicates type of command.
-	switch(cmd_buffer[0])
+	if(DMA5CONbits.CHEN == 0)
 	{
-		case 0x00: break; // NOP/ping
-		// Draw outlined horizontal line.
-		// Expects arguments: x0, y0, x1, y1, ec0, ec1, mode, mmode (11 bytes.)
-		case 0x01: 
-			x0 = EXTRACT_INT16(cmd_buffer, 1);
-			y0 = EXTRACT_INT16(cmd_buffer, 3);
-			x1 = EXTRACT_INT16(cmd_buffer, 5);
-			y1 = EXTRACT_INT16(cmd_buffer, 7);
-			ec0 = cmd_buffer[8];
-			ec1 = cmd_buffer[9];
-			mode = cmd_buffer[10];
-			mmode = cmd_buffer[11];
-			write_hline_outlined(x0, y0, x1, y1, ec0, ec1, mode, mmode);
-			break;
+		con_puts("Got data", 0);
+		if(DMACS1bits.PPST5 == 0)
+			ptr = uart_buffA;
+		else
+			ptr = uart_buffB;
+		// Copy the data.
+		for(i = 0; i < UART_BUFFSZ; i++)
+			uart_buff_done[i] = ptr[i];
+		// Handle the data. For now, we just print it on the console.
+		con_puts(uart_buff_done, 0);
+		// Force 1 transfer.
+		//DMA5REQbits.FORCE = 1;
+		// Enable the channel again.
+		DMA5CONbits.CHEN = 1;
+		// Clear the OERR bit.
+		U1STAbits.OERR = 0;
 	}
+	else
+	{
+		//con_puts("No data", 0);
+	}
+}
+
+/**
+ * interface_set_baudrate: Set the baudrate or return an
+ * error if the baud rate cannot be set (for example, it is
+ * unsupported.)
+ */
+unsigned int interface_set_baudrate(long int baudrate)
+{
+	// Fcy = 36.35 MHz, BRGH = 1.
+	unsigned int brg;
+	// Generated using uart-brg.py - a simple Python script to calculate all of these BRGs.
+    switch(baudrate) // Fcy: 36.850 MHz
+    {
+        case 9600: brg = 959; break; 	// actual rate 9596 (error -4/0.04%) 
+        case 19200: brg = 479; break; 	// actual rate 19192 (error -8/0.04%) 
+        case 28800: brg = 319; break; 	// actual rate 28789 (error -11/0.04%) 
+        case 38400: brg = 239; break; 	// actual rate 38385 (error -15/0.04%) 
+        case 57600: brg = 159; break; 	// actual rate 57578 (error -22/0.04%) 
+        case 115200: brg = 79; break; 	// actual rate 115156 (error -44/0.04%) 
+        case 128000: brg = 71; break; 	// actual rate 127951 (error -49/0.04%) 
+        case 153600: brg = 59; break; 	// actual rate 153541 (error -59/0.04%) 
+        case 230400: brg = 39; break; 	// actual rate 230312 (error -88/0.04%) 
+        case 256000: brg = 35; break; 	// actual rate 255902 (error -98/0.04%) 
+        case 460800: brg = 19; break; 	// actual rate 460625 (error -175/0.04%) 
+        case 921600: brg = 9; break; 	// actual rate 921250 (error -350/0.04%) 
+        case 1843200: brg = 4; break; 	// actual rate 1842500 (error -700/0.04%) 
+        default: return -1; break; 
+    }
+	U1BRG = brg;
+	return brg;
 }

@@ -24,16 +24,13 @@
  * captures some of the I2C data.
  */
 
-#define CMD_BUFFER_SIZE	128		// 128 bytes buffer
-#define I2C_MY_ADDR		0x32	// default I2C address: 0x32
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
-#define EXTRACT_INT16(buff, p) (buff[p] | buff[(p) + 1] << 8)
-
-// Buffer definitions.
-extern char cmd_buffer[CMD_BUFFER_SIZE];
-extern int cmd_buffer_ptr;
-extern int cmd_buffer_full;
+#define UART_BUFFSZ		256
 
 // Function prototypes.
-void interface_init_i2c();
-void interface_handle_i2c();
+void interface_init_uart();
+unsigned int interface_set_baudrate(long int baudrate);
+
+#endif // INTERFACE_H

@@ -1,0 +1,202 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={DE18EB1A-B46B-486B-B96F-A811A635DFAC}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-as.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g
+TraceCmdString=
+DebugOptions=--defsym=__DEBUG=1
+[File001]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File002]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File003]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File004]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File005]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File006]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\font_outlined8x14.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File007]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File008]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\font_outlined8x8.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File009]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File010]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File011]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File012]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O1
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File013]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\V3B.cof
+Folder=Output
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=256 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -fast-math -lq
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[File014]
+Location=C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\V3B.hex
+Folder=Output
+DeviceName=dsPIC33FJ128GP802
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|output.s|gfx.c|main.c|osd.c|gfx_game_engine.c|useful.c|fonts\font_outlined8x14.c|fonts.c|fonts\font_outlined8x8.c|console.c|hud.c|interface.c|fpexpansion.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=256 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -fast-math -lq
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[TOOL_LOC_STAMPS]
+tool_loc{DE18EB1A-B46B-486B-B96F-A811A635DFAC}=C:\Program Files\Microchip\MPLAB C30\bin\pic30-as.exe
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Program Files\Microchip\MPLAB C30\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files\Microchip\MPLAB C30\bin\pic30-ld.exe

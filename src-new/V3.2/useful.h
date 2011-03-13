@@ -56,7 +56,7 @@ void *safe_calloc(size_t num, size_t elsize);
 void *safe_realloc(void *ptr, size_t size);
 // Implementations of itoa and reverse.
 int my_itoa(long int n, char s[]);
-void reverse(char s[]);
+void my_reverse(char s[]);
 // Integer power function. (Faster than floating point pow.)
 long int intpow(int x, int y);
 // Lat/Long to string.

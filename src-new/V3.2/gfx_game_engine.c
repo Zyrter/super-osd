@@ -19,7 +19,12 @@
 
 #include "gfx.h"
 #include "gfx_game_engine.h"
+#include "fpexpansion.h"
 #include "useful.h"
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
 #include <stdlib.h>
 
 /**
@@ -240,7 +245,7 @@ void compute_3d_transform(struct WorldCamera *p_viewer, struct Point3D_LLA *p_su
 	// then the point is not visible.
 	res->h_angle += p_viewer->hfov * 0.5f;
 	res->v_angle += p_viewer->vfov * 0.5f;
-	// Set flags.
+	// Set flags. Rolling seems to exclude some values - need to work on this!
 	if(res->h_angle < 0 || res->h_angle > p_viewer->hfov)
 		res->flags |= X_OVER;
 	if(res->v_angle < 0 || res->v_angle > p_viewer->vfov)
@@ -252,12 +257,16 @@ void compute_3d_transform(struct WorldCamera *p_viewer, struct Point3D_LLA *p_su
 		// If roll is nonzero rotate about the display surface's center.
 		if(p_viewer->roll >= 0.5f)
 		{
-			float x = res->pos.x, y = res->pos.y;
-			// TODO: cache sin(theta) and cos(theta).
-			rotate2(res->pos.x, res->pos.y, p_viewer->width / 2, p_viewer->height / 2, &x, &y, DEG2RAD(p_viewer->roll));
-			// Convert and write back.
-			res->pos.x = x;
-			res->pos.y = y;
+			float theta_rad = DEG2RAD(p_viewer->roll);
+			float px = res->pos.x, py = res->pos.y;
+			float ox = p_viewer->width / 2, oy = p_viewer->height / 2;
+			float costheta = cosf(theta_rad), sintheta = sinf(theta_rad);
+			res->pos.x = (costheta * (px - ox)) - (sintheta * (py - oy)) + ox;
+			res->pos.y = (sintheta * (px - ox)) + (costheta * (py - oy)) + oy;
+			if(res->pos.x < 0 || res->pos.x > p_viewer->width)
+				res->flags |= X_OVER;
+			if(res->pos.y < 0 || res->pos.y > p_viewer->height)
+				res->flags |= Y_OVER;
 		}
 	}
 	return;
@@ -272,7 +281,7 @@ quick_exit:
 int demo_game()
 {
 	char buff[100];
-	long int d, last_time;
+	long int last_time = 0;
 	int i, r, ctr = 0, fps = 0, vis_wps = 0;
 	struct WorldCamera p_viewer;
 	struct Point2D_CalcRes p_res;
@@ -302,12 +311,8 @@ int demo_game()
 	p_viewer.p.alt = 100.0f;
 	while(1)
 	{
-		//fill_buffer(draw_buffer_mask, 0xffff);
-		//fill_buffer(draw_buffer_level, 0xffff);
 		fill_buffer(draw_buffer_mask, 0x0000);
-		fill_buffer(draw_buffer_level, 0xffff);
-		//fill_buffer_rand(draw_buffer_mask);
-		//fill_buffer_rand(draw_buffer_level);
+		fill_buffer(draw_buffer_level, 0x0000);
 		ctr++;
 		if(tv_time != last_time)
 		{
@@ -323,18 +328,10 @@ int demo_game()
 		vis_wps = 0;
 		write_string(buff, 0, 0, 0, 0, TEXT_VA_TOP, TEXT_HA_LEFT, 0, 1);
 		memset(buff, 0, 20);
-		//strcat(buff, "ROL:");
-		//my_itoa(p_viewer.roll, buff + strlen(buff));
+		strcat(buff, "ROL:");
+		my_itoa(p_viewer.roll, buff + strlen(buff));
 		write_string(buff, DISP_WIDTH, 0, 0, 1, TEXT_VA_TOP, TEXT_HA_RIGHT, 0, 1);
 		memset(buff, 0, 20);
-		/*
-		strcat(buff, "W:");
-		fpllstring(p_viewer.p.lat, 5, buff + strlen(buff));
-		strcat(buff, "N ");
-		fpllstring(p_viewer.p.lon, 5, buff + strlen(buff));
-		strcat(buff, "E\n");
-		*/
-		strcat(buff, "C:");
 		fpllstring(p_viewer.p.lat, 4, buff + strlen(buff));
 		strcat(buff, "N ");
 		fpllstring(p_viewer.p.lon, 4, buff + strlen(buff));
@@ -369,9 +366,9 @@ int demo_game()
 		// adjust viewpoint.
 		p_viewer.p.lat -= 0.0005f;
 		if(p_viewer.p.lat < 50.65f) p_viewer.p.lat = 51.40f;
-		//p_viewer.roll += 0.5f;
-		//if(p_viewer.roll >= 360.0f)
-		//	p_viewer.roll = 0.0f;
+		p_viewer.roll += 0.5f;
+		if(p_viewer.roll >= 360.0f)
+			p_viewer.roll = 0.0f;
 	}
 	return 1;
 }

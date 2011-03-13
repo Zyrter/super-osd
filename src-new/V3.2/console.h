@@ -17,6 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#ifndef CONSOLE_H
+#define CONSOLE_H
+
 /*
  * These files manage the virtual console. The console is used for 
  * debugging and on startup. The functions are similar to old DOS 
@@ -27,8 +30,13 @@
 #define CON_ATTR_BLINK		2
 #define CON_ATTR_HIGHLIGHT	4
 
+// 128 byte buffer
+#define CON_TMPSIZE			128
+
 typedef struct ConChar { char ch, attr; };
 typedef struct ConCurs { int x, y; };
+
+extern int con_rolling; 
 
 // Function prototypes.
 void con_init();
@@ -36,9 +44,12 @@ void con_scrollup();
 void con_fillscr(char ch, char attr);
 void con_clrscr();
 void con_setchr(int x, int y, char ch, char attr);
-void con_putchr(char ch, char attr);
+void con_putchr(char ch, char attr, char flush);
 void con_puts(char *str, char attr);
+void con_puts_noflush(char *str, char attr);
 void con_printf(char *fmt, char attr, ...);
 void con_curhome();
 void con_curset(int x, int y);
 void con_flush();
+
+#endif

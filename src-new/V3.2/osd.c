@@ -17,9 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <stdlib.h>
+
 #include "gfx.h"
 #include "osd.h"
-#include <stdlib.h>
+#include "interface.h"
 
 #define  PPS_UNLOCK		__builtin_write_OSCCONL(OSCCON & 0xbf)
 #define  PPS_LOCK		__builtin_write_OSCCONL(OSCCON | 0x40) 
@@ -32,18 +34,22 @@ long int tv_time;
 int vsync_last, timer2_dc, timer2_osd;
 int vid_hoffset, vid_voffset;
 
-uint16_t scanline_mask[DISP_WIDTH / 16];
-uint16_t scanline_level[DISP_WIDTH / 16];
-uint16_t scanline_mask_out[DISP_WIDTH / 16];
-uint16_t scanline_level_out[DISP_WIDTH / 16];
+// scanlines are 36 bytes each (enough for 288 pixels horizontal resolution)
+uint16_t scanline_mask[18];
+uint16_t scanline_level[18];
+uint16_t scanline_mask_out[18];
+uint16_t scanline_level_out[18];
 
 int audio_l_tmaster, audio_l_tmask;
 int audio_r_tmaster, audio_r_tmask;
 
+// for UART/DMA_last;
+
 #define AUDIO_FREQ(f) (31250 / f) // this is not quite true for NTSC, but it is close enough
 
 /* Assembly output. */
-extern int osd_out(short *ptr_set_clear, short *ptr_black_white, short num_words); 
+extern int osd_out_192(short *ptr_set_clear, short *ptr_black_white, short num_words); 
+extern int osd_out_256(short *ptr_set_clear, short *ptr_black_white, short num_words); 
 
 /**
  * The OSD files handle the actual output of the graphics framebuffer
@@ -63,32 +69,12 @@ void init_osd()
 	tv_field = 0;
 	tv_format = FORMAT_PAL; // default PAL
 	have_vsync = 0;
-	// Initialize L audio output for 3kHz audio output, with 
-	// a 10Hz gate signal.
+	// Initialize L audio output for 3kHz audio output, with a 10Hz gate signal.
 	audio_l_tmaster = AUDIO_FREQ(3000);
 	audio_l_tmask = AUDIO_FREQ(10);
 	// Initialize L audio output for 2kHz audio output continuously.
 	audio_l_tmaster = AUDIO_FREQ(2000);
 	audio_l_tmask = 0;
-	// Initialize scanlines with something interesting.
-	scanline_mask[0] = 0xcccc;
-	scanline_level[0] = 0x0000;
-	scanline_mask[1] = 0xcccc;
-	scanline_level[1] = 0xffff;
-	scanline_mask[2] = 0xffff;
-	scanline_level[2] = 0x5555;
-	scanline_mask[3] = 0xffff;
-	scanline_level[3] = 0xffff;
-	scanline_mask[4] = 0xffff;
-	scanline_level[4] = 0x0000;
-	scanline_mask[5] = 0xcccc;
-	scanline_level[5] = 0x0000;
-	scanline_mask[6] = 0xffff;
-	scanline_level[6] = 0x00ff;
-	scanline_mask[7] = 0x5555;
-	scanline_level[7] = 0x00ff;
-	scanline_mask[9] = 0x073C;  // test line
-	scanline_level[9] = 0x0218; // test line
 }
 
 /**
@@ -97,9 +83,19 @@ void init_osd()
  */
 void prep_scanline(uint16_t *scanline_in, uint16_t *scanline_out, int is_mask, int words)
 {
-	asm("bclr SR, #0");
+	//asm("bclr SR, #0");
 	int i = 0, mask = 0;
 	if(is_mask) mask = 0xffff;
+	while(words--)
+	{
+		uint16_t word = scanline_in[i];
+		word = (word << 5) | (word >> 11); // Fast 5-way rotate for 16-bit word
+		word ^= mask; // quick way of inverting on demand
+		//scanline_out[i] = 0x5555;
+		scanline_out[i] = word;
+		i++;
+	}
+	/*
 	while(words--)
 	{
 		// Probably a more optimal way of doing this, but it works. 
@@ -113,23 +109,29 @@ void prep_scanline(uint16_t *scanline_in, uint16_t *scanline_out, int is_mask, i
 		scanline_out[i] = word;
 		i++;
 	}
+	*/
 }
 
 /**
  * setup_pll: Set up the internal oscillator and PLL, so we run at 
- * approximately 40 MIPS.
- *
- * The actual speed with these settings is 42 MIPS +/- 0.4 MIPS,
- * which although slightly out of spec (40 MIPS) it should be okay.
+ * approximately 36.85 MHz, a baud multiple (important for board 
+ * level communications.)
  */
 void setup_pll()
 {
 	// Disable interrupts (must be done during speed changes.)
 	SRbits.IPL = 0;
-	// These values seem to work well.
-	PLLFBD = 155; // or 154
-	CLKDIVbits.PLLPRE = 5;
-	CLKDIVbits.PLLPOST = 0;
+	// We want an Fcy of 36.85 MHz from a 7.37 MHz (FRC) input.
+	// To do this we need to divide the input by two.
+	CLKDIVbits.PLLPRE = 0; // N1=2; Fref 3.685 MHz.
+	// Then we want to multiply by 40 to give an Fvco of 147.4 MHz.
+	// The Fvco output must be in the range of 100 - 200 MHz.
+	PLLFBD = 39; // M=40
+	// Then we want to divide the Fvco by 2 to give 73.7 MHz (which gives
+	// us an Fcy of 36.85 MHz.)
+	CLKDIVbits.PLLPOST = 0b00; // N2=2
+	// Wait for PLL to lock.
+	while(OSCCONbits.LOCK != 1) ;
 	// Enable interrupts again.
 	SRbits.IPL = 7;
 }
@@ -150,13 +152,13 @@ void setup_io()
 	TRISBbits.TRISB14 = 0;	// Vertical sync
 	TRISBbits.TRISB13 = 0;	// Line output
 	// Setup on-chip DAC.
-	DAC1CONbits.DACEN = 1;
-	DAC1CONbits.DACSIDL = 0;
-	DAC1CONbits.AMPON = 1;
-	DAC1CONbits.FORM = 0;
-	DAC1CONbits.DACFDIV = 8;
-	DAC1STATbits.LOEN = 1;
-	DAC1DFLT = 0x0000;
+	//DAC1CONbits.DACEN = 1;
+	//DAC1CONbits.DACSIDL = 0;
+	//DAC1CONbits.AMPON = 1;
+	//DAC1CONbits.FORM = 0;
+	//DAC1CONbits.DACFDIV = 8;
+	//DAC1STATbits.LOEN = 1;
+	//DAC1DFLT = 0x0000;
 }
 
 /**
@@ -164,6 +166,8 @@ void setup_io()
  */
 void setup_int()
 {
+	// Set up clock recover on interrupt, which disables doze for interrupts.
+	CLKDIVbits.ROI = 0;
 	// Set up pin change notification interrupt on CN24.
 	CNEN2bits.CN24IE = 1;
 	IPC4bits.CNIP = 4;
@@ -192,7 +196,7 @@ void setup_int()
 }
 
 /**
- * Disable interrupts.
+ * disable_int: Disable interrupts.
  */
 void disable_int()
 {
@@ -204,19 +208,14 @@ void disable_int()
 }
 
 /**
- * Primary ISR for pin change interrupts.
+ * _CNInterrupt: Primary ISR for pin change interrupts.
  */ 
 void _MY_ISR _CNInterrupt()
 {
 	// Enable Timer2.
-	timer2_osd = 550 + vid_hoffset;
+	timer2_osd = 410 + vid_hoffset;
 	T2CONbits.TON = 1;
 	TMR2 = 0;
-	// Handle I2C.
-	interface_handle_i2c();
-	// Output a debugging pulse.
-	//PORTBbits.RB15 = 1;
-	//PORTBbits.RB15 = 0;
 	// Check if VSYNC is high OR, if it is low, that the last line
 	// wasn't a falling edge..
 	if(PORTBbits.RB7 == 1 || vsync_last == 0)
@@ -224,6 +223,9 @@ void _MY_ISR _CNInterrupt()
 		tv_csync(); // handle CSYNC
 		tv_line++;
 	}
+	// Signal VSYNC refresh on each frame (not each field!)
+	if(tv_field % 2 == 0)
+		have_vsync_refresh = 1;
 	// If the VSYNC pin is low, determine if this was a falling
 	// edge or not. If so, this is a VSYNC event and needs to be
 	// handled appropriately.
@@ -238,27 +240,22 @@ void _MY_ISR _CNInterrupt()
 	// Switch off Timer2.
 	T2CONbits.TON = 0;
 	TMR2 = 0;
+	// Enable DOZE again (could be 1:1.)
+	CLKDIVbits.DOZEN = 0;
 }
 
 /**
- * tv_vsync: VSYNC handler. This fires on each field 50 
+/ * tv_vsync: VSYNC handler. This fires on each field 50 
  * or 60 times per second.
  */
 void tv_vsync()
 {
 	// How many lines in the last field?
-	// There are 288 lines in PAL, and 240 in NTSC, per field. 
-	// Give some leeway (+/-8%) for counting errors or uncounted 
-	// pulses. Use this to determine the video format.
-	// Sometimes the video format is incorrectly detected as NTSC,
-	// instead of PAL. This needs to be fixed.
-	if(tv_line > 264 && tv_line < 330)
-		tv_format = FORMAT_PAL; // also works for SECAM(?)
-	/* ain't workin'
-	else if(tv_line > 220 && tv_line < 259) 
-		tv_format = FORMAT_NTSC;  
-	*/
-	else {} // else, don't change format.
+	// What we want to do is count the number of lines to determine
+	// the video format. If after more than 10 fields we have detected
+	// a different format, then we need to switch.
+	// TODO
+	tv_format = FORMAT_PAL;
 	tv_line = 1;
 	tv_field++;
 	// If the field counter has reached 50 for PAL or 60 for
@@ -268,6 +265,7 @@ void tv_vsync()
 		tv_field = 0;
 		tv_time++;
 	}
+	// Notify vsync'd code that we have vsync.
 }
 
 /**
@@ -287,20 +285,50 @@ void tv_csync()
 	if(PORTBbits.RB10 == 0) 
 		icomp = 1;
 	// Compute the GFX Y position and hence the address.
-	if(tv_format == FORMAT_PAL)
-		tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * PAL_GFX_SCALE) / 64;
+	if(disp_width == 192)
+	{
+		if(tv_format == FORMAT_PAL)
+			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * PAL_GFX_SCALE_192) / 256;
+		else
+			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * NTSC_GFX_SCALE_192) / 256;
+	}
+	else if(disp_width == 256)
+	{
+		if(tv_format == FORMAT_PAL)
+			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * PAL_GFX_SCALE_256) / 256;
+		else
+			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * NTSC_GFX_SCALE_256) / 256;
+	}
+	int addr = tv_gfx_y * (disp_width / 16);
+	// Load empty scanline if width too big.
+	if(tv_gfx_y > disp_height)
+	{
+		int i;
+		for(i = 0; i < disp_width / 16; i++)
+		{
+			scanline_mask_out[i] = 0xffff; // mask is inverted
+			scanline_level_out[i] = 0x0000;
+		}
+	}
 	else
-		tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * NTSC_GFX_SCALE) / 64;
-	int addr = tv_gfx_y * (DISP_WIDTH / 16);
-	// Prepare the scanline. We are time constrained, so just copy the pointers
-	// from the graphics memory to the scanline pointers.
-	prep_scanline(disp_buffer_mask + addr, scanline_mask_out, 1, DISP_WIDTH / 16);
-	prep_scanline(disp_buffer_level + addr, scanline_level_out, 0, DISP_WIDTH / 16);
-	// Wait for OSD time. (TODO: execute other code in this time.)
+	{
+		// Prepare the scanline. We are time constrained, so just copy the pointers
+		// from the graphics memory to the scanline pointers.
+		prep_scanline(disp_buffer_mask + addr, scanline_mask_out, 1, disp_width / 16);
+		prep_scanline(disp_buffer_level + addr, scanline_level_out, 0, disp_width / 16);
+	}
+	// Check if the UART RX DMA has transferred data. If so, we need to pause it 
+	// and handle it when we get some free time.
+	//if(DMACS1bits.PPST5 != UART_RX_DMA_last)
+	//	DMA5CONbits.CHEN = 0;
+	// Wait for OSD time. (TODO: Execute other code in this time? Consider timer period match interrupt...)
 	while(TMR2 <= timer2_osd);
 	// Output screen data.
 	TRISBbits.TRISB5 = 1; // tristate before sending
-	osd_out(scanline_mask_out, scanline_level_out, DISP_WIDTH / 16);
+	if(disp_width == 192)
+		osd_out_192(scanline_mask_out, scanline_level_out, disp_width / 16);
+	else if(disp_width == 256)
+		osd_out_256(scanline_mask_out, scanline_level_out, disp_width / 16);
 	// Tristate output so as not to cause problems.
 	TRISBbits.TRISB5 = 1;
 	IFS0bits.T2IF = 0;
