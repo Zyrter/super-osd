@@ -20,6 +20,8 @@
 #ifndef GFX_GAME_ENGINE_H
 #define GFX_GAME_ENGINE_H
 
+#if 0
+
 // Macros for storing and retrieving long coordinates.
 #define CF2L(x) ((long int)((x) * 1000000))
 #define CL2F(x) ((x) / 1000000.0f)
@@ -82,4 +84,6 @@ float hypot3(float a, float b, float c);
 void compute_3d_transform(struct WorldCamera *p_viewer, struct Point3D_LLA *p_subj, struct Point2D_CalcRes *res, float cliph);
 int demo_game();
 
-#endif
+#endif // #if 0
+
+#endif 

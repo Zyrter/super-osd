@@ -20,11 +20,12 @@
 #ifndef HUD_H
 #define HUD_H
 
-#define HUD_VSCALE_FLAG_CLR_BG			1
+#define HUD_VSCALE_FLAG_CLEAR			1
 #define HUD_VSCALE_FLAG_NO_NEGATIVE		2
 
 // Function prototypes.
-void hud_draw_vertical_scale(int v, int range, int halign, int x, int y, int height, int mintick_step, int majtick_step, int majtick_len, int mintick_len, int max_val, int flags);
+void hud_draw_linear_compass(int v, int range, int width, int x, int y, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int flags);
+void hud_draw_vertical_scale(int v, int range, int halign, int x, int y, int height, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int boundtick_len, int max_val, int flags);
 void hud_demo();
 
 #endif // HUD_H

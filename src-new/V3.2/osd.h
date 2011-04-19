@@ -35,7 +35,8 @@
 #include "gfx.h"
 #include "osd.h"
 
-extern unsigned int tv_field;
+extern char tv_format, tv_format_switch;
+extern unsigned int tv_field, tv_line, tv_max_line;
 extern long int tv_time;
 
 /**

@@ -37,8 +37,8 @@ struct ConCurs curs;
 // 1 = rolling window (resets at top) 
 int con_rolling; 
 
-// Private buffer.
-char printf_buffer[CON_TMPSIZE];
+// Private buffer. Not used.
+//char printf_buffer[CON_TMPSIZE];
 
 /**
  * con_init: Initialize the console.
@@ -220,6 +220,8 @@ void con_puts_noflush(char *s, char attr)
  * @param	fmt		format string (as in printf, sprintf...)
  * @param	attr	attributes for each character
  */
+/* BROKEN */
+#if 0
 void con_printf(char *fmt, char attr, ...)
 {
 	// FIXME: something is not right with this.
@@ -235,6 +237,7 @@ void con_printf(char *fmt, char attr, ...)
 	}
 	con_flush();
 }
+#endif
 
 /**
  * con_flush: Update the display to reflect the current

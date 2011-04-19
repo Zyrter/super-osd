@@ -22,6 +22,7 @@
 #include "fpexpansion.h"
 #include "useful.h"
 
+#if 0
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
@@ -372,3 +373,5 @@ int demo_game()
 	}
 	return 1;
 }
+
+#endif // #if 0

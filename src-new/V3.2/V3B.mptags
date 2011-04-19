@@ -6,24 +6,25 @@
 !_TAG_PROGRAM_VERSION	5.5.4	//
 !_TAG_REVISION_NAME	MCHPTags	//
 !_TAG_REVISION_VERSION	6.0.1	//
-AUDIO_FREQ::(f)(31250/f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	48;"	d	line:48	file:
-BUFF_SIZE::((192/8)*128)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	35;"	d	line:35
-BUFF_WORDS::(BUFF_SIZE/2)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	36;"	d	line:36
-CALC_BIT_IN_WORD::(x)((x)&15)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	41;"	d	line:41
-CALC_BUFF_ADDR::(x,y)(((x)/16)+((y)*(DISP_WIDT	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	40;"	d	line:40
-CF2L::(x)((longint)((x)*1000000))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	24;"	d	line:24
-CHECK_COORDS::(x,y)if(x<0||x>=DISP_WIDTH||y<	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	129;"	d	line:129
-CHECK_COORD_X::(x)if(x<0||x>=DISP_WIDTH)retur	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	130;"	d	line:130
-CHECK_COORD_Y::(y)if(y<0||y>=DISP_HEIGHT)retu	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	131;"	d	line:131
-CIRCLE_PLOT_4::(buff,cx,cy,x,y,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	126;"	d	line:126
-CIRCLE_PLOT_8::(buff,cx,cy,x,y,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	120;"	d	line:120
-CL2F::(x)((x)/1000000.0f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	25;"	d	line:25
-CLIP_COORDS::(x,y){CLIP_COORD_X(x);CLIP_COO	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	136;"	d	line:136
-CLIP_COORD_X::(x){x=MAX(0,MIN(x,DISP_WIDTH))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	134;"	d	line:134
-CLIP_COORD_Y::(y){y=MAX(0,MIN(y,DISP_HEIGHT)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	135;"	d	line:135
-COMPUTE_HLINE_EDGE_L_MASK::(b)((1<<(16-(b)))-1)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	71;"	d	line:71
-COMPUTE_HLINE_EDGE_R_MASK::(b)(~((1<<(15-(b)))-1))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	72;"	d	line:72
-COMPUTE_HLINE_ISLAND_MASK::(b0,b1)(COMPUTE_HLINE_EDGE_L_M	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	74;"	d	line:74
+AUDIO_FREQ::(f)(31250/f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	47;"	d	line:47	file:
+BUFF_SIZE_HIRES::6240	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	36;"	d	line:36
+BUFF_SIZE_LORES::3120	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	35;"	d	line:35
+BUFF_TOTAL_SIZE::12480	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	39;"	d	line:39
+CALC_BIT_IN_WORD::(x)((x)&15)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	45;"	d	line:45
+CALC_BUFF_ADDR::(x,y)(((x)/16)+((y)*(DISP_WIDT	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	44;"	d	line:44
+CF2L::(x)((longint)((x)*1000000))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	26;"	d	line:26
+CHECK_COORDS::(x,y)if(x<0||x>=DISP_WIDTH||y<	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	133;"	d	line:133
+CHECK_COORD_X::(x)if(x<0||x>=DISP_WIDTH)retur	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	134;"	d	line:134
+CHECK_COORD_Y::(y)if(y<0||y>=DISP_HEIGHT)retu	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	135;"	d	line:135
+CIRCLE_PLOT_4::(buff,cx,cy,x,y,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	130;"	d	line:130
+CIRCLE_PLOT_8::(buff,cx,cy,x,y,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	124;"	d	line:124
+CL2F::(x)((x)/1000000.0f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	27;"	d	line:27
+CLIP_COORDS::(x,y){CLIP_COORD_X(x);CLIP_COO	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	140;"	d	line:140
+CLIP_COORD_X::(x){x=MAX(0,MIN(x,DISP_WIDTH))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	138;"	d	line:138
+CLIP_COORD_Y::(y){y=MAX(0,MIN(y,DISP_HEIGHT)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	139;"	d	line:139
+COMPUTE_HLINE_EDGE_L_MASK::(b)((1<<(16-(b)))-1)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	75;"	d	line:75
+COMPUTE_HLINE_EDGE_R_MASK::(b)(~((1<<(15-(b)))-1))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	76;"	d	line:76
+COMPUTE_HLINE_ISLAND_MASK::(b0,b1)(COMPUTE_HLINE_EDGE_L_M	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	78;"	d	line:78
 CONSOLE_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	21;"	d	line:21
 CONST_2PI::6.283185307f	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	40;"	d	line:40
 CONST_PI::3.1415926535f	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	41;"	d	line:41
@@ -33,284 +34,337 @@ CON_ATTR_INVERT::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ12
 CON_TMPSIZE::128	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	34;"	d	line:34
 ConChar	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	36;"	s	line:36
 ConCurs	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	37;"	s	line:37
-DEBUG_DELAY	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	57;"	d	line:57
-DEBUG_DELAY::{delaytmp=10000;while(delaytmp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	55;"	d	line:55
+DEBUG_DELAY	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	61;"	d	line:61
+DEBUG_DELAY::{delaytmp=10000;while(delaytmp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	59;"	d	line:59
 DEG2RAD::(x)((x)*0.0174532925f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	33;"	d	line:33
-DISP_HEIGHT::128	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	31;"	d	line:31
-DISP_WIDTH::192	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	30;"	d	line:30
-DO_MEM_TEST_WORD	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	153;"	d	line:153	file:
-DO_MEM_TEST_WORD::(x)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	115;"	d	line:115	file:
-DRAW_ENDCAP_HLINE::(e,x,y,s,f,l)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	85;"	d	line:85
-DRAW_ENDCAP_VLINE::(e,x,y,s,f,l)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	91;"	d	line:91
-ENABLE_DELAY_WRITES::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	52;"	d	line:52
-ENDCAP_FLAT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	79;"	d	line:79
-ENDCAP_NONE::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	77;"	d	line:77
-ENDCAP_ROUND::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	78;"	d	line:78
-FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	39;"	v	line:39
-FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	40;"	v	line:40
-FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	41;"	v	line:41
-FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	42;"	v	line:42
+DISP_HEIGHT::disp_height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	33;"	d	line:33
+DISP_WIDTH::disp_width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	32;"	d	line:32
+DO_MEM_TEST_WORD	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	196;"	d	line:196	file:
+DO_MEM_TEST_WORD::(x)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	158;"	d	line:158	file:
+DRAW_ENDCAP_HLINE::(e,x,y,s,f,l)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	89;"	d	line:89
+DRAW_ENDCAP_VLINE::(e,x,y,s,f,l)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	95;"	d	line:95
+ENABLE_DELAY_WRITES::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	56;"	d	line:56
+ENDCAP_FLAT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	83;"	d	line:83
+ENDCAP_NONE::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	81;"	d	line:81
+ENDCAP_ROUND::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	82;"	d	line:82
+FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	46;"	m	line:46	struct:_buffers	file:
+FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	47;"	m	line:47	struct:_buffers	file:
+FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	48;"	m	line:48	struct:_buffers	file:
+FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	49;"	m	line:49	struct:_buffers	file:
+FAR	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	50;"	v	line:50
 FAR::__attribute__((far))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	27;"	d	line:27
 FONTS_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	21;"	d	line:21
-FONT_BOLD::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	94;"	d	line:94
-FONT_INVERT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	95;"	d	line:95
+FONT_BOLD::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	98;"	d	line:98
+FONT_INVERT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	99;"	d	line:99
 FONT_LOWERCASE_ONLY::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	32;"	d	line:32
 FONT_UPPERCASE_ONLY::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	33;"	d	line:33
 FORMAT_NTSC::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	27;"	d	line:27
 FORMAT_PAL::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	26;"	d	line:26
-FWDTEN_OFF	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	39;"	v	line:39
-FontDimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	106;"	s	line:106
+FWDTEN_OFF	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	44;"	v	line:44
+FontDimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	110;"	s	line:110
 FontEntry	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	36;"	s	line:36
 GFX_GAME_ENGINE_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	21;"	d	line:21
 GFX_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	21;"	d	line:21
-HUD_VSCALE_FLAGS	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	20;"	d	line:20
-ICS_PGD1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	41;"	v	line:41
-IESO_OFF	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	35;"	v	line:35
+HUD_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	21;"	d	line:21
+HUD_VSCALE_FLAG_CLEAR::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	23;"	d	line:23
+HUD_VSCALE_FLAG_NO_NEGATIVE::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	24;"	d	line:24
+ICS_PGD1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	46;"	v	line:46
+IESO_OFF	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	40;"	v	line:40
 INTERFACE_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.h	28;"	d	line:28
 MAX3::(a,b,c)MAX(a,MAX(b,c))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	46;"	d	line:46
 MAX::(a,b)((a)>(b)?(a):(b))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	44;"	d	line:44
 MIN3::(a,b,c)MIN(a,MIN(b,c))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	47;"	d	line:47
 MIN::(a,b)((a)<(b)?(a):(b))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	45;"	d	line:45
 MY_ASSERT::(x){if(!(x))panic("assertfaile	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	26;"	d	line:26
-NTSC_GFX_SCALE::24	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	31;"	d	line:31
+NTSC_GFX_SCALE_192::96	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	31;"	d	line:31
+NTSC_GFX_SCALE_256::148	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	33;"	d	line:33
 NUM_FONTS::3	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	29;"	d	line:29
 OSD_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	21;"	d	line:21
-PAL_GFX_SCALE::29	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	30;"	d	line:30
-POSCMD_NONE	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	37;"	v	line:37
+PAL_GFX_SCALE_192::116	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	30;"	d	line:30
+PAL_GFX_SCALE_256::180	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	32;"	d	line:32
+POSCMD_NONE	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	42;"	v	line:42
 PPS_LOCK::__builtin_write_OSCCONL(OSCCON	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	27;"	d	line:27	file:
 PPS_UNLOCK::__builtin_write_OSCCONL(OSCCON	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	26;"	d	line:26	file:
-Point2D_CalcRes	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	67;"	s	line:67
-Point2D_LL	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	39;"	s	line:39
-Point2D_Pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	38;"	s	line:38
-Point3D_LLA	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	s	line:40
-Point3D_SmLLA	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	s	line:42
+Point2D_CalcRes	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	69;"	s	line:69
+Point2D_LL	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	41;"	s	line:41
+Point2D_Pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	s	line:40
+Point3D_LLA	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	s	line:42
+Point3D_SmLLA	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	44;"	s	line:44
 RAD2DEG::(x)((x)*57.2957795f)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	34;"	d	line:34
-SETUP_STROKE_FILL::(stroke,fill,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	49;"	d	line:49
-SET_WP::(wplist,id,latInp,lonInp,altIn	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	31;"	d	line:31
+SETUP_STROKE_FILL	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	366;"	f	line:366
+SETUP_STROKE_FILL::(stroke,fill,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	53;"	d	line:53
+SET_WP::(wplist,id,latInp,lonInp,altIn	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	33;"	d	line:33
 SIZEOF_ARRAY::(x)(sizeof(x)/sizeof((x)[0]))	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	37;"	d	line:37
-SWAP::(a,b){a^=b;b^=a;a^=b;}	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	115;"	d	line:115
-SWAP_BUFFS::(tmp,a,b){tmp=a;a=b;b=tmp;}	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	112;"	d	line:112
-TEXT_HA_CENTER::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	102;"	d	line:102
-TEXT_HA_LEFT::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	101;"	d	line:101
-TEXT_HA_RIGHT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	103;"	d	line:103
-TEXT_VA_BOTTOM::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	100;"	d	line:100
-TEXT_VA_MIDDLE::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	99;"	d	line:99
-TEXT_VA_TOP::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	98;"	d	line:98
-UART_BUFFSZ::256	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.h	30;"	d	line:30
+SWAP::(a,b){a^=b;b^=a;a^=b;}	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	119;"	d	line:119
+SWAP_BUFFS::(tmp,a,b){tmp=a;a=b;b=tmp;}	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	116;"	d	line:116
+TEXT_HA_CENTER::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	106;"	d	line:106
+TEXT_HA_LEFT::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	105;"	d	line:105
+TEXT_HA_RIGHT::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	107;"	d	line:107
+TEXT_VA_BOTTOM::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	104;"	d	line:104
+TEXT_VA_MIDDLE::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	103;"	d	line:103
+TEXT_VA_TOP::0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	102;"	d	line:102
+UART_BUFFSZ::200	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.h	30;"	d	line:30
 UART_RX_DMA_last	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	33;"	v	line:33
 USEFUL_H	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	21;"	d	line:21
-WRITE_WORD_MODE::(buff,addr,mask,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	67;"	d	line:67
-Waypoint3D	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	44;"	s	line:44
-WorldCamera	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	51;"	s	line:51
-X_OVER::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	34;"	d	line:34
-Y_OVER::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	35;"	d	line:35
-_CMPInterrupt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	74;"	p	line:74	signature:()
-_CNInterrupt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	218;"	f	line:218
+WRITE_WORD_MODE::(buff,addr,mask,mode)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	71;"	d	line:71
+Waypoint3D	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	46;"	s	line:46
+WorldCamera	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	53;"	s	line:53
+X_OVER::1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	36;"	d	line:36
+Y_OVER::2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	37;"	d	line:37
+_CMPInterrupt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	78;"	p	line:78	signature:()
+_CNInterrupt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	213;"	f	line:213
 _MY_ISR::__attribute__((interrupt,shado	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	24;"	d	line:24
-_osd_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	27;"	l	line:27
-a	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	341;"	l	line:341
+_buffers	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	44;"	s	line:44	file:
+_osd_out_hires	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	121;"	l	line:121
+_osd_out_lores	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	27;"	l	line:27
+a	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	429;"	l	line:429
 aa	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	91;"	l	line:91
-addr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	836;"	l	line:836
-addr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	298;"	l	line:298
-addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	246;"	l	line:246
-addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	351;"	l	line:351
-addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	429;"	l	line:429
-addr0_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	248;"	l	line:248
-addr0_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	431;"	l	line:431
-addr0_old	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	422;"	l	line:422
-addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	247;"	l	line:247
-addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	352;"	l	line:352
-addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	430;"	l	line:430
-addr1_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	249;"	l	line:249
-addr1_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	432;"	l	line:432
-addr1_old	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	422;"	l	line:422
-addr_temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	830;"	l	line:830
-alt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	m	line:40	struct:Point3D_LLA
-alt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_SmLLA
-and_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	831;"	l	line:831
-angle_dist_deg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	99;"	f	line:99	signature:(float a1, float a2)
-angle_dist_deg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	77;"	p	line:77	signature:(float a1, float a2)
-angle_dist_rad	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	85;"	f	line:85	signature:(float a1, float a2)
-angle_dist_rad	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	76;"	p	line:76	signature:(float a1, float a2)
-args	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	225;"	l	line:225
+addr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1022;"	l	line:1022
+addr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	349;"	l	line:349
+addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	307;"	l	line:307
+addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	439;"	l	line:439
+addr0	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	521;"	l	line:521
+addr0_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	309;"	l	line:309
+addr0_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	523;"	l	line:523
+addr0_old	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	514;"	l	line:514
+addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	308;"	l	line:308
+addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	440;"	l	line:440
+addr1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	522;"	l	line:522
+addr1_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	310;"	l	line:310
+addr1_bit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	524;"	l	line:524
+addr1_old	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	514;"	l	line:514
+addr_temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1016;"	l	line:1016
+aira	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
+airspeed	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
+alt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_LLA
+alt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	44;"	m	line:44	struct:Point3D_SmLLA
+alt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
+alta	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
+and_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1017;"	l	line:1017
+angle_dist_deg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	79;"	p	line:79	signature:(float a1, float a2)
+angle_dist_rad	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	78;"	p	line:78	signature:(float a1, float a2)
+arrow_len	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	118;"	l	line:118
 attr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	36;"	m	line:36	struct:ConChar
-audio_l_tmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	42;"	v	line:42
-audio_l_tmaster	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	42;"	v	line:42
-audio_r_tmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	43;"	v	line:43
-audio_r_tmaster	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	43;"	v	line:43
+audio_l_tmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	44;"	v	line:44
+audio_l_tmaster	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	44;"	v	line:44
+audio_r_tmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	45;"	v	line:45
+audio_r_tmaster	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	45;"	v	line:45
+ax	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1246;"	l	line:1246
+ay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1246;"	l	line:1246
 bb	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	73;"	l	line:73
 bb	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	92;"	l	line:92
-bearing	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	64;"	f	line:64	signature:(struct Point2D_LL from, struct Point2D_LL to)
-bearing	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	75;"	p	line:75	signature:(struct Point2D_LL from, struct Point2D_LL to)
-bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	197;"	l	line:197
-bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	218;"	l	line:218
-bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	354;"	l	line:354
+bearing	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	77;"	p	line:77	signature:(struct Point2D_LL from, struct Point2D_LL to)
+bigfontheight	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1179;"	l	line:1179
+bigfontwidth	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1179;"	l	line:1179
+bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	258;"	l	line:258
+bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	279;"	l	line:279
+bitnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	442;"	l	line:442
 brg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	155;"	l	line:155
-brg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	48;"	l	line:48
-buff	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	82;"	l	line:82
-buff	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	283;"	l	line:283
+brg	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	53;"	l	line:53
+buff	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	125;"	l	line:125
+buff	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	223;"	l	line:223
+buff_words	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	58;"	v	line:58
+buffer0_level::(buffers.buffer0_level)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	52;"	d	line:52	file:
+buffer0_mask::(buffers.buffer0_mask)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	53;"	d	line:53	file:
+buffer1_level::(buffers.buffer1_level)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	54;"	d	line:54	file:
+buffer1_mask::(buffers.buffer1_mask)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	55;"	d	line:55	file:
+buffer_mode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	400;"	f	line:400	signature:(int mode)
+buffer_mode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	156;"	p	line:156	signature:(int mode)
 c	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	140;"	l	line:140
-calc_text_dimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	898;"	f	line:898	signature:(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim)
-calc_text_dimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	179;"	p	line:179	signature:(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim)
-ch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	49;"	l	line:49
+calc_text_dimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1084;"	f	line:1084	signature:(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim)
+calc_text_dimensions	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	190;"	p	line:190	signature:(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim)
+calc_ys	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+ch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	48;"	l	line:48
 ch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	36;"	m	line:36	struct:ConChar
-compute_3d_transform	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	216;"	f	line:216	signature:(struct WorldCamera *p_viewer, struct Point3D_LLA *p_subj, struct Point2D_CalcRes *res, float cliph)
-compute_3d_transform	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	82;"	p	line:82	signature:(struct WorldCamera *p_viewer, struct Point3D_LLA *p_subj, struct Point2D_CalcRes *res, float cliph)
-con_clrscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	124;"	f	line:124
+clear_disp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	239;"	f	line:239
+clear_disp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	159;"	p	line:159	signature:()
+clear_draw	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	230;"	f	line:230
+clear_draw	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	160;"	p	line:160	signature:()
+compute_3d_transform	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	84;"	p	line:84	signature:(struct WorldCamera *p_viewer, struct Point3D_LLA *p_subj, struct Point2D_CalcRes *res, float cliph)
+con_clrscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	126;"	f	line:126
 con_clrscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	45;"	p	line:45	signature:()
 con_curhome	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	51;"	p	line:51	signature:()
 con_curset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	52;"	p	line:52	signature:(int x, int y)
-con_fillscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	108;"	f	line:108	signature:(char ch, char attr)
+con_fillscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	110;"	f	line:110	signature:(char ch, char attr)
 con_fillscr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	44;"	p	line:44	signature:(char ch, char attr)
-con_flush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	241;"	f	line:241
+con_flush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	246;"	f	line:246
 con_flush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	53;"	p	line:53	signature:()
-con_height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	34;"	v	line:34
-con_init	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	47;"	f	line:47
+con_height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	33;"	v	line:33
+con_init	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	46;"	f	line:46
 con_init	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	42;"	p	line:42	signature:()
-con_printf	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	221;"	f	line:221	signature:(char *fmt, char attr, ...)
 con_printf	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	50;"	p	line:50	signature:(char *fmt, char attr, ...)
-con_putchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	136;"	f	line:136	signature:(char ch, char attr, char flush)
+con_putchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	138;"	f	line:138	signature:(char ch, char attr, char flush)
 con_putchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	47;"	p	line:47	signature:(char ch, char attr, char flush)
-con_puts	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	185;"	f	line:185	signature:(char *s, char attr)
+con_puts	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	187;"	f	line:187	signature:(char *s, char attr)
 con_puts	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	48;"	p	line:48	signature:(char *str, char attr)
-con_puts_noflush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	203;"	f	line:203	signature:(char *s, char attr)
+con_puts_noflush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	205;"	f	line:205	signature:(char *s, char attr)
 con_puts_noflush	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	49;"	p	line:49	signature:(char *str, char attr)
-con_rolling	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	39;"	v	line:39
-con_scrollup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	86;"	f	line:86
+con_rolling	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	38;"	v	line:38
+con_scrollup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	88;"	f	line:88
 con_scrollup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	43;"	p	line:43	signature:()
-con_setchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	76;"	f	line:76	signature:(int x, int y, char ch, char attr)
+con_setchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	78;"	f	line:78	signature:(int x, int y, char ch, char attr)
 con_setchr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	46;"	p	line:46	signature:(int x, int y, char ch, char attr)
 con_width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	33;"	v	line:33
 cons	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	32;"	v	line:32
-cos_lat2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	70;"	l	line:70
-costheta	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	197;"	l	line:197
-costheta	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	263;"	l	line:263
-ctr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	285;"	l	line:285
-current_wp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	34;"	v	line:34
-curs	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	35;"	v	line:35
+ctr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	221;"	l	line:221
+ctr2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	221;"	l	line:221
+curs	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	34;"	v	line:34
 d	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	38;"	l	line:38
 data	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	42;"	m	line:42	struct:FontEntry
-delay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	47;"	l	line:47
+delay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	52;"	l	line:52
 delaytmp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	21;"	v	line:21
-deltax	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	688;"	l	line:688
-deltay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	689;"	l	line:689
-demo_game	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	281;"	f	line:281
-demo_game	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	83;"	p	line:83	signature:()
-dim	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	937;"	l	line:937
-disable_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	206;"	f	line:206
-disable_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	73;"	p	line:73	signature:()
-disp_buffer_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	47;"	v	line:47
-disp_buffer_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	48;"	v	line:48
+deltax	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	780;"	l	line:780
+deltax	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	883;"	l	line:883
+deltay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	781;"	l	line:781
+deltay	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	884;"	l	line:884
+demo_game	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	85;"	p	line:85	signature:()
+dim	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1123;"	l	line:1123
+dim	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	97;"	l	line:97
+disable_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	201;"	f	line:201
+disable_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	77;"	p	line:77	signature:()
+disp_buffer_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	63;"	v	line:63
+disp_buffer_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	64;"	v	line:64
+disp_height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	57;"	v	line:57
+disp_mode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	57;"	v	line:57
+disp_width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	57;"	v	line:57
 divideQ16byQ16	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	129;"	f	line:129	signature:(_Q16 a, _Q16 b)
 divideQ16byQ16	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.h	32;"	p	line:32	signature:(_Q16 a, _Q16 bs)
-dlon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	69;"	l	line:69
-done	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	106;"	l	line:106
-draw_buffer_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	45;"	v	line:45
-draw_buffer_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	46;"	v	line:46
-dytemp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	152;"	l	line:152
-err	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	81;"	l	line:81
-error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	531;"	l	line:531
-error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	566;"	l	line:566
-error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	627;"	l	line:627
-error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	690;"	l	line:690
-est_dist	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	70;"	m	line:70	struct:Point2D_CalcRes
-esthypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	150;"	f	line:150	signature:(float dx, float dy)
-esthypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	80;"	p	line:80	signature:(float dx, float dy)
-fetch_font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	800;"	f	line:800	signature:(char ch, int font, struct FontEntry *font_info, char *lookup)
-fetch_font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	177;"	p	line:177	signature:(char ch, int font, struct FontEntry *font_info, char *lookup)
-fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	304;"	l	line:304
-fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	395;"	l	line:395
-fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	561;"	l	line:561
-fill_buffer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	162;"	f	line:162	signature:(uint16_t *buff, uint16_t word)
-fill_buffer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	149;"	p	line:149	signature:(uint16_t *buff, uint16_t word)
-fill_buffer_rand	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	175;"	f	line:175	signature:(uint16_t *buff)
-fill_buffer_rand	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	150;"	p	line:150	signature:(uint16_t *buff)
-firstmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	767;"	l	line:767
+done	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	95;"	l	line:95
+done2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	196;"	l	line:196
+draw_buffer_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	61;"	v	line:61
+draw_buffer_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	62;"	v	line:62
+err	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	124;"	l	line:124
+error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	623;"	l	line:623
+error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	658;"	l	line:658
+error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	719;"	l	line:719
+error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	782;"	l	line:782
+error	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	885;"	l	line:885
+est_dist	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	72;"	m	line:72	struct:Point2D_CalcRes
+esthypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	82;"	p	line:82	signature:(float dx, float dy)
+fcode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+fetch_font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	986;"	f	line:986	signature:(char ch, int font, struct FontEntry *font_info, char *lookup)
+fetch_font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	188;"	p	line:188	signature:(char ch, int font, struct FontEntry *font_info, char *lookup)
+fheight	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+field_odd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
+fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	365;"	l	line:365
+fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	483;"	l	line:483
+fill	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	653;"	l	line:653
+fill_buffer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	205;"	f	line:205	signature:(uint16_t *buff, uint16_t word)
+fill_buffer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	157;"	p	line:157	signature:(uint16_t *buff, uint16_t word)
+fill_buffer_rand	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	218;"	f	line:218	signature:(uint16_t *buff)
+fill_buffer_rand	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	158;"	p	line:158	signature:(uint16_t *buff)
+firstmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	953;"	l	line:953
 flags	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	43;"	m	line:43	struct:FontEntry
-flags	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	71;"	m	line:71	struct:Point2D_CalcRes
+flags	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	73;"	m	line:73	struct:Point2D_CalcRes
+font	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
 font_data_outlined8x14	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts\font_outlined8x14.c	49;"	v	line:49
 font_data_outlined8x8	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts\font_outlined8x8.c	49;"	v	line:49
-font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	832;"	l	line:832
-font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	936;"	l	line:936
+font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1018;"	l	line:1018
+font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1122;"	l	line:1122
+font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1174;"	l	line:1174
+font_info	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	96;"	l	line:96
 font_lookup_outlined8x14	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts\font_outlined8x14.c	14;"	v	line:14
 font_lookup_outlined8x8	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts\font_outlined8x8.c	14;"	v	line:14
 fonts	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.c	23;"	v	line:23
 fpart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	176;"	l	line:176
 fpllstring	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	173;"	f	line:173	signature:(float ll, int digits, char *s)
 fpllstring	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	63;"	p	line:63	signature:(float ll, int digits, char *s)
-fps	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	285;"	l	line:285
-h_angle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	70;"	m	line:70	struct:Point2D_CalcRes
-have_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	31;"	v	line:31
+fps	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	221;"	l	line:221
+fptr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+fstack	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1181;"	l	line:1181
+fwidth	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+gfx_align_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1327;"	f	line:1327
+gfx_align_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	193;"	p	line:193	signature:()
+h_angle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	72;"	m	line:72	struct:Point2D_CalcRes
+have_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
+have_vsync_refresh	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	71;"	v	line:71
+hdga	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
+heading	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	219;"	l	line:219
 height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	39;"	m	line:39	struct:FontEntry
-height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	108;"	m	line:108	struct:FontDimensions
-height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	64;"	m	line:64	struct:WorldCamera
-hfov	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	62;"	m	line:62	struct:WorldCamera
-hud_draw_vertical_scale	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	23;"	p	line:23	signature:(int v, int range, int halign, int x, int y, int height, int majtick_len, int mintick_len, int flags)
-hypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	130;"	f	line:130	signature:(float a, float b)
-hypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	79;"	p	line:79	signature:(float a, float b)
-hypot3	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	175;"	f	line:175	signature:(float a, float b, float c)
-hypot3	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	81;"	p	line:81	signature:(float a, float b, float c)
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	164;"	l	line:164
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	177;"	l	line:177
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	250;"	l	line:250
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	433;"	l	line:433
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	81;"	l	line:81
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	285;"	l	line:285
+height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1245;"	l	line:1245
+height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	112;"	m	line:112	struct:FontDimensions
+height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	66;"	m	line:66	struct:WorldCamera
+height_2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	121;"	l	line:121
+hfov	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	64;"	m	line:64	struct:WorldCamera
+hud_demo	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	217;"	f	line:217
+hud_demo	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	29;"	p	line:29	signature:()
+hud_draw_compass	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	46;"	f	line:46	signature:(int v, int range, int width, int x, int y, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int flags)
+hud_draw_compass	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	27;"	p	line:27	signature:(int v, int range, int width, int x, int y, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int flags)
+hud_draw_vertical_scale	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	93;"	f	line:93	signature:(int v, int range, int halign, int x, int y, int height, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int max_val, int flags)
+hud_draw_vertical_scale	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.h	28;"	p	line:28	signature:(int v, int range, int halign, int x, int y, int height, int mintick_step, int majtick_step, int mintick_len, int majtick_len, int max_val, int flags)
+hypot2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	81;"	p	line:81	signature:(float a, float b)
+hypot3	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	83;"	p	line:83	signature:(float a, float b, float c)
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	124;"	l	line:124
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	207;"	l	line:207
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	220;"	l	line:220
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	311;"	l	line:311
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	525;"	l	line:525
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	164;"	l	line:164
 i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	121;"	l	line:121
 i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	63;"	l	line:63
-i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	93;"	l	line:93
+i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	87;"	l	line:87
 i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	117;"	l	line:117
 i	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	139;"	l	line:139
-icomp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	285;"	l	line:285
+icomp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	316;"	l	line:316
 id	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	38;"	m	line:38	struct:FontEntry
-init_gfx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	57;"	f	line:57
-init_gfx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	147;"	p	line:147	signature:()
+imode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	861;"	l	line:861
+init_gfx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	77;"	f	line:77	signature:(int mode)
+init_gfx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	154;"	p	line:154	signature:(int mode)
 init_osd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	61;"	f	line:61
-init_osd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	69;"	p	line:69	signature:()
+init_osd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	73;"	p	line:73	signature:()
 interface_check_uart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	118;"	f	line:118
 interface_init_uart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	47;"	f	line:47
 interface_init_uart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.h	33;"	p	line:33	signature:()
 interface_set_baudrate	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	152;"	f	line:152	signature:(long int baudrate)
 interface_set_baudrate	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.h	34;"	p	line:34	signature:(long int baudrate)
 interface_test_uart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	103;"	f	line:103	signature:(long int n)
+interlace_offset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	316;"	l	line:316
 intpow	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	156;"	f	line:156	signature:(int x, int y)
 intpow	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	61;"	p	line:61	signature:(int x, int y)
 ipart	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	175;"	l	line:175
 j	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	139;"	l	line:139
-last_time	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	284;"	l	line:284
-lastmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	768;"	l	line:768
-lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	39;"	m	line:39	struct:Point2D_LL
-lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	m	line:40	struct:Point3D_LLA
-lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_SmLLA
-lat1	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	67;"	l	line:67
-lat2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	68;"	l	line:68
-lerp2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	117;"	f	line:117	signature:(float a, float b, float f)
-lerp2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	78;"	p	line:78	signature:(float a, float b, float f)
-level_bits	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	831;"	l	line:831
-line_length	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	900;"	l	line:900
-lines	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	900;"	l	line:900
-lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	39;"	m	line:39	struct:Point2D_LL
-lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	m	line:40	struct:Point3D_LLA
-lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_SmLLA
+last_time	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	222;"	l	line:222
+lastmask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	954;"	l	line:954
+lasty	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	785;"	l	line:785
+lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	41;"	m	line:41	struct:Point2D_LL
+lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_LLA
+lat	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	44;"	m	line:44	struct:Point3D_SmLLA
+lerp2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	80;"	p	line:80	signature:(float a, float b, float f)
+level_bits	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1017;"	l	line:1017
+line_length	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1086;"	l	line:1086
+lines	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1086;"	l	line:1086
+lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	41;"	m	line:41	struct:Point2D_LL
+lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	42;"	m	line:42	struct:Point3D_LLA
+lon	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	44;"	m	line:44	struct:Point3D_SmLLA
 lookup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	41;"	m	line:41	struct:FontEntry
-lookup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	833;"	l	line:833
-main	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	45;"	f	line:45
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	200;"	l	line:200
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	221;"	l	line:221
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	250;"	l	line:250
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	355;"	l	line:355
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	433;"	l	line:433
-mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	93;"	l	line:93
-mask_l	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	250;"	l	line:250
-mask_l	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	433;"	l	line:433
-mask_r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	250;"	l	line:250
-mask_r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	433;"	l	line:433
-max_length	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	900;"	l	line:900
-mem_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	79;"	f	line:79	signature:(uint16_t word)
-mem_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	152;"	p	line:152	signature:(uint16_t word)
-mem_test_full	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	107;"	f	line:107
-mem_test_full	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	153;"	p	line:153	signature:()
-memseed	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	51;"	v	line:51
+lookup	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1019;"	l	line:1019
+main	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	50;"	f	line:50
+majtick_end	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	101;"	l	line:101
+majtick_end	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	48;"	l	line:48
+majtick_start	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	101;"	l	line:101
+majtick_start	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	48;"	l	line:48
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	261;"	l	line:261
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	282;"	l	line:282
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	311;"	l	line:311
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	443;"	l	line:443
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	525;"	l	line:525
+mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	87;"	l	line:87
+mask_l	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	311;"	l	line:311
+mask_l	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	525;"	l	line:525
+mask_r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	311;"	l	line:311
+mask_r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	525;"	l	line:525
+max_height	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+max_length	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1086;"	l	line:1086
+max_xx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+mem_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	122;"	f	line:122	signature:(uint16_t word)
+mem_test	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	162;"	p	line:162	signature:(uint16_t word)
+mem_test_full	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	150;"	f	line:150
+mem_test_full	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	163;"	p	line:163	signature:()
+memseed	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	67;"	v	line:67
+mintick_end	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	101;"	l	line:101
+mintick_end	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	48;"	l	line:48
+mintick_start	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	101;"	l	line:101
+mintick_start	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	48;"	l	line:48
 multiplyQ15xQ15	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	88;"	f	line:88	signature:(_Q15 a, _Q15 b)
 multiplyQ15xQ15	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.h	29;"	p	line:29	signature:(_Q15 a, _Q15 b)
 multiplyQ15xQ16::(a,b)multiplyQ16xQ15(b,a)	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	78;"	d	line:78	file:
@@ -326,170 +380,194 @@ my_reverse	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\O
 my_reverse	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	59;"	p	line:59	signature:(char s[])
 name	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	40;"	m	line:40	struct:FontEntry
 newptr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	93;"	l	line:93
-next_word	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	104;"	l	line:104
+next_word	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	93;"	l	line:93
+next_word2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\output.s	194;"	l	line:194
 nullread	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	120;"	l	line:120
-or_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	831;"	l	line:831
-osd_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	51;"	p	line:51	file:	signature:(short *ptr_set_clear, short *ptr_black_white, short num_words)
-ox	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	262;"	l	line:262
-oy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	262;"	l	line:262
-p	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	48;"	m	line:48	struct:Waypoint3D
-p	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	54;"	m	line:54	struct:WorldCamera
-p_res	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	287;"	l	line:287
-p_viewer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	286;"	l	line:286
+oldalt	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	220;"	l	line:220
+oldas	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	220;"	l	line:220
+omode	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	861;"	l	line:861
+or_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1017;"	l	line:1017
+osd_out_hires	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	51;"	p	line:51	file:	signature:(short *ptr_set_clear, short *ptr_black_white, short num_words)
+osd_out_lores	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	50;"	p	line:50	file:	signature:(short *ptr_set_clear, short *ptr_black_white, short num_words)
+ostr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1186;"	l	line:1186
+p	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	50;"	m	line:50	struct:Waypoint3D
+p	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	56;"	m	line:56	struct:WorldCamera
 pad	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	181;"	l	line:181
 panic	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	36;"	f	line:36	signature:(char *msg)
 panic	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	50;"	p	line:50	signature:(char *msg)
-pitch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	59;"	m	line:59	struct:WorldCamera
-point	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	288;"	l	line:288
-pos	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	69;"	m	line:69	struct:Point2D_CalcRes
-prep_scanline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	90;"	f	line:90	signature:(uint16_t *scanline_in, uint16_t *scanline_out, int is_mask, int words)
-printf_buffer	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	42;"	v	line:42
+pitch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	61;"	m	line:61	struct:WorldCamera
+pos	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	71;"	m	line:71	struct:Point2D_CalcRes
+prep_scanline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	84;"	f	line:84	signature:(uint16_t *scanline_in, uint16_t *scanline_out, int is_mask, int words)
 ptr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	120;"	l	line:120
 ptr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	59;"	l	line:59
 ptr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	76;"	l	line:76
-px	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	261;"	l	line:261
-py	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	261;"	l	line:261
-r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	285;"	l	line:285
+r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	53;"	l	line:53
 r	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	158;"	l	line:158
-roll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	59;"	m	line:59	struct:WorldCamera
-rotate2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	195;"	f	line:195	signature:(float px, float py, float ox, float oy, float *rx, float *ry, float theta)
-row	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	830;"	l	line:830
-row_temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	830;"	l	line:830
-s	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	224;"	l	line:224
+range_2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	121;"	l	line:121
+range_2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	54;"	l	line:54
+roll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	61;"	m	line:61	struct:WorldCamera
+row	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1016;"	l	line:1016
+row_temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1016;"	l	line:1016
+rr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+rr	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	53;"	l	line:53
+rv	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+rv	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	53;"	l	line:53
 safe_calloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	74;"	f	line:74	signature:(size_t num, size_t size)
 safe_calloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	55;"	p	line:55	signature:(size_t num, size_t elsize)
 safe_malloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	57;"	f	line:57	signature:(size_t size)
 safe_malloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	54;"	p	line:54	signature:(size_t size)
 safe_realloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	91;"	f	line:91	signature:(void *ptr, size_t size)
 safe_realloc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.h	56;"	p	line:56	signature:(void *ptr, size_t size)
-scanline_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	38;"	v	line:38
-scanline_level_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	40;"	v	line:40
-scanline_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	37;"	v	line:37
-scanline_mask_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	39;"	v	line:39
-seq	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	46;"	m	line:46	struct:Waypoint3D
-setup_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	172;"	f	line:172
-setup_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	72;"	p	line:72	signature:()
-setup_io	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	147;"	f	line:147
-setup_io	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	71;"	p	line:71	signature:()
-setup_pll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	125;"	f	line:125
-setup_pll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	70;"	p	line:70	signature:()
-shortname	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	47;"	m	line:47	struct:Waypoint3D
+scanline_level	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	40;"	v	line:40
+scanline_level_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	42;"	v	line:42
+scanline_mask	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	39;"	v	line:39
+scanline_mask_out	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	41;"	v	line:41
+seq	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	48;"	m	line:48	struct:Waypoint3D
+setup_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	167;"	f	line:167
+setup_int	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	76;"	p	line:76	signature:()
+setup_io	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	142;"	f	line:142
+setup_io	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	75;"	p	line:75	signature:()
+setup_pll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	120;"	f	line:120
+setup_pll	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	74;"	p	line:74	signature:()
+shortname	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	49;"	m	line:49	struct:Waypoint3D
 sign	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	117;"	l	line:117
-sintheta	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	197;"	l	line:197
-sintheta	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	263;"	l	line:263
-small_dist	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	70;"	m	line:70	struct:Point2D_CalcRes
+small_dist	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	72;"	m	line:72	struct:Point2D_CalcRes
+smallfontheight	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1177;"	l	line:1177
+smallfontwidth	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1177;"	l	line:1177
 squareQ15	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	115;"	f	line:115	signature:(_Q15 x)
 squareQ15	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.h	31;"	p	line:31	signature:(_Q15 x)
 squareQ16	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.c	103;"	f	line:103	signature:(_Q16 x)
 squareQ16	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fpexpansion.h	30;"	p	line:30	signature:(_Q16 x)
-steep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	677;"	l	line:677
-stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	304;"	l	line:304
-stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	395;"	l	line:395
-stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	561;"	l	line:561
-swap_buffers	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	320;"	f	line:320
-swap_buffers	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	148;"	p	line:148	signature:()
-temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\main.c	49;"	l	line:49
+steep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	769;"	l	line:769
+steep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	872;"	l	line:872
+stox	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	785;"	l	line:785
+stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	365;"	l	line:365
+stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	483;"	l	line:483
+stroke	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	653;"	l	line:653
+style	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+style	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	53;"	l	line:53
+swap_buffers	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	385;"	f	line:385
+swap_buffers	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	155;"	p	line:155	signature:()
+temp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	95;"	l	line:95
+temp2	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	95;"	l	line:95
 temp_buff	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\useful.c	27;"	v	line:27
-tent_dist	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	101;"	l	line:101
-theta_rad	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	260;"	l	line:260
-timer2_dc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	34;"	v	line:34
-timer2_osd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	34;"	v	line:34
-tmp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	325;"	l	line:325
-track	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	33;"	v	line:33
-tv_csync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	283;"	f	line:283
-tv_csync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	76;"	p	line:76	signature:()
-tv_field	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
+text_x_spacing	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	119;"	l	line:119
+timer2_dc	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	35;"	v	line:35
+timer2_osd	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	35;"	v	line:35
+tmp	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	390;"	l	line:390
+tv_csync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	314;"	f	line:314
+tv_csync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	80;"	p	line:80	signature:()
+tv_field	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
 tv_format	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	31;"	v	line:31
-tv_gfx_y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
-tv_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
-tv_time	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
-tv_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	253;"	f	line:253
-tv_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	75;"	p	line:75	signature:()
+tv_format_switch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	32;"	v	line:32
+tv_gfx_y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
+tv_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
+tv_max_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
+tv_real_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
+tv_tent_format	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	31;"	v	line:31
+tv_tent_format_count	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	33;"	v	line:33
+tv_time	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	34;"	v	line:34
+tv_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	255;"	f	line:255
+tv_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.h	79;"	p	line:79	signature:()
 uart_buffA	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	28;"	v	line:28
 uart_buffB	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	29;"	v	line:29
 uart_buff_done	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\interface.c	30;"	v	line:30
 uint16_t	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	25;"	t	line:25
-v_angle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	70;"	m	line:70	struct:Point2D_CalcRes
-vfov	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	62;"	m	line:62	struct:WorldCamera
-vid_hoffset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	35;"	v	line:35
-vid_voffset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	35;"	v	line:35
-vis_wps	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	285;"	l	line:285
-vsync_last	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	34;"	v	line:34
-wbit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	837;"	l	line:837
+use_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	71;"	v	line:71
+v_angle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	72;"	m	line:72	struct:Point2D_CalcRes
+vfov	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	64;"	m	line:64	struct:WorldCamera
+vid_hoffset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	36;"	v	line:36
+vid_voffset	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	36;"	v	line:36
+vsync_last	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	35;"	v	line:35
+wait_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1355;"	f	line:1355
+wait_vsync	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	195;"	p	line:195	signature:()
+wbit	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1023;"	l	line:1023
 width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\fonts.h	39;"	m	line:39	struct:FontEntry
-width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	108;"	m	line:108	struct:FontDimensions
-width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	64;"	m	line:64	struct:WorldCamera
-word	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	97;"	l	line:97
-wordnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	198;"	l	line:198
-wordnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	219;"	l	line:219
-write_char	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	828;"	f	line:828	signature:(char ch, unsigned int x, unsigned int y, int flags, int font)
-write_char	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	178;"	p	line:178	signature:(char ch, unsigned int x, unsigned int y, int flags, int font)
-write_circle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	528;"	f	line:528	signature:(uint16_t *buff, unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int mode)
-write_circle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	161;"	p	line:161	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int r, unsigned int dashp, int mode)
-write_circle_filled	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	624;"	f	line:624	signature:(uint16_t *buff, unsigned int cx, unsigned int cy, unsigned int r, int mode)
-write_circle_filled	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	163;"	p	line:163	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int r, int mode)
-write_circle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	559;"	f	line:559	signature:(unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int bmode, int mode, int mmode)
-write_circle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	162;"	p	line:162	signature:(unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int bmode, int mode, int mmode)
-write_filled_rectangle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	420;"	f	line:420	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int width, unsigned int height, int mode)
-write_filled_rectangle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	159;"	p	line:159	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int width, unsigned int height, int mode)
-write_filled_rectangle_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	488;"	f	line:488	signature:(unsigned int x, unsigned int y, unsigned int width, unsigned int height, int lmode, int mmode)
-write_filled_rectangle_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	160;"	p	line:160	signature:(unsigned int x, unsigned int y, unsigned int width, unsigned int height, int lmode, int mmode)
-write_hline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	235;"	f	line:235	signature:(uint16_t *buff, unsigned int x0, unsigned int x1, unsigned int y, int mode)
-write_hline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	165;"	p	line:165	signature:(uint16_t *buff, unsigned int x0, unsigned int x1, unsigned int y, int mode)
-write_hline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	282;"	f	line:282	signature:(unsigned int x0, unsigned int x1, unsigned int y, int lmode, int mmode)
-write_hline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	166;"	p	line:166	signature:(unsigned int x0, unsigned int x1, unsigned int y, int lmode, int mmode)
-write_hline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	302;"	f	line:302	signature:(unsigned int x0, unsigned int x1, unsigned int y, int endcap0, int endcap1, int mode, int mmode)
-write_hline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	167;"	p	line:167	signature:(unsigned int x0, unsigned int x1, unsigned int y, int endcap0, int endcap1, int mode, int mmode)
-write_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	674;"	f	line:674	signature:(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mode)
-write_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	171;"	p	line:171	signature:(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mode)
-write_line_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	723;"	f	line:723	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int mode)
-write_line_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	172;"	p	line:172	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int mode)
-write_pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	192;"	f	line:192	signature:(uint16_t *buff, unsigned int x, unsigned int y, int mode)
-write_pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	155;"	p	line:155	signature:(uint16_t *buff, unsigned int x, unsigned int y, int mode)
-write_pixel_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	213;"	f	line:213	signature:(unsigned int x, unsigned int y, int mmode, int lmode)
-write_pixel_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	156;"	p	line:156	signature:(unsigned int x, unsigned int y, int mmode, int lmode)
-write_rectangle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	505;"	f	line:505	signature:(unsigned int x, unsigned int y, int width, int height, int mode, int mmode)
-write_rectangle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	173;"	p	line:173	signature:(unsigned int x, unsigned int y, int width, int height, int mode, int mmode)
-write_string	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	933;"	f	line:933	signature:(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font)
-write_string	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	180;"	p	line:180	signature:(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font)
-write_vline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	339;"	f	line:339	signature:(uint16_t *buff, unsigned int x, unsigned int y0, unsigned int y1, int mode)
-write_vline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	168;"	p	line:168	signature:(uint16_t *buff, unsigned int x, unsigned int y0, unsigned int y1, int mode)
-write_vline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	373;"	f	line:373	signature:(unsigned int x, unsigned int y0, unsigned int y1, int lmode, int mmode)
-write_vline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	169;"	p	line:169	signature:(unsigned int x, unsigned int y0, unsigned int y1, int lmode, int mmode)
-write_vline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	393;"	f	line:393	signature:(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
-write_vline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	170;"	p	line:170	signature:(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
-write_word_misaligned	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	765;"	f	line:765	signature:(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff, int mode)
-write_word_misaligned	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	175;"	p	line:175	signature:(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff, int mode)
-write_word_misaligned_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	788;"	f	line:788	signature:(uint16_t wordl, uint16_t wordm, unsigned int addr, unsigned int xoff, int lmode, int mmode)
-write_word_misaligned_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	176;"	p	line:176	signature:(uint16_t wordl, uint16_t wordm, unsigned int addr, unsigned int xoff, int lmode, int mmode)
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	110;"	l	line:110
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	243;"	l	line:243
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	50;"	l	line:50
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	88;"	l	line:88
+width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1244;"	l	line:1244
+width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	112;"	m	line:112	struct:FontDimensions
+width	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	66;"	m	line:66	struct:WorldCamera
+word	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\osd.c	91;"	l	line:91
+wordnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	259;"	l	line:259
+wordnum	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	280;"	l	line:280
+write_char	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1014;"	f	line:1014	signature:(char ch, unsigned int x, unsigned int y, int flags, int font)
+write_char	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	189;"	p	line:189	signature:(char ch, unsigned int x, unsigned int y, int flags, int font)
+write_circle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	620;"	f	line:620	signature:(uint16_t *buff, unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int mode)
+write_circle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	171;"	p	line:171	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int r, unsigned int dashp, int mode)
+write_circle_filled	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	716;"	f	line:716	signature:(uint16_t *buff, unsigned int cx, unsigned int cy, unsigned int r, int mode)
+write_circle_filled	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	173;"	p	line:173	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int r, int mode)
+write_circle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	651;"	f	line:651	signature:(unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int bmode, int mode, int mmode)
+write_circle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	172;"	p	line:172	signature:(unsigned int cx, unsigned int cy, unsigned int r, unsigned int dashp, int bmode, int mode, int mmode)
+write_filled_rectangle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	512;"	f	line:512	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int width, unsigned int height, int mode)
+write_filled_rectangle	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	169;"	p	line:169	signature:(uint16_t *buff, unsigned int x, unsigned int y, unsigned int width, unsigned int height, int mode)
+write_filled_rectangle_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	580;"	f	line:580	signature:(unsigned int x, unsigned int y, unsigned int width, unsigned int height, int lmode, int mmode)
+write_filled_rectangle_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	170;"	p	line:170	signature:(unsigned int x, unsigned int y, unsigned int width, unsigned int height, int lmode, int mmode)
+write_hline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	296;"	f	line:296	signature:(uint16_t *buff, unsigned int x0, unsigned int x1, unsigned int y, int mode)
+write_hline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	175;"	p	line:175	signature:(uint16_t *buff, unsigned int x0, unsigned int x1, unsigned int y, int mode)
+write_hline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	343;"	f	line:343	signature:(unsigned int x0, unsigned int x1, unsigned int y, int lmode, int mmode)
+write_hline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	176;"	p	line:176	signature:(unsigned int x0, unsigned int x1, unsigned int y, int lmode, int mmode)
+write_hline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	363;"	f	line:363	signature:(unsigned int x0, unsigned int x1, unsigned int y, int endcap0, int endcap1, int mode, int mmode)
+write_hline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	177;"	p	line:177	signature:(unsigned int x0, unsigned int x1, unsigned int y, int endcap0, int endcap1, int mode, int mmode)
+write_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	766;"	f	line:766	signature:(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mode)
+write_line	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	181;"	p	line:181	signature:(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mode)
+write_line_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	838;"	f	line:838	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int lmode)
+write_line_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	182;"	p	line:182	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int lmode)
+write_line_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	857;"	f	line:857	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
+write_line_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	183;"	p	line:183	signature:(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
+write_pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	253;"	f	line:253	signature:(uint16_t *buff, unsigned int x, unsigned int y, int mode)
+write_pixel	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	165;"	p	line:165	signature:(uint16_t *buff, unsigned int x, unsigned int y, int mode)
+write_pixel_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	274;"	f	line:274	signature:(unsigned int x, unsigned int y, int mmode, int lmode)
+write_pixel_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	166;"	p	line:166	signature:(unsigned int x, unsigned int y, int mmode, int lmode)
+write_rectangle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	597;"	f	line:597	signature:(unsigned int x, unsigned int y, int width, int height, int mode, int mmode)
+write_rectangle_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	184;"	p	line:184	signature:(unsigned int x, unsigned int y, int width, int height, int mode, int mmode)
+write_string	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1119;"	f	line:1119	signature:(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font)
+write_string	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	191;"	p	line:191	signature:(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags, int font)
+write_string_formatted	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1171;"	f	line:1171	signature:(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags)
+write_vline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	427;"	f	line:427	signature:(uint16_t *buff, unsigned int x, unsigned int y0, unsigned int y1, int mode)
+write_vline	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	178;"	p	line:178	signature:(uint16_t *buff, unsigned int x, unsigned int y0, unsigned int y1, int mode)
+write_vline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	461;"	f	line:461	signature:(unsigned int x, unsigned int y0, unsigned int y1, int lmode, int mmode)
+write_vline_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	179;"	p	line:179	signature:(unsigned int x, unsigned int y0, unsigned int y1, int lmode, int mmode)
+write_vline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	481;"	f	line:481	signature:(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
+write_vline_outlined	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	180;"	p	line:180	signature:(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
+write_word_misaligned	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	951;"	f	line:951	signature:(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff, int mode)
+write_word_misaligned	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	186;"	p	line:186	signature:(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff, int mode)
+write_word_misaligned_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	974;"	f	line:974	signature:(uint16_t wordl, uint16_t wordm, unsigned int addr, unsigned int xoff, int lmode, int mmode)
+write_word_misaligned_lm	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.h	187;"	p	line:187	signature:(uint16_t wordl, uint16_t wordm, unsigned int addr, unsigned int xoff, int lmode, int mmode)
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	112;"	l	line:112
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	248;"	l	line:248
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	49;"	l	line:49
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	90;"	l	line:90
 x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	37;"	m	line:37	struct:ConCurs
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	531;"	l	line:531
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	566;"	l	line:566
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	627;"	l	line:627
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	693;"	l	line:693
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	72;"	l	line:72
-x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	38;"	m	line:38	struct:Point2D_Pixel
-xch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	627;"	l	line:627
-xshift	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	830;"	l	line:830
-xx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	935;"	l	line:935
-xx_original	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	935;"	l	line:935
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	110;"	l	line:110
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	243;"	l	line:243
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	50;"	l	line:50
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	88;"	l	line:88
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	623;"	l	line:623
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	658;"	l	line:658
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	719;"	l	line:719
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	785;"	l	line:785
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	888;"	l	line:888
+x	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	m	line:40	struct:Point2D_Pixel
+xch	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	719;"	l	line:719
+xs	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	53;"	l	line:53
+xshift	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1016;"	l	line:1016
+xx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1121;"	l	line:1121
+xx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+xx	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	164;"	l	line:164
+xx_original	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1121;"	l	line:1121
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	112;"	l	line:112
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	248;"	l	line:248
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	49;"	l	line:49
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.c	90;"	l	line:90
 y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\console.h	37;"	m	line:37	struct:ConCurs
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	531;"	l	line:531
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	566;"	l	line:566
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	627;"	l	line:627
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	692;"	l	line:692
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.c	71;"	l	line:71
-y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	38;"	m	line:38	struct:Point2D_Pixel
-yaw	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	59;"	m	line:59	struct:WorldCamera
-ystep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	691;"	l	line:691
-yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	422;"	l	line:422
-yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	830;"	l	line:830
-yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	935;"	l	line:935
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1329;"	l	line:1329
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	623;"	l	line:623
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	658;"	l	line:658
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	719;"	l	line:719
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	784;"	l	line:784
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	887;"	l	line:887
+y	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	40;"	m	line:40	struct:Point2D_Pixel
+yaw	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx_game_engine.h	61;"	m	line:61	struct:WorldCamera
+ys	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\hud.c	122;"	l	line:122
+ystep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	783;"	l	line:783
+ystep	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	886;"	l	line:886
+yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1016;"	l	line:1016
+yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1121;"	l	line:1121
+yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	1173;"	l	line:1173
+yy	C:\Documents and Settings\Thomas\My Documents\PIC\dsPIC33FJ128GP802\OSD V3B-2\gfx.c	514;"	l	line:514

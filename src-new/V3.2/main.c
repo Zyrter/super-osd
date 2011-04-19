@@ -34,6 +34,7 @@ extern uint16_t *draw_buffer_level;
 extern uint16_t *draw_buffer_mask;
 extern uint16_t *disp_buffer_level;
 extern uint16_t *disp_buffer_mask;
+extern long int delayhowlong; 
 
 /* Configuration bits. */
 // Fast RC oscillator with divide & PLL, two-speed oscillator startup disabled
@@ -51,7 +52,6 @@ int main()
 {
 	long int delay;
 	int brg;
-	char temp[50];
 	// Call the various initialization functions.
 	init_osd();
 	setup_pll();
@@ -113,5 +113,6 @@ int main()
 	// Demo HUD.
 	//buffer_mode(0);
 	con_puts("Launching hud_demo", 0);
+	delayhowlong = 10000;
 	hud_demo();
 }

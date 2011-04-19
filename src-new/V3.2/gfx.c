@@ -19,6 +19,7 @@
 
 // used by some debug code
 long int delaytmp;
+long int delayhowlong; 
 
 #include "gfx.h"
 #include "useful.h"
@@ -54,7 +55,7 @@ struct _buffers
 #define		buffer1_level	(buffers.buffer1_level)
 #define		buffer1_mask	(buffers.buffer1_mask)
 
-int disp_width, disp_height;
+int disp_width, disp_height, disp_mode;
 int buff_words;
 
 // We define pointers to each of these buffers.
@@ -76,7 +77,7 @@ int use_vsync, have_vsync_refresh;
  */
 void init_gfx(int mode)
 {
-	// mode 0: 256x192 pixel single buffered mode
+	// mode 0: hires
 	if(mode == 0)
 	{
 		draw_buffer_level = buffer0_level;
@@ -84,10 +85,11 @@ void init_gfx(int mode)
 		disp_buffer_level = draw_buffer_level;
 		disp_buffer_mask = draw_buffer_mask;
 		buff_words = BUFF_TOTAL_SIZE / 4;
-		disp_width = 256;
-		disp_height = 192;
+		disp_width = 240;
+		disp_height = 208; 
+		disp_mode = 0;
 	}
-	// mode 1: 192x128 pixel double buffered mode
+	// mode 1: lores
 	else if(mode == 1)
 	{
 		draw_buffer_level = buffer0_level;
@@ -96,7 +98,8 @@ void init_gfx(int mode)
 		disp_buffer_mask = buffer1_mask;
 		buff_words = BUFF_TOTAL_SIZE / 8;
 		disp_width = 192;
-		disp_height = 128;
+		disp_height = 128; 
+		disp_mode = 1;
 	}
 	// Fill the buffers with empty data, in case the RAM doesn't
 	// initialize empty.
@@ -109,6 +112,8 @@ void init_gfx(int mode)
 	// Don't use vsync for now.
 	use_vsync = 0;
 	have_vsync_refresh = 1;
+	// Default debug delay period (not often used.)
+	delayhowlong = 10;
 }
 
 /**
@@ -780,7 +785,7 @@ void write_line(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x
 	int error = deltax / 2;
 	int ystep;
 	int y = y0;
-	int x;
+	int x, lasty = y, stox = 0;
 	if(y0 < y1)
 		ystep = 1;
 	else
@@ -788,9 +793,32 @@ void write_line(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x
 	for(x = x0; x < x1; x++)
 	{
 		if(steep)
-			write_pixel(buff, y, x, mode);
+		{
+			if(lasty != y)
+			{
+				if(x > lasty) 
+					write_vline(buff, stox, y, lasty, mode);
+				else
+					write_vline(buff, stox, lasty, y, mode);
+				lasty = y;
+				stox = x;
+			}
+		}
 		else
-			write_pixel(buff, x, y, mode);
+		{
+			//write_pixel(buff, x, y, mode);
+			/*
+			if(lasty != y)
+			{
+				if(y > lasty) 
+					write_vline(buff, stox, y, lasty, mode);
+				else
+					write_vline(buff, stox, lasty, y, mode);
+				lasty = y;
+				stox = x;
+			}
+			*/
+		}
 		error -= deltay;
 		if(error < 0)
 		{
@@ -801,24 +829,50 @@ void write_line(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x
 }
 
 /**
- * write_line_outlined: Draw a line of arbitrary angle, with an outline.
+ * write_line_lm: Draw a line of arbitrary angle.
  *
- * @param	buff	pointer to buffer to write in
  * @param	x0		first x coordinate
  * @param	y0		first y coordinate
  * @param	x1		second x coordinate
  * @param	y1		second y coordinate
- * @param	mode	0 = clear, 1 = set, 2 = toggle
+ * @param	mmode	0 = clear, 1 = set, 2 = toggle
+ * @param	lmode	0 = clear, 1 = set, 2 = toggle
  */
-void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int mode)
+void write_line_lm(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int lmode)
 {
-	// TODO
-	/*
-	int stroke, fill;
-	SETUP_STROKE_FILL(stroke, fill, mode);
-	// To draw an outlined line, we first process the outside of the line, then
-	// draw the inside part, similar to circles. 
-	unsigned int steep = abs(y1 - y0) > abs(x1 - x0);
+	write_line(draw_buffer_mask, x0, y0, x1, y1, mmode);
+	write_line(draw_buffer_level, x0, y0, x1, y1, lmode);
+}
+
+/**
+ * write_line_outlined: Draw a line of arbitrary angle, with an outline.
+ *
+ * @param	buff		pointer to buffer to write in
+ * @param	x0			first x coordinate
+ * @param	y0			first y coordinate
+ * @param	x1			second x coordinate
+ * @param	y1			second y coordinate
+ * @param	endcap0		0 = none, 1 = single pixel, 2 = full cap
+ * @param	endcap1		0 = none, 1 = single pixel, 2 = full cap
+ * @param	mode		0 = black outline, white body, 1 = white outline, black body
+ * @param	mmode		0 = clear, 1 = set, 2 = toggle
+ */
+void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int endcap0, int endcap1, int mode, int mmode)
+{
+	// Based on http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+	// This could be improved for speed.
+	int omode, imode;
+	if(mode == 0) 
+	{
+		omode = 0;
+		imode = 1;
+	}
+	else
+	{
+		omode = 1;
+		imode = 0;
+	}
+	int steep = abs(y1 - y0) > abs(x1 - x0);
 	if(steep)
 	{
 		SWAP(x0, y0);
@@ -829,15 +883,60 @@ void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsi
 		SWAP(x0, x1);
 		SWAP(y0, y1);
 	}
-	unsigned int deltax = x1 - x0;
-	unsigned int deltay = abs(y1 - y0);
-	unsigned int error = deltax / 2;
-	unsigned int ystep, y = y0, x;
+	int deltax = x1 - x0;
+	int deltay = abs(y1 - y0);
+	int error = deltax / 2;
+	int ystep;
+	int y = y0;
+	int x;
 	if(y0 < y1)
 		ystep = 1;
 	else
 		ystep = -1;
-	*/
+	// Draw the outline.
+	for(x = x0; x < x1; x++)
+	{
+		if(steep)
+		{
+			write_pixel_lm(y - 1, x, mmode, omode);
+			write_pixel_lm(y + 1, x, mmode, omode);
+			write_pixel_lm(y, x - 1, mmode, omode);
+			write_pixel_lm(y, x + 1, mmode, omode);
+		}
+		else
+		{
+			write_pixel_lm(x - 1, y, mmode, omode);
+			write_pixel_lm(x + 1, y, mmode, omode);
+			write_pixel_lm(x, y - 1, mmode, omode);
+			write_pixel_lm(x, y + 1, mmode, omode);
+		}
+		error -= deltay;
+		if(error < 0)
+		{
+			y += ystep;
+			error += deltax;
+		}
+	}
+	// Now draw the innards.
+	error = deltax / 2;
+	y = y0;
+	for(x = x0; x < x1; x++)
+	{
+		if(steep)
+		{
+			write_pixel_lm(y, x, mmode, imode);
+		}
+		else
+		{
+			write_pixel_lm(x, y, mmode, imode);
+		}
+		error -= deltay;
+		if(error < 0)
+		{
+			y += ystep;
+			error += deltax;
+		}
+	}
 }
 
 /**
@@ -860,6 +959,58 @@ void write_word_misaligned(uint16_t *buff, uint16_t word, unsigned int addr, uns
 	if(xoff > 0)
 	{
 		WRITE_WORD_MODE(buff, addr + 1, lastmask, mode);
+	}
+}
+
+/**
+ * write_word_misaligned_NAND: Write a misaligned word across two addresses
+ * with an x offset, using a NAND mask.
+ *
+ * This allows for many pixels to be set in one write.
+ *
+ * @param	buff	buffer to write in
+ * @param	word	word to write (16 bits)
+ * @param	addr	address of first word
+ * @param	xoff	x offset (0-15)
+ *
+ * This is identical to calling write_word_misaligned with a mode of 0 but
+ * it doesn't go through a lot of switch logic which slows down text writing
+ * a lot.
+ */
+void write_word_misaligned_NAND(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff)
+{
+	uint16_t firstmask = word >> xoff;
+	uint16_t lastmask = word << (16 - xoff);
+	WRITE_WORD_NAND(buff, addr, firstmask);
+	if(xoff > 0)
+	{
+		WRITE_WORD_NAND(buff, addr + 1, lastmask);
+	}
+}
+
+/**
+ * write_word_misaligned_OR: Write a misaligned word across two addresses
+ * with an x offset, using an OR mask.
+ *
+ * This allows for many pixels to be set in one write.
+ *
+ * @param	buff	buffer to write in
+ * @param	word	word to write (16 bits)
+ * @param	addr	address of first word
+ * @param	xoff	x offset (0-15)
+ *
+ * This is identical to calling write_word_misaligned with a mode of 1 but
+ * it doesn't go through a lot of switch logic which slows down text writing 
+ * a lot.
+ */
+void write_word_misaligned_OR(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff)
+{
+	uint16_t firstmask = word >> xoff;
+	uint16_t lastmask = word << (16 - xoff);
+	WRITE_WORD_OR(buff, addr, firstmask);
+	if(xoff > 0)
+	{
+		WRITE_WORD_OR(buff, addr + 1, lastmask);
 	}
 }
 
@@ -947,7 +1098,7 @@ void write_char(char ch, unsigned int x, unsigned int y, int flags, int font)
 		// We can write mask words easily.
 		for(yy = y; yy < y + font_info.height; yy++)
 		{
-			write_word_misaligned(draw_buffer_mask, font_info.data[row] << xshift, addr, wbit, 1);
+			write_word_misaligned_OR(draw_buffer_mask, font_info.data[row] << xshift, addr, wbit);
 			addr += DISP_WIDTH / 16;
 			row++;
 		}
@@ -964,10 +1115,10 @@ void write_char(char ch, unsigned int x, unsigned int y, int flags, int font)
 				level_bits = ~level_bits;
 			or_mask = font_info.data[row] << xshift;
 			and_mask = (font_info.data[row] & level_bits) << xshift;
-			write_word_misaligned(draw_buffer_level, or_mask, addr, wbit, 1);
+			write_word_misaligned_OR(draw_buffer_level, or_mask, addr, wbit);
 			// If we're not bold write the AND mask.
-			if(!(flags & FONT_BOLD))
-				write_word_misaligned(draw_buffer_level, and_mask, addr, wbit, 0);
+			//if(!(flags & FONT_BOLD))
+				write_word_misaligned_NAND(draw_buffer_level, and_mask, addr, wbit);
 			addr += DISP_WIDTH / 16;
 			row++;
 		}
@@ -1060,6 +1211,171 @@ void write_string(char *str, unsigned int x, unsigned int y, unsigned int xs, un
 }
 
 /**
+ * write_string_formatted: Draw a string with format escape
+ * sequences in it. Allows for complex text effects.
+ *
+ * @param	str		string to write (with format data)
+ * @param	x		x coordinate
+ * @param	y		y coordinate
+ * @param	xs		default horizontal spacing
+ * @param	ys		default horizontal spacing
+ * @param	va 		vertical align
+ * @param	ha		horizontal align
+ * @param	flags	flags (passed to write_char)
+ */
+void write_string_formatted(char *str, unsigned int x, unsigned int y, unsigned int xs, unsigned int ys, int va, int ha, int flags)
+{
+	int fcode = 0, fptr, font = 0, fwidth, fheight, xx = x, yy = y, max_xx = 0, max_height = 0;
+	struct FontEntry font_info;
+	// Retrieve sizes of the fonts: bigfont and smallfont.
+	fetch_font_info(0, 0, &font_info, NULL); 
+	int smallfontwidth = font_info.width, smallfontheight = font_info.height;
+	fetch_font_info(0, 1, &font_info, NULL); 
+	int bigfontwidth = font_info.width, bigfontheight = font_info.height;
+	// 11 byte stack with last byte as NUL.
+	char fstack[11]; 
+	fstack[10] = '\0'; 
+	// First, we need to parse the string for format characters and
+	// work out a bounding box. We'll parse again for the final output.
+	// This is a simple state machine parser.
+	char *ostr = str;
+	while(*str)
+	{
+		if(*str == '<' && fcode == 1) // escape code: skip
+			fcode = 0;
+		if(*str == '<' && fcode == 0) // begin format code?
+		{
+			fcode = 1; 
+			fptr = 0;
+		}
+		if(*str == '>' && fcode == 1)
+		{
+			fcode = 0;
+			if(strcmp(fstack, "B")) // switch to "big" font (font #1)
+			{
+				fwidth = bigfontwidth;
+				fheight = bigfontheight;
+			}
+			else if(strcmp(fstack, "S")) // switch to "small" font (font #0)
+			{
+				fwidth = smallfontwidth;
+				fheight = smallfontheight;
+			}
+			if(fheight > max_height) 
+				max_height = fheight;
+			// Skip over this byte. Go to next byte.
+			str++;
+			continue;
+		}
+		if(*str != '<' && *str != '>' && fcode == 1)
+		{
+			// Add to the format stack (up to 10 bytes.)
+			if(fptr > 10) // stop adding bytes
+			{
+				str++; // go to next byte
+				continue;
+			}
+			fstack[fptr++] = *str;
+			fstack[fptr] = '\0'; // clear next byte (ready for next char or to terminate string.)
+		}
+		if(fcode == 0)
+		{
+			// Not a format code, raw text. 
+			xx += fwidth + xs;
+			if(*str == '\n')
+			{
+				if(xx > max_xx) 
+					max_xx = xx;
+				xx = x;
+				yy += fheight + ys;
+			}
+		}
+		str++;
+	}
+	// Reset string pointer.
+	str = ostr;
+	// Now we've parsed it and got a bbox, we need to work out the dimensions of it
+	// and how to align it.
+	int width = max_xx - x;
+	int height = yy - y;
+	int ay, ax;
+	switch(va)
+	{
+		case TEXT_VA_TOP: 		ay = yy; break;
+		case TEXT_VA_MIDDLE:	ay = yy - (height / 2); break;
+		case TEXT_VA_BOTTOM: 	ay = yy - height; break;
+	}
+	switch(ha)
+	{
+		case TEXT_HA_LEFT:		ax = x; break;
+		case TEXT_HA_CENTER:	ax = x - (width / 2); break;
+		case TEXT_HA_RIGHT:		ax = x - width; break;
+	}
+	// So ax,ay is our new text origin. Parse the text format again and paint
+	// the text on the display.
+	fcode = 0;
+	fptr = 0;
+	font = 0;
+	xx = 0;
+	yy = 0;
+	while(*str)
+	{
+		if(*str == '<' && fcode == 1) // escape code: skip
+			fcode = 0;
+		if(*str == '<' && fcode == 0) // begin format code?
+		{
+			fcode = 1; 
+			fptr = 0;
+		}
+		if(*str == '>' && fcode == 1)
+		{
+			fcode = 0;
+			if(strcmp(fstack, "B")) // switch to "big" font (font #1)
+			{
+				fwidth = bigfontwidth;
+				fheight = bigfontheight;
+				font = 1;
+			}
+			else if(strcmp(fstack, "S")) // switch to "small" font (font #0)
+			{
+				fwidth = smallfontwidth;
+				fheight = smallfontheight;
+				font = 0;
+			}
+			// Skip over this byte. Go to next byte.
+			str++;
+			continue;
+		}
+		if(*str != '<' && *str != '>' && fcode == 1)
+		{
+			// Add to the format stack (up to 10 bytes.)
+			if(fptr > 10) // stop adding bytes
+			{
+				str++; // go to next byte
+				continue;
+			}
+			fstack[fptr++] = *str;
+			fstack[fptr] = '\0'; // clear next byte (ready for next char or to terminate string.)
+		}
+		if(fcode == 0)
+		{
+			// Not a format code, raw text. So we draw it.
+			// TODO - different font sizes.
+			write_char(*str, xx, yy + (max_height - fheight), flags, font);
+			xx += fwidth + xs;
+			if(*str == '\n')
+			{
+				if(xx > max_xx) 
+					max_xx = xx;
+				xx = x;
+				yy += fheight + ys;
+			}
+		}
+		str++;
+	}
+}
+
+/**
  * gfx_align_test: Draw alignment markers, for making sure the
  * display is properly aligned. A test routine.
  */
@@ -1095,7 +1411,7 @@ void wait_vsync()
 {
 	if(use_vsync == 1)
 	{
-		while(have_vsync_refresh != 1);
+		while(have_vsync_refresh == 0);
 		have_vsync_refresh = 0;
 	}
 }

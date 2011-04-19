@@ -26,17 +26,17 @@ typedef	unsigned short uint16_t;
 
 #define FAR	__attribute__((far))
 
-// We have a 192x128 pixel display.
-// todo: make these integers not consts.
-extern int disp_width, disp_height;
+// Display dimensions.
+extern int disp_width, disp_height, disp_mode;
+// Backwards compatibility.
 #define	DISP_WIDTH			disp_width
 #define	DISP_HEIGHT			disp_height
 
-#define	BUFF_SIZE_192		3072
-#define	BUFF_SIZE_256		6144
+#define	BUFF_SIZE_LORES		3120
+#define	BUFF_SIZE_HIRES		6240
 
-// Video buffer is always 12KB for now.
-#define	BUFF_TOTAL_SIZE		12288
+// Video buffer is always ~12.2KB for now.
+#define	BUFF_TOTAL_SIZE		12480
 //#define	BUFF_WORDS		(DISP_WIDTH * DISP_HEIGHT) / 16
 
 // Macros for computing addresses and bit positions.
@@ -53,10 +53,11 @@ extern int disp_width, disp_height;
 
 // Debugging macro. If enabled delays writes so they are more visible.
 extern long int delaytmp;
+extern long int delayhowlong; // how long to delay for (configurable)
 #define ENABLE_DELAY_WRITES 0
 
 #if ENABLE_DELAY_WRITES == 1
-#define DEBUG_DELAY { delaytmp = 10000; while(delaytmp--); }
+#define DEBUG_DELAY { delaytmp = delayhowlong; while(delaytmp--); }
 #else
 #define DEBUG_DELAY
 #endif
@@ -65,10 +66,14 @@ extern long int delaytmp;
 // at a given position
 #define WRITE_WORD_MODE(buff, addr, mask, mode) \
 	switch(mode) { \
-		case 0: buff[addr] = buff[addr] & ~mask; break; \
+		case 0: buff[addr] &= ~mask; break; \
 		case 1:	buff[addr] |= mask; break; \
 		case 2: buff[addr] ^= mask; break; } \
 	DEBUG_DELAY;
+
+#define WRITE_WORD_NAND(buff, addr, mask) { buff[addr] &= ~mask; DEBUG_DELAY; }
+#define WRITE_WORD_OR(buff, addr, mask)   { buff[addr] |= mask; DEBUG_DELAY; }
+#define WRITE_WORD_XOR(buff, addr, mask)  { buff[addr] ^= mask; DEBUG_DELAY; }
 
 // Horizontal line calculations. 
 // Edge cases.
@@ -179,11 +184,14 @@ void write_vline(uint16_t *buff, unsigned int x, unsigned int y0, unsigned int y
 void write_vline_lm(unsigned int x, unsigned int y0, unsigned int y1, int lmode, int mmode);
 void write_vline_outlined(unsigned int x, unsigned int y0, unsigned int y1, int endcap0, int endcap1, int mode, int mmode);
 void write_line(uint16_t *buff, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mode);
-void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int mode);
+void write_line_lm(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int mmode, int lmode);
+void write_line_outlined(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, int endcap0, int endcap1, int mode, int mmode);
 void write_rectangle_outlined(unsigned int x, unsigned int y, int width, int height, int mode, int mmode);
 // Text functions.
 void write_word_misaligned(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff, int mode);
 void write_word_misaligned_lm(uint16_t wordl, uint16_t wordm, unsigned int addr, unsigned int xoff, int lmode, int mmode);
+void write_word_misaligned_NAND(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff);
+void write_word_misaligned_OR(uint16_t *buff, uint16_t word, unsigned int addr, unsigned int xoff);
 int fetch_font_info(char ch, int font, struct FontEntry *font_info, char *lookup);
 void write_char(char ch, unsigned int x, unsigned int y, int flags, int font);
 void calc_text_dimensions(char *str, struct FontEntry font, int xs, int ys, struct FontDimensions *dim);

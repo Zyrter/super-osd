@@ -27,7 +27,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#define UART_BUFFSZ		256
+#define UART_BUFFSZ		200
 
 // Function prototypes.
 void interface_init_uart();

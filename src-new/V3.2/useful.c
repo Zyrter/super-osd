@@ -24,7 +24,7 @@
 #include <string.h>
 #include <math.h>
 
-char temp_buff[100];
+char temp_buff[50];
 
 /**
  * panic: fatal error routine. Panic displays the message

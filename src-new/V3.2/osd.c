@@ -28,28 +28,27 @@
 
 #include <p33fj128gp802.h>
 
-char tv_format, have_vsync; // FORMAT_PAL or FORMAT_NTSC.
-unsigned int tv_line, tv_field, tv_gfx_y;
+char tv_format, tv_tent_format; // FORMAT_PAL or FORMAT_NTSC.
+char have_vsync, field_odd, tv_format_switch;
+unsigned int tv_line, tv_field, tv_gfx_y, tv_max_line, tv_tent_format_count, tv_real_line;
 long int tv_time;
 int vsync_last, timer2_dc, timer2_osd;
 int vid_hoffset, vid_voffset;
 
-// scanlines are 36 bytes each (enough for 288 pixels horizontal resolution)
-uint16_t scanline_mask[18];
-uint16_t scanline_level[18];
-uint16_t scanline_mask_out[18];
-uint16_t scanline_level_out[18];
+// scanlines are 32 bytes each (16 words; enough for 256 pixels horizontal resolution.)
+uint16_t scanline_mask[16];
+uint16_t scanline_level[16];
+uint16_t scanline_mask_out[16];
+uint16_t scanline_level_out[16];
 
 int audio_l_tmaster, audio_l_tmask;
 int audio_r_tmaster, audio_r_tmask;
 
-// for UART/DMA_last;
-
 #define AUDIO_FREQ(f) (31250 / f) // this is not quite true for NTSC, but it is close enough
 
-/* Assembly output. */
-extern int osd_out_192(short *ptr_set_clear, short *ptr_black_white, short num_words); 
-extern int osd_out_256(short *ptr_set_clear, short *ptr_black_white, short num_words); 
+// Assembly output routines.
+extern int osd_out_lores(short *ptr_set_clear, short *ptr_black_white, short num_words); 
+extern int osd_out_hires(short *ptr_set_clear, short *ptr_black_white, short num_words); 
 
 /**
  * The OSD files handle the actual output of the graphics framebuffer
@@ -63,10 +62,11 @@ void init_osd()
 {
 	int i;
 	vid_hoffset = 0;
-	vid_voffset = 1;
+	vid_voffset = 0;
 	tv_time = 0;
 	tv_line = 0;
 	tv_field = 0;
+	field_odd = 0;
 	tv_format = FORMAT_PAL; // default PAL
 	have_vsync = 0;
 	// Initialize L audio output for 3kHz audio output, with a 10Hz gate signal.
@@ -213,15 +213,19 @@ void disable_int()
 void _MY_ISR _CNInterrupt()
 {
 	// Enable Timer2.
-	timer2_osd = 410 + vid_hoffset;
+	if(tv_format == FORMAT_PAL)
+		timer2_osd = 420 + vid_hoffset;
+	else if(tv_format == FORMAT_NTSC)
+		timer2_osd = 350 + vid_hoffset;
 	T2CONbits.TON = 1;
 	TMR2 = 0;
 	// Check if VSYNC is high OR, if it is low, that the last line
-	// wasn't a falling edge..
+	// wasn't a falling edge.
 	if(PORTBbits.RB7 == 1 || vsync_last == 0)
 	{
 		tv_csync(); // handle CSYNC
-		tv_line++;
+		tv_line += 2; // add 2 to compensate for interlace
+		tv_real_line++;
 	}
 	// Signal VSYNC refresh on each frame (not each field!)
 	if(tv_field % 2 == 0)
@@ -252,11 +256,43 @@ void tv_vsync()
 {
 	// How many lines in the last field?
 	// What we want to do is count the number of lines to determine
-	// the video format. If after more than 10 fields we have detected
+	// the video format. If after more than 200 fields we have detected
 	// a different format, then we need to switch.
-	// TODO
-	tv_format = FORMAT_PAL;
-	tv_line = 1;
+	
+	// Why so big? These are the measured values! Plus/minus a bit of error.
+	// Not entirely sure what causes these to be so out. But it seems to work...?
+	// PAL
+	if(tv_real_line > 400 && tv_real_line < 420)
+	{
+		if(tv_format != FORMAT_PAL)
+		{
+			if(tv_tent_format != FORMAT_PAL) tv_tent_format_count = 0;
+			tv_tent_format = FORMAT_PAL;
+			tv_tent_format_count++;
+		}
+	}
+	// NTSC
+	else if(tv_real_line > 300 && tv_real_line < 320)
+	{
+		if(tv_format != FORMAT_NTSC)
+		{
+			if(tv_tent_format != FORMAT_NTSC) tv_tent_format_count = 0;
+			tv_tent_format = FORMAT_NTSC;
+			tv_tent_format_count++;
+		}
+	}
+	// Switch format?
+	if(tv_tent_format_count > 200)
+	{
+		tv_format = tv_tent_format;
+		tv_format_switch = 1; // code must clear this
+	}
+	tv_max_line = tv_real_line;
+	tv_real_line = 0;
+	if(PORTBbits.RB10 == 1) // field is odd; start at 1.
+		tv_line = 1;
+	else					// field is even; start at 0.
+		tv_line = 0;
 	tv_field++;
 	// If the field counter has reached 50 for PAL or 60 for
 	// NTSC, reset it and start it at zero, then count a second.
@@ -266,6 +302,7 @@ void tv_vsync()
 		tv_time++;
 	}
 	// Notify vsync'd code that we have vsync.
+	have_vsync_refresh = 1;
 }
 
 /**
@@ -276,59 +313,44 @@ void tv_vsync()
  */
 void tv_csync()
 {
-	int icomp = 0;
+	int icomp = 1, interlace_offset = 0;
 	if(tv_line < 45)
-		return;
-	if((tv_format == FORMAT_PAL && tv_line > 330) || (tv_format == FORMAT_NTSC && tv_line > 325))
 		return;
 	// Compensate for interlacing artefacts.
 	if(PORTBbits.RB10 == 0) 
-		icomp = 1;
+		icomp = 0;
 	// Compute the GFX Y position and hence the address.
-	if(disp_width == 192)
+	if(disp_mode == 1)
 	{
+		if((tv_format == FORMAT_PAL && tv_line > 480) || (tv_format == FORMAT_NTSC && tv_line > 325))
+			return;
 		if(tv_format == FORMAT_PAL)
 			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * PAL_GFX_SCALE_192) / 256;
 		else
 			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * NTSC_GFX_SCALE_192) / 256;
 	}
-	else if(disp_width == 256)
+	else if(disp_mode == 0)
 	{
 		if(tv_format == FORMAT_PAL)
-			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * PAL_GFX_SCALE_256) / 256;
-		else
-			tv_gfx_y = ((long int)(tv_line + icomp + vid_voffset - 50) * NTSC_GFX_SCALE_256) / 256;
+			tv_gfx_y = (tv_line + vid_voffset - 230) / 2; 
+		else if(tv_format == FORMAT_NTSC)
+			tv_gfx_y = (tv_line + vid_voffset - 230) / 2; 
 	}
-	int addr = tv_gfx_y * (disp_width / 16);
-	// Load empty scanline if width too big.
+	// Exit if GFX Y too big.
 	if(tv_gfx_y > disp_height)
-	{
-		int i;
-		for(i = 0; i < disp_width / 16; i++)
-		{
-			scanline_mask_out[i] = 0xffff; // mask is inverted
-			scanline_level_out[i] = 0x0000;
-		}
-	}
-	else
-	{
-		// Prepare the scanline. We are time constrained, so just copy the pointers
-		// from the graphics memory to the scanline pointers.
-		prep_scanline(disp_buffer_mask + addr, scanline_mask_out, 1, disp_width / 16);
-		prep_scanline(disp_buffer_level + addr, scanline_level_out, 0, disp_width / 16);
-	}
-	// Check if the UART RX DMA has transferred data. If so, we need to pause it 
-	// and handle it when we get some free time.
-	//if(DMACS1bits.PPST5 != UART_RX_DMA_last)
-	//	DMA5CONbits.CHEN = 0;
+		return;
+	int addr = tv_gfx_y * (disp_width / 16);
+	// Prepare the scanline. We are time constrained, so the below must be FAST!
+	prep_scanline(disp_buffer_mask + addr, scanline_mask_out, 1, disp_width / 16);
+	prep_scanline(disp_buffer_level + addr, scanline_level_out, 0, disp_width / 16);
 	// Wait for OSD time. (TODO: Execute other code in this time? Consider timer period match interrupt...)
 	while(TMR2 <= timer2_osd);
 	// Output screen data.
 	TRISBbits.TRISB5 = 1; // tristate before sending
-	if(disp_width == 192)
-		osd_out_192(scanline_mask_out, scanline_level_out, disp_width / 16);
-	else if(disp_width == 256)
-		osd_out_256(scanline_mask_out, scanline_level_out, disp_width / 16);
+	if(disp_mode == 1)
+		osd_out_lores(scanline_mask_out, scanline_level_out, disp_width / 16);
+	else if(disp_mode == 0)
+		osd_out_hires(scanline_mask_out, scanline_level_out, disp_width / 16);
 	// Tristate output so as not to cause problems.
 	TRISBbits.TRISB5 = 1;
 	IFS0bits.T2IF = 0;
