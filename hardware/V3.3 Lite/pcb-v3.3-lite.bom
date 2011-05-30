@@ -1,0 +1,59 @@
+# $Id$
+# PcbBOM Version 1.0
+# Date: Wed 25 May 2011 08:56:12 GMT UTC
+# Author: Thomas
+# Title: (unknown) - PCB BOM
+# Quantity, Description, Value, RefDes
+# --------------------------------------------
+3,"100milconn-smt-2c","unknown",CN10 CN9 CN7 
+1,"0603","100n 25V DNP",C29 
+1,"SOT89","unknown",U11 
+1,"0805","1u 50V DNP",C28 
+2,"0603","120R",R34 R35 
+3,"0603","150k_1%",R18 R20 R30 
+5,"0603","10k_1%",R19 R21 R29 R8 R2 
+1,"sdcard-MB-0134-2","unknown",CN8 
+1,"SO8M","unknown",U7 
+2,"SOT25","unknown",U4 U10 
+11,"0603","10k",R36 R22 R42 R24 R23 R39 R28 R27 R12 R13 R11 
+14,"0603","100n",C8 C13 C23 C2 C5 C19 C6 C27 C7 C14 C9 C10 C25 C26 
+1,"0603","100n DNP",C24 
+9,"0603","1k",R43 R17 R32 R26 R25 R6 R7 R10 R31 
+2,"TQFP44_10","unknown",U1 U6 
+1,"100milconn-smt-6c","unknown",CN4 
+2,"603","GREEN_2.2V",LED2 LED3 
+3,"TL1240-2","unknown",S3 S2 S1 
+2,"JUMPER5","unknown",CN3 CN2 
+1,"0603","1M",R33 
+1,"0603","39k",R41 
+1,"0603","22k",R40 
+2,"0603","10R",R3 R5 
+1,"IND__Bourns_SDR0604_Series","22u_1A",L1 
+1,"0805","100mA",PTC2 
+1,"XTAL_HC-49U","7.3728_MHz",X1 
+3,"0603","100R",R37 R38 R16 
+2,"0603","18p",C22 C21 
+3,"0805","22u 6.3V",C20 C17 C3 
+6,"100milconn-smt-3c","unknown",PPM2 PPM1 VO1 VI2 VI1 CN1 
+1,"0603","100n_DNP",C16 
+3,"0603","10u_6.3V",C12 C15 C11 
+1,"0603","0R *DNP*",R45 
+2,"0603","75R",R14 R15 
+3,"100milconn-smt-4c","unknown",AU1 CN6 CN5 
+1,"0603","560p",C18 
+2,"0603","unknown",Z2 Z1 
+1,"0603","220R",R9 
+1,"MSOP10","unknown",U2 
+1,"TSSOP16","unknown",U3 
+1,"0603","330R",R44 
+1,"1206","1R 0.33W",R4 
+1,"1206","47u 6.3V DNP",C4 
+1,"1206","2.2u 50V",C1 
+1,"SOT23","MMBT2222A",Q1 
+3,"SOT23","unknown",U8 U9 D3 
+1,"0603","16.5k_1%",R1 
+1,"SOD123","unknown",D2 
+1,"0805","500mA 6V",PTC1 
+1,"603","BLU_3.2V",LED1 
+1,"SOD323","BAS70JFILM",D1 
+1,"SOT26","unknown",U5 

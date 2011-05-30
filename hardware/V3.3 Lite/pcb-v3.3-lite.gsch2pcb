@@ -1,0 +1,2 @@
+schematics osd.sch power.sch mcu.sch buttons-and-illumination.sch
+output-name pcb-v3.3-lite
